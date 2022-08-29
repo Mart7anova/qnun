@@ -1,0 +1,24 @@
+@import '../common/c2-styles/sass/variables';
+@import '../common/c2-styles/sass/mixins';
+
+.headerContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-flow: row wrap;
+    background-color: $mainColor;
+    min-height: 50px;
+
+    & a{
+        @include text(20px);
+        color: $mainWhite;
+        text-decoration: none;
+
+    }
+
+    & .active{
+        text-decoration: underline;
+    }
+
+}
+

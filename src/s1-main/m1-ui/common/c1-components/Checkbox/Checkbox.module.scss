@@ -1,0 +1,65 @@
+@import '../../c2-styles/sass/variables';
+@import '../../c2-styles/sass/mixins';
+
+.label {
+  display: flex;
+  cursor: pointer;
+  float: left;
+
+  .checkbox {
+    display: none;
+  }
+
+  .box {
+    position: relative;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $mainBlack;
+    border-radius: 12px;
+
+    //пвсевдоэлемент checked
+    &:before {
+      content: '';
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -5px 0 0 -5px;
+      height: 4px;
+      width: 8px;
+      border: solid $mainColor;
+      border-width: 0 0 3px 3px;
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+
+  .spanClassName {
+    display: flex;
+    align-items: center;
+    @include text();
+    color: $mainBlack;
+  }
+
+  .checkbox:checked ~ .box {
+    border-color: $mainColor;
+  }
+
+  .checkbox:checked ~ .box:before {
+    display: block;
+  }
+
+  .checkbox:checked ~ .spanClassName {
+    color: $mainColor;
+  }
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+@import 'variables';
+
+@mixin text($fontSize: 16px) {
+  font-family: sans-serif;
+  font-size: $fontSize;
+}
+
+@mixin button($width, $height){
+  height: $height;
+  padding: 0 20px;
+  border-radius: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.4s;
+}

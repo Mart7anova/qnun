@@ -1,0 +1,31 @@
+@import '../../c2-styles/sass/variables';
+@import '../../c2-styles/sass/mixins';
+
+.default{
+  @include text(18px);
+  color: $mainWhite;
+
+  @include button(50%,35px);
+  border: 2px solid $mainColor;
+  background-color: $mainColor;
+
+  &:active:not([disabled]){
+    background-color: transparent;
+    color: $mainColor;
+  }
+  &:disabled{
+    background-color: $lightGrey;
+    border-color: $darkGrey;
+    color: $darkGrey;
+  }
+}
+
+.red{
+  border: 2px solid $errorColor;
+  background-color: $errorColor;
+
+  &:active:not([disabled]){
+    background-color: transparent;
+    color: $errorColor;
+  }
+}

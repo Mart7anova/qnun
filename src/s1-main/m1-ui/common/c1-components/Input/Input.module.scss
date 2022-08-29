@@ -1,0 +1,37 @@
+@import '../../c2-styles/sass/variables';
+@import '../../c2-styles/sass/mixins';
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+
+  .defaultInput {
+    @include text();
+    color: $mainBlack;
+
+    outline: none;
+    width: 100%;
+    height: 35px;
+    padding: 5px 13px;
+    border: 2px solid $mainBlack;
+    border-radius: 30px;
+    background-color: transparent;
+    transition: border-color 0.5s;
+
+    &:hover, &:focus {
+      border-color: $mainColor;
+    }
+  }
+
+  .errorInput {
+    border-color: $errorColor;
+  }
+
+  .error {
+    @include text(14px);
+    color: $errorColor;
+    margin-left: 13px;
+  }
+
+}
+

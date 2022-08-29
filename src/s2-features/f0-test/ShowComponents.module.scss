@@ -1,0 +1,29 @@
+.showComponents {
+  display: flex;
+  justify-content: center;
+  min-height: 40vh;
+  align-items: center;
+
+  .componentsContainer {
+    max-width: 25%;
+    display: flex;
+    flex-flow: column wrap;
+
+    .checkboxItem {
+      margin: 20px 0 0;
+    }
+
+    Input {
+      margin: 10px 0 0;
+    }
+
+    .buttonContainer {
+
+      & Button{
+        margin: 10px 10px 0 0;
+      }
+    }
+
+  }
+
+}
