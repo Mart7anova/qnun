@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/qnun/static/css/main.b079456d.css",
+    "main.js": "/qnun/static/js/main.26e52f6a.js",
+    "static/js/787.19b5cadc.chunk.js": "/qnun/static/js/787.19b5cadc.chunk.js",
+    "index.html": "/qnun/index.html",
+    "main.b079456d.css.map": "/qnun/static/css/main.b079456d.css.map",
+    "main.26e52f6a.js.map": "/qnun/static/js/main.26e52f6a.js.map",
+    "787.19b5cadc.chunk.js.map": "/qnun/static/js/787.19b5cadc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b079456d.css",
+    "static/js/main.26e52f6a.js"
+  ]
+}
