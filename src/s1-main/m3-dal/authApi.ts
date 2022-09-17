@@ -10,7 +10,7 @@ export const authApi = {
         return instance.get<AuthMeType>("/auth/me")
     },
     registration(email: string, password: string) {
-        return instance.post<BaseResponseType>("auth/register", {email, password})
+        return instance.post("auth/register", {email, password})
     },
     login(email: string, password: string, rememberMe: boolean) {
         return instance.post<BaseResponseType<{ token: string, tokenDeathTime: number }>>("/auth/login", {
@@ -40,9 +40,11 @@ export const authApi = {
 
 }
 
+
 export type BaseResponseType<T = string, D = number> = {
     _id?: string
     email?: string
+    password?: string
     rememberMe: boolean
     isAdmin?: boolean
     name?: string
@@ -55,6 +57,12 @@ export type BaseResponseType<T = string, D = number> = {
     token: T
     tokenDeathTime: D
 }
+
+// export type AuthLogin = {
+//     error?: string
+//     email: string
+//     in?: string
+// }
 
 export type AuthMeType = {
     error: string
