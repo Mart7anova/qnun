@@ -42,17 +42,18 @@ export const Registration = () => {
             }
 
             if (!values.password) {
-                errors.password = "Required";
+                errors.password = "Required"
             } else if (values.password.length < 8) {
-                errors.password = "Put more then 8 symbols, please.";
+                errors.password = "Put more then 8 symbols, please."
             } else if (!values.password) {
-                errors.password = "Symbol required!";
+                errors.password = "Symbol required!"
+            }
+            if (!values.confirmPassword) {
+                errors.confirmPassword = "Required"
+            } else if (values.confirmPassword.length < 8) {
+                errors.confirmPassword = "Put more then 8 symbols, please."
             } else if (values.password !== values.confirmPassword) {
                 errors.confirmPassword = "Password not matched"
-            }
-
-            if (values.confirmPassword.length < 8) {
-                errors.confirmPassword = "Put more then 8 symbols, please."
             }
             return errors
         },
@@ -89,8 +90,14 @@ export const Registration = () => {
                         <div>
                             <div style={{marginLeft: "-107px"}}>Password</div>
                             {isHidePass ? <input type="password"  {...formik.getFieldProps("password")}/>
-                                : <input {...formik.getFieldProps("confirmPassword")} />}
-                            <button type="button" onClick={onClickHandlerPass}>{isHidePass ? <span>+</span> : <span>-</span>}</button>
+                                : <input {...formik.getFieldProps("password")} />}
+                            <button type="button" onClick={onClickHandlerPass}>{
+                                isHidePass ?
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3945/3945105.png"
+                                         style={{width: "20px"}}></img> :
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1693/1693945.png"
+                                         style={{width: "20px"}}></img>}
+                            </button>
                             {formik.touched.password &&
                             formik.errors.password ?
                                 <div style={{color: "#f03045", fontSize: "14px"}}>{formik.errors.password}</div> : null}
@@ -101,12 +108,18 @@ export const Registration = () => {
                             {isHideConfirmPass ? <input type="password" {...formik.getFieldProps("confirmPassword")}/>
                                 : <input {...formik.getFieldProps("confirmPassword")}/>
                             }
-                            <button type="button" onClick={onClickHandlerConfirmPass}>{isHideConfirmPass ? <span>+</span> : <span>-</span>}</button>
+                            <button type="button" onClick={onClickHandlerConfirmPass}>
+                                {isHideConfirmPass ?
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3945/3945105.png"
+                                         style={{width: "20px"}}></img> :
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1693/1693945.png"
+                                         style={{width: "20px"}}></img>}
+                            </button>
                             {formik.touched.confirmPassword &&
                             formik.errors.confirmPassword ?
                                 <div style={{
                                     color: "#f03045",
-                                    fontSize: "14px"
+                                    fontSize: "14px",
                                 }}>{formik.errors.confirmPassword}</div> : null}
                         </div>
 
