@@ -1,0 +1,20 @@
+.loginPage {
+
+	.formWrapper {
+		box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
+		border-radius: 2px;
+		max-width: 413px;
+		margin: 60px auto;
+		padding: 35px 33px 42px 33px;
+
+		.form {
+			display: flex;
+			flex-direction: column;
+
+			.signUpButton {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		}
+	}
+}

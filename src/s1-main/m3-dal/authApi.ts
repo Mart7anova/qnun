@@ -13,7 +13,7 @@ export const authApi = {
         return instance.post("auth/register", {email, password})
     },
     login(email: string, password: string, rememberMe: boolean) {
-        return instance.post<BaseResponseType<{ token: string, tokenDeathTime: number }>>("/auth/login", {
+        return instance.post("/auth/login", {
             email,
             password,
             rememberMe
