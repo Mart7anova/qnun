@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ButtonHTMLAttributes, DetailedHTMLProps, InputHTMLAttributes, useState} from 'react';
 
 import {Input} from '../Input/Input';
 import {Button} from '../Button/Button';
@@ -8,18 +8,44 @@ import style from './PasswordView.module.scss'
 import open from '../../c3-image/open.png'
 import close from '../../c3-image/close.png'
 
-export const PasswordView = () => {
+type  DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+
+type PropsType = DefaultInputPropsType & DefaultButtonPropsType & {
+    onChangeText?: (value: string) => void
+    onEnter?: () => void
+    error?: string
+    spanClassName?: string
+}
+
+export const PasswordView = (props: PropsType) => {
+    const {
+        type,
+        onChange, onChangeText,
+        onKeyUp, onEnter,
+        error,
+        className, spanClassName,
+
+        ...restProps
+    } = props
+
     const [isOpenPassword, setIsOpenPassword] = useState(false)
 
-    const inputType = isOpenPassword ? 'text':'password'
+    const inputType = isOpenPassword ? 'text' : 'password'
 
     const onChangeIsOpenStatus = () => {
-      setIsOpenPassword(!isOpenPassword)
+        setIsOpenPassword(!isOpenPassword)
     }
 
     return (
         <div className={style.mainComponent}>
-            <Input className={style.input} type={inputType}/>
+            <Input type={inputType}
+                   onChangeText={onChangeText}
+                   onEnter={onEnter}
+                   error={error}
+                   className={className}
+                   {...restProps}
+            />
             <Button className={style.button} onClick={onChangeIsOpenStatus}>
                 {
                     isOpenPassword
