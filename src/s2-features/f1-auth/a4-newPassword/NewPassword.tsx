@@ -3,8 +3,9 @@ import React from 'react';
 import styleContainer from '../../../s1-main/m1-ui/common/c2-styles/Container.module.css';
 import style from './NewPassword.module.scss';
 import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css';
-import {Input} from '../../../s1-main/m1-ui/common/c1-components/Input/Input';
+
 import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
+import {PasswordView} from '../../../s1-main/m1-ui/common/c1-components/passwordView/PasswordView';
 
 export const NewPassword = () => {
     return (
@@ -13,8 +14,8 @@ export const NewPassword = () => {
                 <h1 className={style.header}>
                     Create new password
                 </h1>
-                <Input placeholder={'password'}
-                       className={style.input}
+                <PasswordView placeholder={'password'}
+                              className={style.input}
                 />
                 <span className={style.informationText}>
                     Create new password and we will send you further instructions to email
