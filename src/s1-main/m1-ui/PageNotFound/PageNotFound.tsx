@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './PageNotFound.module.scss'
-import {Link} from 'react-router-dom';
-import {showComponents} from '../u1-Route/Variables/routeVariables';
+import { showComponents} from '../u1-Route/Variables/routeVariables';
+import {Link} from "react-router-dom";
 
 export const PageNotFound = () => {
     return (
