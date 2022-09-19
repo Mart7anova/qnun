@@ -1,6 +1,5 @@
 import React from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import {ShowComponents} from '../../../s2-features/f0-test/ShowComponents';
 import {PageNotFound} from '../PageNotFound/PageNotFound';
 import {Login} from '../../../s2-features/f1-auth/a1-login/Login';
 import {Registration} from '../../../s2-features/f1-auth/a2-registration/Registration';
@@ -11,7 +10,8 @@ import {
     checkEmail,
     login,
     newPassword,
-    otherRoutes, packsList,
+    otherRoutes,
+    packsList,
     pageNotFound,
     profile,
     registration,
@@ -35,7 +35,7 @@ export const AppRoute = () => {
                 <Route path={resetPassword} element={<ForgotPassword/>}/>
                 <Route path={newPassword} element={<NewPassword/>}/>
 
-                <Route index element={<ShowComponents/>}/>
+                <Route index element={<Registration/>}/>
                 <Route path={profile} element={<Profile/>}/>
                 <Route path={packsList} element={<PacksList/>}/>
                 <Route path={checkEmail} element={<CheckEmail/>}/>

@@ -5,8 +5,8 @@ import {Button} from '../Button/Button';
 
 import style from './PasswordView.module.scss'
 
-import open from '../../c3-image/open.png'
-import close from '../../c3-image/close.png'
+import open from '../../c3-image/photo/open.png'
+import close from '../../c3-image/photo/close.png'
 
 type  DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>

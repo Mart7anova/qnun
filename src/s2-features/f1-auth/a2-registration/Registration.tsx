@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import {useFormik} from "formik";
-import {Link, Navigate} from "react-router-dom";
-import {login} from "../../../s1-main/m1-ui/u1-Route/Variables/routeVariables";
-import registration from "../a2-registration/Registration.module.scss"
-import {AppRootStateType, useAppDispatch} from "../../../s1-main/m2-bll/store";
-import {registrationThunk} from "../../../s1-main/m2-bll/reducers/auth-reducer";
-import {useSelector} from "react-redux";
+import {useFormik} from 'formik';
+import {Link, Navigate} from 'react-router-dom';
+import {login} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import registration from '../a2-registration/Registration.module.scss'
+import {AppRootStateType, useAppDispatch} from '../../../s1-main/m2-bll/store';
+import {registrationThunk} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {useSelector} from 'react-redux';
 
 type FormikErrorType = {
     email?: string
@@ -15,6 +15,8 @@ type FormikErrorType = {
 export const Registration = () => {
     const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isAuth)
     const dispatch = useAppDispatch()
+
+    console.log(isLoggedIn)
 
     const [isHidePass, setHidePass] = useState<boolean>(true)
     const [isHideConfirmPass, setHideConfirmPass] = useState<boolean>(true)
@@ -28,32 +30,32 @@ export const Registration = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: "",
-            password: "",
-            confirmPassword: ""
+            email: '',
+            password: '',
+            confirmPassword: ''
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
 
             if (!values.email) {
-                errors.email = "Required"
+                errors.email = 'Required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = "Invalid email address"
+                errors.email = 'Invalid email address'
             }
 
             if (!values.password) {
-                errors.password = "Required"
+                errors.password = 'Required'
             } else if (values.password.length < 8) {
-                errors.password = "Put more then 8 symbols, please."
+                errors.password = 'Put more then 8 symbols, please.'
             } else if (!values.password) {
-                errors.password = "Symbol required!"
+                errors.password = 'Symbol required!'
             }
             if (!values.confirmPassword) {
-                errors.confirmPassword = "Required"
+                errors.confirmPassword = 'Required'
             } else if (values.confirmPassword.length < 8) {
-                errors.confirmPassword = "Put more then 8 symbols, please."
+                errors.confirmPassword = 'Put more then 8 symbols, please.'
             } else if (values.password !== values.confirmPassword) {
-                errors.confirmPassword = "Password not matched"
+                errors.confirmPassword = 'Password not matched'
             }
             return errors
         },
@@ -67,6 +69,7 @@ export const Registration = () => {
         }
     })
 
+
     if (isLoggedIn) {
         return <Navigate to={login}/>
     }
@@ -77,60 +80,60 @@ export const Registration = () => {
                     <h1>SIGN UP</h1>
                     <form onSubmit={formik.handleSubmit}>
                         <div>
-                            <div style={{marginLeft: "-135px"}}>Email</div>
-                            <input type="email" style={{width: "185px"}} {...formik.getFieldProps("email")}/>
+                            <div style={{marginLeft: '-135px'}}>Email</div>
+                            <input type="email" style={{width: '185px'}} {...formik.getFieldProps('email')}/>
                             {formik.touched.email &&
                             formik.errors.email ?
                                 <div style={{
-                                    color: "#f03045",
-                                    fontSize: "14px"
+                                    color: '#f03045',
+                                    fontSize: '14px'
                                 }}>{formik.errors.email}</div> : null}
                         </div>
 
                         <div>
-                            <div style={{marginLeft: "-107px"}}>Password</div>
-                            {isHidePass ? <input type="password"  {...formik.getFieldProps("password")}/>
-                                : <input {...formik.getFieldProps("password")} />}
+                            <div style={{marginLeft: '-107px'}}>Password</div>
+                            {isHidePass ? <input type="password"  {...formik.getFieldProps('password')}/>
+                                : <input {...formik.getFieldProps('password')} />}
                             <button type="button" onClick={onClickHandlerPass}>{
                                 isHidePass ?
                                     <img src="https://cdn-icons-png.flaticon.com/512/3945/3945105.png"
-                                         style={{width: "20px"}}></img> :
+                                         style={{width: '20px'}}></img> :
                                     <img src="https://cdn-icons-png.flaticon.com/512/1693/1693945.png"
-                                         style={{width: "20px"}}></img>}
+                                         style={{width: '20px'}}></img>}
                             </button>
                             {formik.touched.password &&
                             formik.errors.password ?
-                                <div style={{color: "#f03045", fontSize: "14px"}}>{formik.errors.password}</div> : null}
+                                <div style={{color: '#f03045', fontSize: '14px'}}>{formik.errors.password}</div> : null}
                         </div>
 
                         <div>
-                            <div style={{marginLeft: "-45px"}}>Confirm password</div>
-                            {isHideConfirmPass ? <input type="password" {...formik.getFieldProps("confirmPassword")}/>
-                                : <input {...formik.getFieldProps("confirmPassword")}/>
+                            <div style={{marginLeft: '-45px'}}>Confirm password</div>
+                            {isHideConfirmPass ? <input type="password" {...formik.getFieldProps('confirmPassword')}/>
+                                : <input {...formik.getFieldProps('confirmPassword')}/>
                             }
                             <button type="button" onClick={onClickHandlerConfirmPass}>
                                 {isHideConfirmPass ?
                                     <img src="https://cdn-icons-png.flaticon.com/512/3945/3945105.png"
-                                         style={{width: "20px"}}></img> :
+                                         style={{width: '20px'}}></img> :
                                     <img src="https://cdn-icons-png.flaticon.com/512/1693/1693945.png"
-                                         style={{width: "20px"}}></img>}
+                                         style={{width: '20px'}}></img>}
                             </button>
                             {formik.touched.confirmPassword &&
                             formik.errors.confirmPassword ?
                                 <div style={{
-                                    color: "#f03045",
-                                    fontSize: "14px",
+                                    color: '#f03045',
+                                    fontSize: '14px',
                                 }}>{formik.errors.confirmPassword}</div> : null}
                         </div>
 
-                        <button type="submit" style={{marginTop: "10px", marginBottom: "10px"}}>
+                        <button type="submit" style={{marginTop: '10px', marginBottom: '10px'}}>
                             Sign Up
                         </button>
                     </form>
 
                     <div>Already have account?</div>
                     <span>
-                        <Link style={{textDecoration: "none", color: "#6b90cc"}} to={login}>Sign In</Link> </span>
+                        <Link style={{textDecoration: 'none', color: '#6b90cc'}} to={login}>Sign In</Link> </span>
                 </div>
             </div>
         </div>

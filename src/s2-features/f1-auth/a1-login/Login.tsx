@@ -3,16 +3,16 @@ import s from './Login.module.scss'
 import {Input} from '../../../s1-main/m1-ui/common/c1-components/Input/Input';
 import {Checkbox} from '../../../s1-main/m1-ui/common/c1-components/Checkbox/Checkbox';
 import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
-import {Navigate} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from '../../../s1-main/m2-bll/store';
-import {profile} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {profile, registration} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {loginThunk} from '../../../s1-main/m2-bll/reducers/auth-reducer';
 
 
 export const Login = () => {
-		const isAuth = useSelector<AppRootStateType>(state => state.auth.isAuth)
+		const isAuth = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
 		const dispatch = useAppDispatch()
 
 		const formik = useFormik({
@@ -40,8 +40,10 @@ export const Login = () => {
 										<Checkbox {...formik.getFieldProps('rememberMe')}>Remember me</Checkbox>
 										<span>Forgot Password?</span>
 										<Button>Sign In</Button>
-										<span>Already have an account?</span>
-										<span className={s.signUpButton}>Sign Up</span>
+										<span>If you don't have an account?</span>
+										<Link to={registration}>
+											<span className={s.signUpButton}>Sign Up</span>
+										</Link>
 								</form>
 						</div>
 				</div>
