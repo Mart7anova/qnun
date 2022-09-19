@@ -9,3 +9,4 @@ export const newPassword = 'newPassword'
 //pages
 export const showComponents = '/'
 export const profile = 'profile'
+export const packsList = '/packsList'

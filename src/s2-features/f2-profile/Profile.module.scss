@@ -1,0 +1,47 @@
+@import './src/s1-main/m1-ui/common/c2-styles/sass/mixins';
+
+.profileContainer {
+  .link {
+    position: absolute;
+    top: 70px;
+
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+    color: $mainBlack;
+
+    .arrowImg {
+      height: 20px;
+    }
+
+    .textLink {
+      padding-left: 10px;
+    }
+  }
+
+  .profileBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .header {
+      margin-bottom: 30px;
+    }
+
+    .userPhoto {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .name {
+      margin-bottom: 15px;
+    }
+
+    .email {
+      margin-bottom: 15px;
+      color: $darkGrey;
+    }
+  }
+}

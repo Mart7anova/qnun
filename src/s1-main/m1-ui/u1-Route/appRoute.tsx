@@ -10,7 +10,7 @@ import {Profile} from '../../../s2-features/f2-profile/Profile';
 import {
     login,
     newPassword,
-    otherRoutes,
+    otherRoutes, packsList,
     pageNotFound,
     profile,
     registration,
@@ -18,6 +18,7 @@ import {
     showComponents
 } from './Variables/routeVariables';
 import {Main} from '../Main';
+import {PacksList} from '../../../s2-features/f3-packsList/PacksList';
 
 export const AppRoute = () => {
 
@@ -34,6 +35,7 @@ export const AppRoute = () => {
 
                 <Route index element={<ShowComponents/>}/>
                 <Route path={profile} element={<Profile/>}/>
+                <Route path={packsList} element={<PacksList/>}/>
             </Route>
         </Routes>
     );
