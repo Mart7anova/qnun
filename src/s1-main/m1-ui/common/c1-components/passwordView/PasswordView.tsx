@@ -1,4 +1,4 @@
-import React, {ButtonHTMLAttributes, DetailedHTMLProps, InputHTMLAttributes, useState} from 'react';
+import React, {DetailedHTMLProps, InputHTMLAttributes, useState} from 'react';
 
 import {Input} from '../Input/Input';
 import {Button} from '../Button/Button';
@@ -8,10 +8,9 @@ import style from './PasswordView.module.scss'
 import open from '../../c3-image/photo/open.png'
 import close from '../../c3-image/photo/close.png'
 
-type  DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-type PropsType = DefaultInputPropsType & DefaultButtonPropsType & {
+type PropsType = DefaultInputPropsType & {
     onChangeText?: (value: string) => void
     onEnter?: () => void
     error?: string
@@ -21,11 +20,6 @@ type PropsType = DefaultInputPropsType & DefaultButtonPropsType & {
 export const PasswordView = (props: PropsType) => {
     const {
         type,
-        onChange, onChangeText,
-        onKeyUp, onEnter,
-        error,
-        className, spanClassName,
-
         ...restProps
     } = props
 
@@ -40,10 +34,6 @@ export const PasswordView = (props: PropsType) => {
     return (
         <div className={style.mainComponent}>
             <Input type={inputType}
-                   onChangeText={onChangeText}
-                   onEnter={onEnter}
-                   error={error}
-                   className={className}
                    {...restProps}
             />
             <Button className={style.button} onClick={onChangeIsOpenStatus}>

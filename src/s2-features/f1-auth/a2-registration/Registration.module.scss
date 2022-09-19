@@ -1,16 +1,11 @@
+@import './src/s1-main/m1-ui/common/c2-styles/sass/mixins';
+@import './src/s1-main/m1-ui/common/c2-styles/sass/variables';
+
 .mainBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid red;
-  min-height: 100vh;
-
   .childrenBlock {
-    border: 1px solid black;
-    //width: 413px;
-    //height: 528px;
-    text-align: center;
+    & h1{
+      margin: 30px;
+    }
+
   }
 }

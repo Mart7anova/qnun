@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useFormik} from 'formik';
 import {Link, Navigate} from 'react-router-dom';
 import {login} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
@@ -6,6 +6,12 @@ import registration from '../a2-registration/Registration.module.scss'
 import {AppRootStateType, useAppDispatch} from '../../../s1-main/m2-bll/store';
 import {registrationThunk} from '../../../s1-main/m2-bll/reducers/auth-reducer';
 import {useSelector} from 'react-redux';
+import {PasswordView} from '../../../s1-main/m1-ui/common/c1-components/passwordView/PasswordView';
+import {Input} from '../../../s1-main/m1-ui/common/c1-components/Input/Input';
+import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
+
+import styleContainer from '../../../s1-main/m1-ui/common/c2-styles/Container.module.css';
+import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css';
 
 type FormikErrorType = {
     email?: string
@@ -15,18 +21,6 @@ type FormikErrorType = {
 export const Registration = () => {
     const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isAuth)
     const dispatch = useAppDispatch()
-
-    console.log(isLoggedIn)
-
-    const [isHidePass, setHidePass] = useState<boolean>(true)
-    const [isHideConfirmPass, setHideConfirmPass] = useState<boolean>(true)
-
-    const onClickHandlerPass = () => {
-        isHidePass ? setHidePass(!true) : setHidePass(true)
-    }
-    const onClickHandlerConfirmPass = () => {
-        isHideConfirmPass ? setHideConfirmPass(!true) : setHideConfirmPass(true)
-    }
 
     const formik = useFormik({
         initialValues: {
@@ -69,17 +63,22 @@ export const Registration = () => {
         }
     })
 
+    const errorEmail = formik.touched.email && formik.errors.email ? formik.errors.email : ''
+    const errorPass = formik.touched.password && formik.errors.password ? formik.errors.password : ''
+    const errorConfirmPassword = formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ''
 
     if (isLoggedIn) {
         return <Navigate to={login}/>
     }
+
     return (
         <div>
-            <div className={registration.mainBlock}>
-                <div className={registration.childrenBlock}>
-                    <h1>SIGN UP</h1>
+            <div className={`${styleContainer.container} ${registration.mainBlock}`}>
+                <div className={`${styleBlock.block} ${registration.childrenBlock}`}>
+
+                    <h1>Sing up</h1>
                     <form onSubmit={formik.handleSubmit}>
-                        <div>
+                        {/*<div>
                             <div style={{marginLeft: '-135px'}}>Email</div>
                             <input type="email" style={{width: '185px'}} {...formik.getFieldProps('email')}/>
                             {formik.touched.email &&
@@ -88,9 +87,12 @@ export const Registration = () => {
                                     color: '#f03045',
                                     fontSize: '14px'
                                 }}>{formik.errors.email}</div> : null}
-                        </div>
+                        </div>*/}
 
-                        <div>
+                        <div>Email</div>
+                        <Input className={registration.input} type={'email'} error={errorEmail} {...formik.getFieldProps('email')}/>
+
+                        {/*<div>
                             <div style={{marginLeft: '-107px'}}>Password</div>
                             {isHidePass ? <input type="password"  {...formik.getFieldProps('password')}/>
                                 : <input {...formik.getFieldProps('password')} />}
@@ -104,9 +106,12 @@ export const Registration = () => {
                             {formik.touched.password &&
                             formik.errors.password ?
                                 <div style={{color: '#f03045', fontSize: '14px'}}>{formik.errors.password}</div> : null}
-                        </div>
+                        </div>*/}
 
-                        <div>
+                        <div>Password</div>
+                        <PasswordView className={registration.input} error={errorPass} {...formik.getFieldProps('password')}/>
+
+                        {/*<div>
                             <div style={{marginLeft: '-45px'}}>Confirm password</div>
                             {isHideConfirmPass ? <input type="password" {...formik.getFieldProps('confirmPassword')}/>
                                 : <input {...formik.getFieldProps('confirmPassword')}/>
@@ -124,11 +129,12 @@ export const Registration = () => {
                                     color: '#f03045',
                                     fontSize: '14px',
                                 }}>{formik.errors.confirmPassword}</div> : null}
-                        </div>
+                        </div>*/}
 
-                        <button type="submit" style={{marginTop: '10px', marginBottom: '10px'}}>
-                            Sign Up
-                        </button>
+                        <div>Confirm password</div>
+                        <PasswordView className={registration.input} error={errorConfirmPassword} {...formik.getFieldProps('confirmPassword')}/>
+
+                        <Button>Sign Up</Button>
                     </form>
 
                     <div>Already have account?</div>
