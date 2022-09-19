@@ -8,6 +8,7 @@ import {ForgotPassword} from '../../../s2-features/f1-auth/a3-forgotPassword/For
 import {NewPassword} from '../../../s2-features/f1-auth/a4-newPassword/NewPassword';
 import {Profile} from '../../../s2-features/f2-profile/Profile';
 import {
+    checkEmail,
     login,
     newPassword,
     otherRoutes, packsList,
@@ -19,6 +20,7 @@ import {
 } from './Variables/routeVariables';
 import {Main} from '../Main';
 import {PacksList} from '../../../s2-features/f3-packsList/PacksList';
+import {CheckEmail} from '../../../s2-features/f1-auth/a5-checkEmail/CheckEmail';
 
 export const AppRoute = () => {
 
@@ -36,6 +38,7 @@ export const AppRoute = () => {
                 <Route index element={<ShowComponents/>}/>
                 <Route path={profile} element={<Profile/>}/>
                 <Route path={packsList} element={<PacksList/>}/>
+                <Route path={checkEmail} element={<CheckEmail/>}/>
             </Route>
         </Routes>
     );
