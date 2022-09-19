@@ -18,7 +18,7 @@ export const Header2 = () => {
 				<header className={s.header}>
 						<div className={s.container}>
 								<Link to={'/'}>
-										<img src={logo} alt="logo"/>
+										<img src={"logo"} alt="logo"/>
 								</Link>
 								{isLoggedIn
 										? (
