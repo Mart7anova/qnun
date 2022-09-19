@@ -12,7 +12,7 @@ type PropsType = DefaultInputPropsType & {
 
 export const Input: FC<PropsType> = (props) => {
     const {
-        type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
+        type,
         onChange, onChangeText,
         onKeyUp, onEnter,
         error,
@@ -41,7 +41,7 @@ export const Input: FC<PropsType> = (props) => {
     return (
         <div className={style.inputContainer}>
             <input
-                type={'text'}
+                type={type}
                 onChange={onChangeCallback}
                 onKeyUp={onKeyUpCallback}
                 className={finalInputClassName}
