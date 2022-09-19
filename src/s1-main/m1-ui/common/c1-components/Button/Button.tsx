@@ -13,7 +13,7 @@ export const Button: FC<PropsType> = (props) => {
         ...restProps
     } =props
 
-    const finalClassName = `${red && style.red} ${className? className : style.default}`
+    const finalClassName = `${red && style.red} ${className? `${style.default} ${className}` : style.default}`
 
     return (
         <button

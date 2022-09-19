@@ -35,7 +35,7 @@ export const Input: FC<PropsType> = (props) => {
         && onEnter() // то вызвать его
     }
 
-    const finalInputClassName = `${error && style.errorInput} ${className ? className : style.defaultInput}` // need to fix with (?:) and s.superInput
+    const finalInputClassName = `${error && style.errorInput} ${className ? `${style.defaultInput} ${className}` : style.defaultInput}` // need to fix with (?:) and s.superInput
     const finalSpanClassName = `${style.error} ${spanClassName ? spanClassName : ''}`
 
     return (
