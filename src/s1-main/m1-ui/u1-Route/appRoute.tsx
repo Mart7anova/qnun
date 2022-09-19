@@ -4,7 +4,7 @@ import {ShowComponents} from '../../../s2-features/f0-test/ShowComponents';
 import {PageNotFound} from '../PageNotFound/PageNotFound';
 import {Login} from '../../../s2-features/f1-auth/a1-login/Login';
 import {Registration} from '../../../s2-features/f1-auth/a2-registration/Registration';
-import {ResetPassword} from '../../../s2-features/f1-auth/a3-resetPassword/ResetPassword';
+import {ForgotPassword} from '../../../s2-features/f1-auth/a3-forgotPassword/ForgotPassword';
 import {NewPassword} from '../../../s2-features/f1-auth/a4-newPassword/NewPassword';
 import {Profile} from '../../../s2-features/f2-profile/Profile';
 import {
@@ -30,7 +30,7 @@ export const AppRoute = () => {
 
                 <Route path={login} element={<Login/>}/>
                 <Route path={registration} element={<Registration/>}/>
-                <Route path={resetPassword} element={<ResetPassword/>}/>
+                <Route path={resetPassword} element={<ForgotPassword/>}/>
                 <Route path={newPassword} element={<NewPassword/>}/>
 
                 <Route index element={<ShowComponents/>}/>

@@ -17,10 +17,12 @@ import { packsList } from '../../s1-main/m1-ui/u1-Route/Variables/routeVariables
 export const Profile = () => {
     return (
         <div className={`${styleContainer.container} ${style.profileContainer}`}>
+
             <Link to={packsList} className={style.link}>
                 <img src={arrow} alt={'arrow'} className={style.arrowImg}/>
                 <span className={style.textLink}>Back to Packs List</span>
             </Link>
+
             <div className={`${styleBlock.block} ${style.profileBlock}`}>
                 <h1 className={style.header}>
                     Personal Information
