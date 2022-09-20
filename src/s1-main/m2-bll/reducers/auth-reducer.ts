@@ -29,7 +29,7 @@ type ActionsType = RegistrationType | LoginType
 type RegistrationType = ReturnType<typeof isLoggedIn>
 type LoginType = ReturnType<typeof auth>
 
-const isLoggedIn = (value: boolean) => {
+export const isLoggedIn = (value: boolean) => {
     return {
         type: 'AUTH/LOGIN',
         payload: {value}
