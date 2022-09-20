@@ -2,10 +2,22 @@
 @import './src/s1-main/m1-ui/common/c2-styles/sass/variables';
 
 .mainBlock {
+  @include text();
   .childrenBlock {
-    & h1{
+    & h1 {
       margin: 30px;
     }
+    .nameDirection {
+      font-size: 15px;
+      margin: 10px 5px 5px 0;
+    }
 
+    .btn{
+      margin: 20px auto 15px ;
+      display: block;
+    }
+  }
+  .linkStyle {
+    margin: 5px 0 0px 0px;
   }
 }
