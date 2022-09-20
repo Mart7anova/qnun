@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, DetailedHTMLProps, FC, InputHTMLAttributes} from 'react';
 import style from './Input.module.scss'
 
-type  DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 type PropsType = DefaultInputPropsType & {
     onChangeText?: (value: string) => void
@@ -17,7 +17,6 @@ export const Input: FC<PropsType> = (props) => {
         onKeyUp, onEnter,
         error,
         className, spanClassName,
-
         ...restProps
     } = props
 
