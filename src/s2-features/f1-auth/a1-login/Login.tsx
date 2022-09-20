@@ -7,16 +7,12 @@ import {Link, Navigate} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from '../../../s1-main/m2-bll/store';
-<<<<<<<<< Temporary merge branch 1
-import {profile, registration} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
-=========
-import {forgotPassword, profile} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
->>>>>>>>> Temporary merge branch 2
+import {forgotPassword, profile, registration} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {loginThunk} from '../../../s1-main/m2-bll/reducers/auth-reducer';
 
 
 export const Login = () => {
-		const isAuth = useSelector<AppRootStateType>(state => state.auth.isAuth)
+		const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
 		const dispatch = useAppDispatch()
 
 		const formik = useFormik({
@@ -31,7 +27,7 @@ export const Login = () => {
 						dispatch(loginThunk(values.email, values.password, values.rememberMe))
 				}
 		})
-		if (isAuth) return <Navigate to={profile}/>
+		if (isLoggedIn) return <Navigate to={profile}/>
 		return (
 				<div className={s.loginPage}>
 						<div className={s.formWrapper}>
