@@ -3,11 +3,11 @@ import s from './Login.module.scss'
 import {Input} from '../../../s1-main/m1-ui/common/c1-components/Input/Input';
 import {Checkbox} from '../../../s1-main/m1-ui/common/c1-components/Checkbox/Checkbox';
 import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
-import {Link, Navigate} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from '../../../s1-main/m2-bll/store';
-import {profile, registration} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {profile} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {loginThunk} from '../../../s1-main/m2-bll/reducers/auth-reducer';
 
 
@@ -40,10 +40,8 @@ export const Login = () => {
 										<Checkbox {...formik.getFieldProps('rememberMe')}>Remember me</Checkbox>
 										<span>Forgot Password?</span>
 										<Button>Sign In</Button>
-										<span>If you don't have an account?</span>
-										<Link to={registration}>
-											<span className={s.signUpButton}>Sign Up</span>
-										</Link>
+										<span>Already have an account?</span>
+										<span className={s.signUpButton}>Sign Up</span>
 								</form>
 						</div>
 				</div>
