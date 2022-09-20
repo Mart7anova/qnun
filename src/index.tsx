@@ -7,7 +7,7 @@ import {store} from './s1-main/m2-bll/store';
 import {Provider} from 'react-redux';
 
 const root = ReactDOM.createRoot(
-		document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 root.render(
 		<React.StrictMode>
