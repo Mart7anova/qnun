@@ -99,3 +99,12 @@ export const forgotPass = (email: string): AppThunk => async (dispatch) => {
         dispatch(statusRequest(null))
     }
 }
+
+export const updatePassword = (password: string, resetPasswordToken: string): AppThunk => async (dispatch) =>{
+    try {
+        await authApi.resetPass(password, resetPasswordToken)
+        //dispatch(statusRequest())
+    }catch (e) {
+        console.log(e)
+    }
+}
