@@ -72,12 +72,10 @@ export const Registration = () => {
     if (isLoggedIn) {
         return <Navigate to={login}/>
     }
-
     return (
         <div>
             <div className={`${styleContainer.container} ${registration.mainBlock}`}>
                 <div className={`${styleBlock.block} ${registration.childrenBlock}`}>
-
                     <h1>Sing up</h1>
                     <form onSubmit={formik.handleSubmit}>
                         <div className={registration.nameDirection}>Email</div>
