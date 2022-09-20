@@ -12,7 +12,7 @@ export const Header2 = () => {
 		const {pathname} = useLocation()
 
 		const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-		const useName = useSelector<AppRootStateType, string>(state => state.profile.profile?.name || 'error')
+		const useName = useSelector<AppRootStateType, string>(state => state.profile.profile.name || 'error')
 		const userAvatar = useSelector<AppRootStateType, string>(state => state.profile.profile?.avatar || noAvatar)
 
 		return (

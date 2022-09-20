@@ -15,7 +15,7 @@ import {
     pageNotFound,
     profile,
     registration,
-    resetPassword,
+    forgotPassword,
     showComponents
 } from './Variables/routeVariables';
 import {Main} from '../Main';
@@ -32,7 +32,7 @@ export const AppRoute = () => {
 
                 <Route path={login} element={<Login/>}/>
                 <Route path={registration} element={<Registration/>}/>
-                <Route path={resetPassword} element={<ForgotPassword/>}/>
+                <Route path={forgotPassword} element={<ForgotPassword/>}/>
                 <Route path={newPassword} element={<NewPassword/>}/>
 
                 <Route index element={<Registration/>}/>
