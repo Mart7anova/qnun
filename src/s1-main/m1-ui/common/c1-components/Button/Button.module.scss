@@ -2,30 +2,27 @@
 @import '../../c2-styles/sass/mixins';
 
 .default{
-  @include text(18px);
+  background: #366EFF;
+  border-radius: 30px;
+  height: 36px;
+  border: none;
   color: $mainWhite;
-
-  @include button(50%,35px);
-  border: 2px solid $mainColor;
-  background-color: $mainColor;
-
-  &:active:not([disabled]){
-    background-color: transparent;
-    color: $mainColor;
-  }
+  box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  padding: 8px 0;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
   &:disabled{
-    background-color: $darkGray;
-    border-color: $darkGray;
-    color: $darkGray;
+    opacity: 0.5;
   }
 }
 
 .red{
-  border: 2px solid $errorColor;
-  background-color: $errorColor;
+  //border: 2px solid $errorColor;
+  //background-color: $errorColor;
 
   &:active:not([disabled]){
-    background-color: transparent;
-    color: $errorColor;
+    //background-color: transparent;
+    //color: $errorColor;
   }
 }

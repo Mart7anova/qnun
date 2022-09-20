@@ -2,36 +2,37 @@
 @import '../../c2-styles/sass/mixins';
 
 .inputContainer {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  .defaultInput {
-    @include text();
-    color: $mainBlack;
+	input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 30px white inset !important;
+	}
 
-    outline: none;
-    width: 100%;
-    height: 35px;
-    padding: 5px 13px;
-    border: 2px solid $mainBlack;
-    border-radius: 30px;
-    background-color: transparent;
-    transition: border-color 0.5s;
+	.defaultInput {
+		background: transparent;
+		color: $mainBlack;
+		position: relative;
+		outline: none;
+		width: 100%;
+		height: 35px;
+		padding: 5px 0;
+		border: none;
+		border-bottom: 2px solid #CCCCCC;
+		&:hover, &:focus {
+			border-bottom: 2px solid black;
+		}
+	}
 
-    &:hover, &:focus {
-      border-color: $mainColor;
-    }
-  }
+	.errorInput {
+		border-color: $errorColor;
+	}
 
-  .errorInput {
-    border-color: $errorColor;
-  }
-
-  .error {
-    @include text(14px);
-    color: $errorColor;
-    margin-left: 13px;
-  }
+	.error {
+		@include text(14px);
+		color: $errorColor;
+		margin-left: 13px;
+	}
 
 }
 
