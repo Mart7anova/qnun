@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import style from './Profile.module.scss'
 import styleContainer from '../../s1-main/m1-ui/common/c2-styles/Container.module.css'
@@ -8,13 +8,24 @@ import userPhoto from '../../s1-main/m1-ui/common/c3-image/photo/catPhoto.png'
 import arrow from '../../s1-main/m1-ui/common/c3-image/photo/arrow.png'
 
 import {Button} from '../../s1-main/m1-ui/common/c1-components/Button/Button';
-import {EditableSpan} from '../../s1-main/m1-ui/common/c1-components/EditableSpan/EditableSpan';
 
 import {Link} from 'react-router-dom';
-import { packsList } from '../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {packsList} from '../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {useSelector} from 'react-redux';
+import {AppRootStateType, useAppDispatch} from '../../s1-main/m2-bll/store';
+import {authMe} from '../../s1-main/m2-bll/reducers/profile-reducer';
 
 
 export const Profile = () => {
+    const profile = useSelector<AppRootStateType>(state => state.profile)
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (profile === null) {
+            dispatch(authMe())
+        }
+    }, [profile])
+
     return (
         <div className={`${styleContainer.container} ${style.profileContainer}`}>
 

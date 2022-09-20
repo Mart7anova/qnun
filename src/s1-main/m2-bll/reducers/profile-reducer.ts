@@ -1,3 +1,6 @@
+import {AppThunk} from '../store';
+import {authApi} from '../../m3-dal/authApi';
+
 const initialState = {
 		profile: null,
 }
@@ -13,16 +16,26 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
 //actions
 export const setProfile = (profile: ProfileType) =>
 		({type: 'PROFILE/SET-PROFILE', profile} as const)
+
 //thunks
+export const authMe = ():AppThunk => async (dispatch) =>{
+	try {
+		const res = await authApi.auth()
+		dispatch(setProfile(res.data))
+	}catch (e) {
+
+	}
+}
 
 //types
 type ProfileStateType = {
 		profile: ProfileType | null
 }
-type ActionsType =
-		| SetProfileActionType
+type ActionsType = SetProfileActionType
+
 export type SetProfileActionType = ReturnType<typeof setProfile>
-type ProfileType = {
+
+export type ProfileType = {
 		_id: string
 		email: string
 		name: string

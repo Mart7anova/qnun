@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileType} from '../m2-bll/reducers/profile-reducer';
 
 const instance = axios.create({
     baseURL: process.env.NODE_ENV === "development" ? "http://localhost:7542/2.0/" : "https://neko-back.herokuapp.com/2.0/",
@@ -7,7 +8,7 @@ const instance = axios.create({
 
 export const authApi = {
     auth() {
-        return instance.get<AuthMeType>("/auth/me")
+        return instance.get<ProfileType>("/auth/me")
     },
     registration(email: string, password: string) {
         return instance.post("auth/register", {email, password})
