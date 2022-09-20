@@ -7,7 +7,7 @@ const instance = axios.create({
 
 export const authApi = {
     auth() {
-        return instance.get<AuthMeType>("/auth/me")
+        return instance.post("/auth/me",{})
     },
     registration(email: string, password: string) {
         return instance.post("auth/register", {email, password})
