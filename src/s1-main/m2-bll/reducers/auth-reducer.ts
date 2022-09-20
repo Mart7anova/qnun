@@ -48,7 +48,7 @@ const auth = (value: boolean) => {
     } as const
 }
 
-const statusRequest = (value: string) => {
+export const statusRequest = (value: string | null) => {
     return {
         type: 'STATUS-REQUEST/REGISTRATION',
         payload: {value}
@@ -84,12 +84,18 @@ export const logout = (): AppThunk => async (dispatch) =>{
 }
 
 export const forgotPass = (email: string): AppThunk => async (dispatch) => {
+    dispatch(statusRequest('request has been sent'))
     try {
         const {data} = await authApi.forgotPass({email,
             from: 'test-front-admin <mart7anova7@gmail.com>',
-            message: `<div>Перейдите по ссылке, чтобы продолжить востановление пароля <a href='http://localhost:3000/#/login/$token$'>link</a> </div>\``})
-        dispatch(statusRequest(data.error))
+            message: `<div>Перейдите по ссылке, чтобы продолжить востановление пароля <a href='http://localhost:3000/#/newPassword/$token$'>link</a></div>`
+        })
+        if(data.success){
+
+        }
     } catch (e) {
         console.log(e)
+    } finally {
+        dispatch(statusRequest(null))
     }
 }

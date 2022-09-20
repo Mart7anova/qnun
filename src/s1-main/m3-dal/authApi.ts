@@ -31,10 +31,11 @@ export const authApi = {
         return instance.put<{ updatedUser: BaseResponseType, token: string, tokenDeathTime: number }>("auth/me", {name, avatar})
     },
     forgotPass(data: RecoverRequestType) {
-        return instanceForHerokupp.post<ForgotResetPassType<{ emailRegExp: {} }>>("auth/forgot", data)
+        // ForgotResetPassType<{ emailRegExp: {} }>
+        return instanceForHerokupp.post<ResponseForgotPassword>("auth/forgot", data)
     },
     resetPass(password: string, resetPasswordToken: string) {
-        return instance.post<ForgotResetPassType<{ resetPasswordToken: string }>>("auth/set-new-password", {
+        return instanceForHerokupp.post<ForgotResetPassType<{ resetPasswordToken: string }>>("auth/set-new-password", {
             password,
             resetPasswordToken
         })
@@ -73,7 +74,12 @@ export type BaseResponseType<T = string, D = number> = {
     query: string
     body: {}
 }*/
-
+export type ResponseForgotPassword = {
+    answer: boolean,
+    html: boolean,
+    info: string,
+    success: boolean
+}
 export type ForgotResetPassType<T = {}, D = string> = {
     error: string
     emailRegExp: T
