@@ -4,7 +4,7 @@ export const pageNotFound = '/404'
 //auth
 export const login = '/login'
 export const registration = '/registration'
-export const resetPassword = '/resetPassword'
+export const forgotPassword = '/forgotPassword'
 export const newPassword = '/newPassword'
 //pages
 export const showComponents = '/'

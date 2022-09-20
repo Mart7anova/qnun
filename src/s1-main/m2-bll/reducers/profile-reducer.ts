@@ -1,8 +1,8 @@
 import {AppThunk} from '../store';
-import {authApi} from '../../m3-dal/authApi';
+import {authApi, BaseResponseType} from '../../m3-dal/authApi';
 
 const initialState = {
-		profile: null,
+		profile: {} as BaseResponseType,
 }
 
 export const profileReducer = (state: ProfileStateType = initialState, action: ActionsType): ProfileStateType => {
@@ -14,14 +14,15 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
 		}
 }
 //actions
-export const setProfile = (profile: ProfileType) =>
+export const setProfile = (profile: BaseResponseType) =>
 		({type: 'PROFILE/SET-PROFILE', profile} as const)
 
 //thunks
-export const authMe = ():AppThunk => async (dispatch) =>{
+export const updateUser = (name?: string, avatar?: string):AppThunk => async (dispatch) =>{
 	try {
-		const res = await authApi.auth()
-		dispatch(setProfile(res.data))
+		const {data} = await authApi.updateUser(name, avatar)
+		console.log(data)
+		dispatch(setProfile(data.updatedUser))
 	}catch (e) {
 
 	}
@@ -29,12 +30,13 @@ export const authMe = ():AppThunk => async (dispatch) =>{
 
 //types
 type ProfileStateType = {
-		profile: ProfileType | null
+		profile: BaseResponseType
 }
 type ActionsType = SetProfileActionType
 
 export type SetProfileActionType = ReturnType<typeof setProfile>
 
+/*
 export type ProfileType = {
 		_id: string
 		email: string
@@ -47,4 +49,4 @@ export type ProfileType = {
 		verified: boolean
 		rememberMe: boolean;
 		error?: string;
-}
+}*/

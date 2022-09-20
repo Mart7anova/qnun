@@ -7,7 +7,7 @@ import {
     pageNotFound,
     profile,
     registration,
-    resetPassword,
+    forgotPassword,
     showComponents
 } from '../u1-Route/Variables/routeVariables';
 
@@ -21,7 +21,7 @@ export const Header = () => {
             <NavLink to={profile} className={activeClass}>Profile</NavLink>
             <NavLink to={login} className={activeClass}>Login</NavLink>
             <NavLink to={registration} className={activeClass}>Registration</NavLink>
-            <NavLink to={resetPassword} className={activeClass}>Forgot password</NavLink>
+            <NavLink to={forgotPassword} className={activeClass}>Forgot password</NavLink>
             <NavLink to={newPassword} className={activeClass}>New password</NavLink>
             <NavLink to={pageNotFound} className={activeClass}>Page not found</NavLink>
         </header>

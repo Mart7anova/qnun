@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import style from './Profile.module.scss'
 import styleContainer from '../../s1-main/m1-ui/common/c2-styles/Container.module.css'
@@ -9,22 +9,31 @@ import arrow from '../../s1-main/m1-ui/common/c3-image/photo/arrow.png'
 
 import {Button} from '../../s1-main/m1-ui/common/c1-components/Button/Button';
 
-import {Link} from 'react-router-dom';
-import {packsList} from '../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {useSelector} from 'react-redux';
-import {AppRootStateType, useAppDispatch} from '../../s1-main/m2-bll/store';
-import {authMe} from '../../s1-main/m2-bll/reducers/profile-reducer';
+import {Link, Navigate} from 'react-router-dom';
+import {login, packsList} from '../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {useAppDispatch, useAppSelector} from '../../s1-main/m2-bll/store';
+import {EditableSpan} from '../../s1-main/m1-ui/common/c1-components/EditableSpan/EditableSpan';
+import {logout} from '../../s1-main/m2-bll/reducers/auth-reducer';
+import {updateUser} from '../../s1-main/m2-bll/reducers/profile-reducer';
 
 
 export const Profile = () => {
-    const profile = useSelector<AppRootStateType>(state => state.profile)
+    const profile = useAppSelector(state => state.profile.profile)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
+    console.log(profile)
 
-    useEffect(() => {
-        if (profile === null) {
-            dispatch(authMe())
-        }
-    }, [profile])
+    const onChangeUserName = (name: string) => {
+        dispatch(updateUser(name))
+    }
+
+    const onLogoutClick = () => {
+        dispatch(logout())
+    }
+
+    if(!isLoggedIn){
+        return <Navigate to={login}/>
+    }
 
     return (
         <div className={`${styleContainer.container} ${style.profileContainer}`}>
@@ -45,12 +54,12 @@ export const Profile = () => {
                 />
 
                 <h2 className={style.name}>
-                    {/*<EditableSpan value={} onChange={}/>*/}
+                    <EditableSpan value={profile.name} onChange={(value)=>onChangeUserName(value)}/>
                 </h2>
                 <h3 className={style.email}>
-                    email
+                    {profile.email}
                 </h3>
-                <Button className={style.btnLogout}>
+                <Button className={style.btnLogout} onClick={onLogoutClick}>
                     Log out
                 </Button>
             </div>

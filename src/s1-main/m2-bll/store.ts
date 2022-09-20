@@ -3,7 +3,6 @@ import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {authReducer} from './reducers/auth-reducer';
 import {profileReducer} from './reducers/profile-reducer';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {useDispatch} from 'react-redux';
 import {appReducer} from './reducers/app-reducer';
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
