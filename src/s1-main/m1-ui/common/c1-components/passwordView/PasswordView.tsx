@@ -34,7 +34,7 @@ export const PasswordView = (props: PropsType) => {
             <Input type={inputType}
                    {...restProps}
             />
-            <span className={style.button} onClick={onChangeIsOpenStatus}>
+            <Button className={style.button} onClick={onChangeIsOpenStatus}>
                 {
                     isOpenPassword
                         ? <img src={open} alt={'open'} className={style.img}/>
