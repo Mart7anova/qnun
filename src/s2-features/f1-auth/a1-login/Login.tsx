@@ -26,10 +26,11 @@ export const Login = () => {
 				// validate: values => {
 				// },
 				onSubmit: (values) => {
-						dispatch(loginThunk(values.email, values.password, values.rememberMe))
+						dispatch(loginThunk(values.email, values.password, values.rememberMe, formik.setStatus))
 				}
 		})
 		if (isLoggedIn) return <Navigate to={profile}/>
+
 		return (
 				<div className={s.loginPage}>
 						<div className={styleContainer.container}>
@@ -48,9 +49,9 @@ export const Login = () => {
 												</div>
 
 												<Link to={forgotPassword} className={s.forgotPasswordLink}>
-													<span>Forgot Password?</span>
+														<span>Forgot Password?</span>
 												</Link>
-
+												{formik.status && <span className={s.generalFormError}>{formik.status.error}</span>}
 												<Button>Sign in</Button>
 
 												<span className={s.alreadyHaveAccount}>Already have an account?</span>
