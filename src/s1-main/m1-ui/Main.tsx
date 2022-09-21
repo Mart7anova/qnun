@@ -1,6 +1,6 @@
 import React from 'react';
 import {Outlet} from 'react-router-dom';
-import {Header2} from './common/c1-components/Header/Header';
+import {Header2} from './u2-Header/Header';
 
 export const Main = () => {
     return (

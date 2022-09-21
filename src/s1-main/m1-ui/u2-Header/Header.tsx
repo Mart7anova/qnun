@@ -1,29 +1,47 @@
 import React from 'react';
-import style from './Header.module.scss'
-import {NavLink} from 'react-router-dom';
-import {
-    login,
-    newPassword,
-    pageNotFound,
-    profile,
-    registration,
-    forgotPassword,
-    showComponents
-} from '../u1-Route/Variables/routeVariables';
+import s from './Header.module.scss'
+import logo from '../../../assets/it-inc-logo.svg'
+import {Link, useLocation} from 'react-router-dom'
+import {login, profile} from '../u1-Route/Variables/routeVariables';
+import {Button} from '../common/c1-components/Button/Button';
+import {useSelector} from 'react-redux';
+import {AppRootStateType} from 's1-main/m2-bll/store';
+import noAvatar from '../../../assets/no-avatar.png'
 
-const activeClass = (props: {isActive: boolean}) => props.isActive ? style.active : ''
+export const Header2 = () => {
+		const {pathname} = useLocation()
 
-export const Header = () => {
+		const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+		const useName = useSelector<AppRootStateType, string>(state => state.profile.profile.name || 'error')
+		const userAvatar = useSelector<AppRootStateType, string>(state => state.profile.profile?.avatar || noAvatar)
 
-    return (
-        <header className={style.headerContainer}>
-            <NavLink to={showComponents} className={activeClass}>Home</NavLink>
-            <NavLink to={profile} className={activeClass}>Profile</NavLink>
-            <NavLink to={login} className={activeClass}>Login</NavLink>
-            <NavLink to={registration} className={activeClass}>Registration</NavLink>
-            <NavLink to={forgotPassword} className={activeClass}>Forgot password</NavLink>
-            <NavLink to={newPassword} className={activeClass}>New password</NavLink>
-            <NavLink to={pageNotFound} className={activeClass}>Page not found</NavLink>
-        </header>
-    );
+		return (
+				<header className={s.header}>
+						<div className={s.container}>
+								<Link to={'/'}>
+										<img src={logo} alt="logo"/>
+								</Link>
+								{isLoggedIn
+										? (
+												<Link to={profile} style={{textDecoration: 'none', color: 'black'}}>
+														<div className={s.profileContainer}>
+																<div className={s.profileName}>
+																		{useName}
+																</div>
+																<img
+																		src={userAvatar}
+																		alt="ava" style={{width: '36px', height: '36px', borderRadius: '50%'}}/>
+														</div>
+												</Link>
+										)
+										: (
+												pathname !== login &&
+												<Link to={login}>
+														<Button style={{width: '115px'}}>Sign in</Button>
+												</Link>
+										)
+								}
+						</div>
+				</header>
+		);
 };
