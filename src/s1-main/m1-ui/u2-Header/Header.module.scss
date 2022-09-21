@@ -1,24 +1,36 @@
-@import '../common/c2-styles/sass/variables';
-@import '../common/c2-styles/sass/mixins';
+.header {
+	height: 60px;
+	background: #FCFCFC;
+	box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 
-.headerContainer{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-flow: row wrap;
-    background-color: $mainColor;
-    min-height: 50px;
+	.container {
+		max-width: 1008px;
+		margin: 0 auto;
+		padding: 6px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 
-    & a{
-        @include text(20px);
-        color: $mainWhite;
-        text-decoration: none;
+		.profileContainer {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			cursor: pointer;
 
-    }
+			.profileName {
+				font-weight: 500;
+				position: relative;
 
-    & .active{
-        text-decoration: underline;
-    }
-
+				&:after {
+					position: absolute;
+					bottom: -5px;
+					left: 0;
+					content: '';
+					width: 100%;
+					height: 2px;
+					border-bottom: 2.5px dashed black;
+				}
+			}
+		}
+	}
 }
-
