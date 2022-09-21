@@ -30,8 +30,7 @@ export const PasswordView = (props: PropsType) => {
 				setIsOpenPassword(!isOpenPassword)
 		}
 		return (
-				<div className={style.mainComponent} style={{position: 'relative'}}
-				>
+				<div className={style.mainComponent} style={{position: 'relative'}}>
 						<Input type={inputType}
 						       {...restProps}
 						/>

@@ -4,6 +4,7 @@
 .inputContainer {
 	display: flex;
 	flex-direction: column;
+	margin: 10px 0 10px 0;
 
 	input:-webkit-autofill {
 		-webkit-box-shadow: 0 0 0 30px white inset !important;
@@ -16,6 +17,7 @@
 		outline: none;
 		width: 100%;
 		padding: 5px 0;
+		margin-bottom: 22px;
 		border: none;
 		border-bottom: 2px solid #CCCCCC;
 		&:hover, &:focus {
@@ -25,12 +27,13 @@
 
 	.errorInput {
 		border-bottom: 2px solid $errorColor !important;
+		margin-bottom: 0;
 	}
 
 	.error {
 		@include text(14px);
 		color: $errorColor;
-		margin-left: 13px;
+		margin-top: 5px;
 	}
 
 }
