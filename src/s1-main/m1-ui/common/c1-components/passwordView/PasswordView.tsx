@@ -17,30 +17,32 @@ type PropsType = DefaultInputPropsType & {
 }
 
 export const PasswordView = (props: PropsType) => {
-    const {
-        type,
-        ...restProps
-    } = props
+		const {
+				type,
+				...restProps
+		} = props
 
-    const [isOpenPassword, setIsOpenPassword] = useState(false)
+		const [isOpenPassword, setIsOpenPassword] = useState(false)
 
-    const inputType = isOpenPassword ? 'text' : 'password'
+		const inputType = isOpenPassword ? 'text' : 'password'
 
-    const onChangeIsOpenStatus = () => {
-        setIsOpenPassword(!isOpenPassword)
-    }
-    return (
-        <div className={style.mainComponent}>
-            <Input type={inputType}
-                   {...restProps}
-            />
-            <span className={style.button} onClick={onChangeIsOpenStatus}>
+		const onChangeIsOpenStatus = () => {
+				setIsOpenPassword(!isOpenPassword)
+		}
+		return (
+				<div className={style.mainComponent} style={{position: 'relative'}}
+				>
+						<Input type={inputType}
+						       {...restProps}
+						/>
+						<span style={{position: 'absolute', right: '0',top:'0'}}
+						      className={style.button} onClick={onChangeIsOpenStatus}>
                 {
-                    isOpenPassword
-                        ? <img src={open} alt={'open'} className={style.img}/>
-                        : <img src={close} alt={'close'} className={style.img}/>
+		                isOpenPassword
+				                ? <img src={open} alt={'open'} className={style.img}/>
+				                : <img src={close} alt={'close'} className={style.img}/>
                 }
             </span>
-        </div>
-    );
+				</div>
+		);
 };

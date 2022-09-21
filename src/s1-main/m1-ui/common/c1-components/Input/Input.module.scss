@@ -24,7 +24,7 @@
 	}
 
 	.errorInput {
-		border-color: $errorColor;
+		border-bottom: 2px solid $errorColor !important;
 	}
 
 	.error {
