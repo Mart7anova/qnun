@@ -66,14 +66,14 @@ export type BaseResponseType<T = string, D = number> = {
     tokenDeathTime: D
     avatar?: null | string
 }
-//////////////Зачем этот тип???
-/*export type AuthMeType = {
+
+export type AuthMeType = {
     error: string
     method: string
     url: string
     query: string
     body: {}
-}*/
+}
 export type ResponseForgotPassword = {
     answer: boolean,
     html: boolean,
