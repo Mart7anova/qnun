@@ -21,12 +21,13 @@ import {
 import {Main} from '../Main';
 import {PacksList} from '../../../s2-features/f3-packsList/PacksList';
 import {CheckEmail} from '../../../s2-features/f1-auth/a5-checkEmail/CheckEmail';
+import {ShowComponents} from '../../../s2-features/f0-test/ShowComponents';
 
 export const AppRoute = () => {
 
     return (
         <Routes>
-            <Route path={showComponents} element={<Main/>}>
+            <Route path={profile} element={<Main/>}>
                 <Route path={otherRoutes} element={<Navigate to={pageNotFound}/>}/>
                 <Route path={pageNotFound} element={<PageNotFound/>}/>
 
@@ -35,8 +36,8 @@ export const AppRoute = () => {
                 <Route path={forgotPassword} element={<ForgotPassword/>}/>
                 <Route path={newPassword} element={<NewPassword/>}/>
 
-                <Route index element={<Registration/>}/>
-                <Route path={profile} element={<Profile/>}/>
+                <Route index element={<Profile/>}/>
+                <Route path={showComponents} element={<ShowComponents/>}/>
                 <Route path={packsList} element={<PacksList/>}/>
                 <Route path={checkEmail} element={<CheckEmail/>}/>
             </Route>

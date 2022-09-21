@@ -5,7 +5,7 @@ import {Link, useLocation} from 'react-router-dom'
 import {login, profile} from '../../../u1-Route/Variables/routeVariables';
 import {Button} from '../Button/Button';
 import {useSelector} from 'react-redux';
-import {AppRootStateType} from '../../../../m2-bll/store';
+import {AppRootStateType} from 's1-main/m2-bll/store';
 import noAvatar from '../../../../../assets/no-avatar.png'
 
 export const Header2 = () => {
@@ -35,9 +35,9 @@ export const Header2 = () => {
 												</Link>
 										)
 										: (
-												pathname !== `/${login}` &&
+												pathname !== login &&
 												<Link to={login}>
-														<Button>sign in</Button>
+														<Button style={{width: '115px'}}>Sign in</Button>
 												</Link>
 										)
 								}
