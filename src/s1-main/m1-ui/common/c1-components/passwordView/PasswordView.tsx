@@ -1,7 +1,6 @@
 import React, {DetailedHTMLProps, InputHTMLAttributes, useState} from 'react';
 
 import {Input} from '../Input/Input';
-import {Button} from '../Button/Button';
 
 import style from './PasswordView.module.scss'
 
@@ -35,15 +34,13 @@ export const PasswordView = (props: PropsType) => {
             <Input type={inputType}
                    {...restProps}
             />
-            <Button type={'button'}
-                    className={style.button}
-                    onClick={onChangeIsOpenStatus}>
+            <span className={style.button} onClick={onChangeIsOpenStatus}>
                 {
                     isOpenPassword
                         ? <img src={open} alt={'open'} className={style.img}/>
                         : <img src={close} alt={'close'} className={style.img}/>
                 }
-            </Button>
+            </span>
         </div>
     );
 };
