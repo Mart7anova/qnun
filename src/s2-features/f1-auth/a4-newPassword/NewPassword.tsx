@@ -55,6 +55,9 @@ export const NewPassword = () => {
         }
     })
 
+    const errorPass = formik.touched.password && formik.errors.password ? formik.errors.password : ''
+    const errorConfirmPassword = formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ''
+
     if(statusRequest === 'setNewPassword success —ฅ/ᐠ.̫ .ᐟฅ—'){
         dispatch(statusRequestAC(null))
         return <Navigate to={login}/>
@@ -69,13 +72,12 @@ export const NewPassword = () => {
                     </h1>
                     <PasswordView placeholder={'password'}
                                   className={style.input}
+                                  error={errorPass}
                                   {...formik.getFieldProps('password')}
                     />
-                    <span className={style.text}>
-                        repeat the password
-                    </span>
-                    <PasswordView placeholder={'password'}
+                    <PasswordView placeholder={'repeat the password'}
                                   className={style.input}
+                                  error={errorConfirmPassword}
                                   {...formik.getFieldProps('confirmPassword')}
                     />
                     <span className={style.informationText}>
