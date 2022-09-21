@@ -2,26 +2,38 @@
 @import './src/s1-main/m1-ui/common/c2-styles/sass/variables';
 
 .mainBlock {
-  @include text();
+
   .childrenBlock {
-    min-width: 400px;
-    & h1 {
-      margin: 30px;
+
+    .title{
+      font-size: 26px;
+      margin: 37px auto;
+      font-weight: 600;
     }
     .nameDirection {
-      font-size: 15px;
-      margin: 10px 5px 5px 0;
+      font-size: 13px;
+      opacity: 0.5;
     }
     .input{
-      width: 315px;
+      width: 350px;
     }
 
     .btn{
-      margin: 20px auto 15px ;
-      display: block;
+      margin-top: 20px;
+      width: 100%;
+    }
+    .infoBlock{
+      margin: 30px 0 20px 0;
+      font-weight: 600;
+      opacity: 0.4;
+
+    }
+    .linkStyle {
+      color: #366EFF;
+      text-decoration: underline;
+      text-decoration-color: #366EFF;
+      font-weight: 600;
     }
   }
-  .linkStyle {
-    margin: 5px 0 0 0;
-  }
+
 }

@@ -76,7 +76,7 @@ export const Registration = () => {
         <div>
             <div className={`${styleContainer.container} ${registration.mainBlock}`}>
                 <div className={`${styleBlock.block} ${registration.childrenBlock}`}>
-                    <h1>Sing up</h1>
+                    <h1 className={registration.title}>Sing up</h1>
                     <form onSubmit={formik.handleSubmit}>
                         <div className={registration.nameDirection}>Email</div>
                         <Input type={'email'}
@@ -93,10 +93,8 @@ export const Registration = () => {
                         <Button className={registration.btn}>Sign Up</Button>
                     </form>
 
-                    <div>Already have account?</div>
-                    <span className={registration.linkStyle}>
-                        <Link style={{textDecoration: 'none', color: '#6b90cc'}} to={login}>Sign In</Link>
-                    </span>
+                    <div className={registration.infoBlock}>Already have account?</div>
+                    <Link to={login} className={registration.linkStyle}>Sign In</Link>
                 </div>
             </div>
         </div>
