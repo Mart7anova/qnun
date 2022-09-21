@@ -31,7 +31,7 @@ export const CheckEmail = () => {
                 <span className={style.informationText}>
                     We've sent an Email with instruction to {'props.email'}
                 </span>
-                <Button onClick={onBackToLoginClick}>Back to login</Button>
+                <Button onClick={onBackToLoginClick} className={style.button}>Back to login</Button>
             </div>
         </div>
     );
