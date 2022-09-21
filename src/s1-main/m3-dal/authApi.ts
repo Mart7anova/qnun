@@ -35,7 +35,8 @@ export const authApi = {
         return instanceForHerokupp.post<ResponseForgotPassword>("auth/forgot", data)
     },
     resetPass(password: string, resetPasswordToken: string) {
-        return instanceForHerokupp.post<ForgotResetPassType<{ resetPasswordToken: string }>>("auth/set-new-password", {
+        //ForgotResetPassType<{ resetPasswordToken: string }>
+        return instanceForHerokupp.post<{ info: string }>("auth/set-new-password", {
             password,
             resetPasswordToken
         })

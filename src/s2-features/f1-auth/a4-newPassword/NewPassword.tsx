@@ -6,10 +6,11 @@ import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css
 
 import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
 import {PasswordView} from '../../../s1-main/m1-ui/common/c1-components/passwordView/PasswordView';
-import {useAppDispatch} from '../../../s1-main/m2-bll/store';
-import {useParams} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../../s1-main/m2-bll/store';
+import {Navigate, useParams} from 'react-router-dom';
 import {useFormik} from 'formik';
-import {updatePassword} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {statusRequestAC, updatePassword} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {login} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
 
 type FormikErrorType = {
     password?: string
@@ -17,10 +18,9 @@ type FormikErrorType = {
 }
 
 export const NewPassword = () => {
+    const statusRequest = useAppSelector(state => state.auth.statusRequest)
     const dispatch = useAppDispatch()
     const params = useParams()
-
-
 
 
     const formik = useFormik({
@@ -54,6 +54,11 @@ export const NewPassword = () => {
             formik.resetForm()
         }
     })
+
+    if(statusRequest === 'setNewPassword success —ฅ/ᐠ.̫ .ᐟฅ—'){
+        dispatch(statusRequestAC(null))
+        return <Navigate to={login}/>
+    }
 
     return (
         <div className={`${styleContainer.container} ${style.newPassContainer}`}>
