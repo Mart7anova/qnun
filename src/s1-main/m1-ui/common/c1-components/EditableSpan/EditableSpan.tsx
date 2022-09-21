@@ -1,9 +1,12 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Input} from '../Input/Input';
+import pen from '../../c3-image/photo/pen.png';
+import style from './EditableSpan.module.scss'
 
 type PropsType = {
     value: string
     onChange: (value: string) => void
+    className?: string
 }
 
 export const EditableSpan = (props: PropsType) => {
@@ -24,7 +27,7 @@ export const EditableSpan = (props: PropsType) => {
         setIsEditingMode(true)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setValue(props.value)
     }, [props.value])
 
@@ -37,8 +40,12 @@ export const EditableSpan = (props: PropsType) => {
                              onKeyUp={e => e.key === 'Enter' && deactivatedEditMode()}
                              autoFocus
                              onChange={onValueChange}
+                             className={props.className}
                     />
-                    : <span onDoubleClick={activeEditMode}>{props.value}</span>
+                    : <span onDoubleClick={activeEditMode} className={style.text}>
+                        {props.value}
+                        <img src={pen} alt={'pen'} className={style.penImg}/>
+                      </span>
             }
         </>
     )

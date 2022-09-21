@@ -70,12 +70,12 @@ export const NewPassword = () => {
                     <h1 className={style.header}>
                         Create new password
                     </h1>
-                    <PasswordView placeholder={'password'}
+                    <PasswordView placeholder={'Password'}
                                   className={style.input}
                                   error={errorPass}
                                   {...formik.getFieldProps('password')}
                     />
-                    <PasswordView placeholder={'repeat the password'}
+                    <PasswordView placeholder={'Confirm password'}
                                   className={style.input}
                                   error={errorConfirmPassword}
                                   {...formik.getFieldProps('confirmPassword')}
@@ -83,7 +83,7 @@ export const NewPassword = () => {
                     <span className={style.informationText}>
                         Create new password and we will send you further instructions to email
                     </span>
-                    <Button type={'submit'}>Create new password</Button>
+                    <Button type={'submit'} className={style.button}>Create new password</Button>
                 </div>
             </form>
         </div>

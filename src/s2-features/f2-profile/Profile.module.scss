@@ -3,7 +3,8 @@
 .profileContainer {
   .link {
     position: absolute;
-    top: 70px;
+    top: 80px;
+    left: 150px;
 
     display: flex;
     align-items: center;
@@ -21,27 +22,34 @@
   }
 
   .profileBlock {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    min-width: 415px;
 
     .header {
+      font-size: 26px;
       margin-bottom: 30px;
+      font-weight: 600;
     }
 
     .userPhoto {
       width: 150px;
       border-radius: 50%;
-      margin-bottom: 15px;
     }
 
     .name {
-      margin-bottom: 15px;
+      font-size: 20px;
+
+      .editableSpan{
+        font-size: 20px;
+      }
     }
 
     .email {
-      margin-bottom: 15px;
-      color: $lightGrey;
+      font-size: 14px;
+      margin: 0 0 30px 0;
+      opacity: 0.5;
+    }
+    .btnLogout{
+
     }
   }
 }

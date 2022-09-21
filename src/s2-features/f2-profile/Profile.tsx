@@ -54,7 +54,9 @@ export const Profile = () => {
                 />
 
                 <h2 className={style.name}>
-                    <EditableSpan value={profile.name} onChange={(value)=>onChangeUserName(value)}/>
+                    <EditableSpan value={profile.name}
+                                  onChange={(value)=>onChangeUserName(value)}
+                                  className={style.editableSpan}/>
                 </h2>
                 <h3 className={style.email}>
                     {profile.email}
