@@ -8,7 +8,7 @@ import {Link, Navigate} from 'react-router-dom';
 import {checkEmail, login} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useFormik} from 'formik';
 import {useAppDispatch, useAppSelector} from '../../../s1-main/m2-bll/store';
-import {forgotPass} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {forgotPass, statusRequestAC} from '../../../s1-main/m2-bll/reducers/auth-reducer';
 
 type FormikErrorType = {
     email?: string
@@ -38,8 +38,8 @@ export const ForgotPassword = () => {
 
     const errorEmail = formik.touched.email && formik.errors.email ? formik.errors.email : ''
 
-    console.log(statusRequest)
     if (statusRequest === 'request has been sent') {
+        dispatch(statusRequestAC(null))
         return <Navigate to={checkEmail}/>
     }
 
@@ -51,7 +51,7 @@ export const ForgotPassword = () => {
                         Forgot your password?
                     </h1>
 
-                    <Input placeholder={'email'}
+                    <Input placeholder={'Email'}
                            className={style.input}
                            error={errorEmail}
                            {...formik.getFieldProps('email')}
@@ -60,7 +60,7 @@ export const ForgotPassword = () => {
                     Enter your email address and we will send you further instruction
                 </span>
 
-                    <Button type={'submit'}>Send Instruction</Button>
+                    <Button type={'submit'} className={style.button}>Send Instruction</Button>
 
                     <span className={style.informationText}>
                     <b>Did you remember your password?</b>

@@ -10,11 +10,15 @@ import {initializeApp} from '../m2-bll/reducers/app-reducer';
 
 export const App = () => {
 		const appInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
+
 		const dispatch = useAppDispatch()
+
 		useEffect(() => {
 				dispatch(initializeApp())
 		}, [])
+
 		if (!appInitialized) return <Spinner/>
+
 		return (
 				<div className={style.App}>
 						<HashRouter>
