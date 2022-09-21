@@ -33,7 +33,7 @@ type ActionsType = RegistrationType | LoginType | statusRequestType
 
 type RegistrationType = ReturnType<typeof isLoggedIn>
 type LoginType = ReturnType<typeof auth>
-type statusRequestType = ReturnType<typeof statusRequest>
+type statusRequestType = ReturnType<typeof statusRequestAC>
 
 export const isLoggedIn = (value: boolean) => {
     return {
@@ -48,7 +48,7 @@ const auth = (value: boolean) => {
     } as const
 }
 
-export const statusRequest = (value: string | null) => {
+export const statusRequestAC = (value: string | null) => {
     return {
         type: 'STATUS-REQUEST/REGISTRATION',
         payload: {value}
@@ -84,7 +84,7 @@ export const logout = (): AppThunk => async (dispatch) =>{
 }
 
 export const forgotPass = (email: string): AppThunk => async (dispatch) => {
-    dispatch(statusRequest('request has been sent'))
+    dispatch(statusRequestAC('request has been sent'))
     try {
         const {data} = await authApi.forgotPass({email,
             from: 'test-front-admin <mart7anova7@gmail.com>',
@@ -96,6 +96,15 @@ export const forgotPass = (email: string): AppThunk => async (dispatch) => {
     } catch (e) {
         console.log(e)
     } finally {
-        dispatch(statusRequest(null))
+        dispatch(statusRequestAC(null))
+    }
+}
+
+export const updatePassword = (password: string, resetPasswordToken: string): AppThunk => async (dispatch) =>{
+    try {
+        const res = await authApi.resetPass(password, resetPasswordToken)
+        dispatch(statusRequestAC(res.data.info))
+    }catch (e) {
+        console.log(e)
     }
 }
