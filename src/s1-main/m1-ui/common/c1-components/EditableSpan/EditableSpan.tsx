@@ -10,7 +10,6 @@ type PropsType = {
 }
 
 export const EditableSpan = (props: PropsType) => {
-
     const [value, setValue] = useState(props.value)
     const [isEditingMode, setIsEditingMode] = useState(false)
 
