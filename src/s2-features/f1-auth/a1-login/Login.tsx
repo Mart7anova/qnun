@@ -54,7 +54,7 @@ export const Login = () => {
 												{formik.status && <span className={s.generalFormError}>{formik.status.error}</span>}
 												<Button>Sign in</Button>
 
-												<span className={s.alreadyHaveAccount}>Already have an account?</span>
+												<span className={s.alreadyHaveAccount}>Do not have account?</span>
 												<Link to={registration} className={s.signUpButton}>
 														Sign Up
 												</Link>
