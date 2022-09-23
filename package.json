@@ -2,7 +2,7 @@
   "name": "qnun",
   "version": "0.1.0",
   "private": true,
-  "homepage": "Mart7anova.github.io/qnun",
+  "homepage": "https://Mart7anova.github.io/qnun",
   "dependencies": {
     "@react-buddy/ide-toolbox": "^2.2.1",
     "@testing-library/jest-dom": "^5.14.1",
