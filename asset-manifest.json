@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Mart7anova.github.io/qnun/static/css/main.b1e53200.css",
-    "main.js": "/Mart7anova.github.io/qnun/static/js/main.ec419e0c.js",
-    "static/js/787.19b5cadc.chunk.js": "/Mart7anova.github.io/qnun/static/js/787.19b5cadc.chunk.js",
-    "static/media/catPhoto.png": "/Mart7anova.github.io/qnun/static/media/catPhoto.aefbd5142c8adc0599c3.png",
-    "static/media/open.png": "/Mart7anova.github.io/qnun/static/media/open.658383685858f123194b.png",
-    "static/media/it-inc-logo.svg": "/Mart7anova.github.io/qnun/static/media/it-inc-logo.3c09153556dc0fef65c4fc532ee16562.svg",
-    "index.html": "/Mart7anova.github.io/qnun/index.html",
-    "main.b1e53200.css.map": "/Mart7anova.github.io/qnun/static/css/main.b1e53200.css.map",
-    "main.ec419e0c.js.map": "/Mart7anova.github.io/qnun/static/js/main.ec419e0c.js.map",
-    "787.19b5cadc.chunk.js.map": "/Mart7anova.github.io/qnun/static/js/787.19b5cadc.chunk.js.map"
+    "main.css": "/qnun/static/css/main.b1e53200.css",
+    "main.js": "/qnun/static/js/main.8780e18d.js",
+    "static/js/787.19b5cadc.chunk.js": "/qnun/static/js/787.19b5cadc.chunk.js",
+    "static/media/catPhoto.png": "/qnun/static/media/catPhoto.aefbd5142c8adc0599c3.png",
+    "static/media/open.png": "/qnun/static/media/open.658383685858f123194b.png",
+    "static/media/it-inc-logo.svg": "/qnun/static/media/it-inc-logo.3c09153556dc0fef65c4fc532ee16562.svg",
+    "index.html": "/qnun/index.html",
+    "main.b1e53200.css.map": "/qnun/static/css/main.b1e53200.css.map",
+    "main.8780e18d.js.map": "/qnun/static/js/main.8780e18d.js.map",
+    "787.19b5cadc.chunk.js.map": "/qnun/static/js/787.19b5cadc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b1e53200.css",
-    "static/js/main.ec419e0c.js"
+    "static/js/main.8780e18d.js"
   ]
 }
