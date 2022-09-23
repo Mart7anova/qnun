@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styleContainer from '../../../s1-main/m1-ui/common/c2-styles/Container.module.css';
 import style from './ForgotPassword.module.scss';
 import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css';
@@ -8,14 +8,14 @@ import {Link, Navigate} from 'react-router-dom';
 import {PATH} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useFormik} from 'formik';
 import {useAppDispatch, useAppSelector} from '../../../s1-main/m2-bll/store';
-import {forgotPassword, statusRequestAC} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {forgotPassword, setIsRequestSuccess} from '../../../s1-main/m2-bll/reducers/auth-reducer';
 
 type FormikErrorType = {
     email?: string
 }
 
 export const ForgotPassword = () => {
-    const statusRequest = useAppSelector(state => state.auth.statusRequest)
+    const isRequestSuccess = useAppSelector(state => state.auth.isRequestSuccess)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -38,8 +38,11 @@ export const ForgotPassword = () => {
 
     const errorEmail = formik.touched.email && formik.errors.email ? formik.errors.email : ''
 
-    if (statusRequest === 'request has been sent') {
-        dispatch(statusRequestAC(null))
+    useEffect(()=>{
+        dispatch(setIsRequestSuccess(false))
+    },[])
+
+    if (isRequestSuccess) {
         return <Navigate to={PATH.CHECK_EMAIL}/>
     }
 

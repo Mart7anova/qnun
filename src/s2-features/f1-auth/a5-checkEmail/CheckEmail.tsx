@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import styleContainer from '../../../s1-main/m1-ui/common/c2-styles/Container.module.css';
 import style from './CheckEmail.module.scss';
@@ -9,13 +9,20 @@ import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button'
 
 import {Navigate} from 'react-router-dom';
 import {PATH} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {useAppDispatch} from '../../../s1-main/m2-bll/store';
+import {setIsRequestSuccess} from '../../../s1-main/m2-bll/reducers/auth-reducer';
 
 export const CheckEmail = () => {
     const [linkToLogin, setLinkToLogin] = useState(false)
+    const dispatch = useAppDispatch()
 
     const onBackToLoginClick = () => {
         setLinkToLogin(true)
     }
+
+    useEffect(()=>{
+        dispatch(setIsRequestSuccess(false))
+    },[])
 
     if(linkToLogin){
         return <Navigate to={PATH.LOGIN}/>

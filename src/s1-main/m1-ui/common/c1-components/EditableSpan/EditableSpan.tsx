@@ -12,14 +12,19 @@ type PropsType = {
 export const EditableSpan = (props: PropsType) => {
     const [value, setValue] = useState(props.value)
     const [isEditingMode, setIsEditingMode] = useState(false)
+    const [error, setError] = useState('')
 
     const onValueChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setValue(e.currentTarget.value)
     }
 
     const deactivatedEditMode = () => {
-        setIsEditingMode(false)
-        props.onChange(value)
+        if(value){
+            setIsEditingMode(false)
+            props.onChange(value)
+        } else {
+            setError('field is required')
+        }
     }
 
     const activeEditMode = () => {
@@ -40,10 +45,11 @@ export const EditableSpan = (props: PropsType) => {
                              autoFocus
                              onChange={onValueChange}
                              className={props.className}
+                             error={error}
                     />
                     : <span onDoubleClick={activeEditMode} className={style.text}>
                         {props.value}
-                        <img src={pen} alt={'pen'} className={style.penImg}/>
+                        <img src={pen} alt={'pen'} className={style.penImg} onClick={activeEditMode}/>
                       </span>
             }
         </>

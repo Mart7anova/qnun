@@ -6,7 +6,7 @@ import {AxiosError} from 'axios';
 const initialState = {
     isLoggedIn: false,
     isAuth: false,
-    statusRequest: null as null | string
+    isRequestSuccess: false
 }
 
 export const authReducer = (state: AuthType = initialState, action: ActionsType): AuthType => {
@@ -18,7 +18,7 @@ export const authReducer = (state: AuthType = initialState, action: ActionsType)
             return {...state, isAuth: action.payload.value}
         }
         case 'STATUS-REQUEST/REGISTRATION': {
-            return {...state, statusRequest: action.payload.value}
+            return {...state, isRequestSuccess: action.payload.value}
         }
         default:
             return state
@@ -39,7 +39,7 @@ const auth = (value: boolean) => {
     } as const
 }
 
-export const statusRequestAC = (value: string | null) => {
+export const setIsRequestSuccess = (value: boolean) => {
     return {
         type: 'STATUS-REQUEST/REGISTRATION',
         payload: {value}
@@ -79,27 +79,22 @@ export const logout = (): AppThunk => async (dispatch) => {
 }
 
 export const forgotPassword = (email: string): AppThunk => async (dispatch) => {
-    dispatch(statusRequestAC('request has been sent'))
     try {
-        const {data} = await authApi.forgotPass({
+        await authApi.forgotPass({
             email,
-            from: 'test-front-admin <mart7anova7@gmail.com>',
-            message: `<div>Перейдите по ссылке, чтобы продолжить востановление пароля <a href='http://localhost:3000/#/newPassword/$token$'>link</a></div>`
+            from: 'test-front-admin <1@gmail.com>',
+            message: `<div>Перейдите по ссылке, чтобы продолжить востановление пароля <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`
         })
-        if (data.success) {
-
-        }
+        dispatch(setIsRequestSuccess(true))
     } catch (e) {
 
-    } finally {
-        dispatch(statusRequestAC(null))
     }
 }
 
 export const updatePassword = (password: string, resetPasswordToken: string): AppThunk => async (dispatch) => {
     try {
-        const res = await authApi.resetPass(password, resetPasswordToken)
-        dispatch(statusRequestAC(res.data.info))
+        await authApi.resetPass(password, resetPasswordToken)
+        dispatch(setIsRequestSuccess(true))
     } catch (e) {
 
     }
@@ -110,7 +105,7 @@ export type AuthType = typeof initialState
 
 type RegistrationType = ReturnType<typeof isLoggedIn>
 type LoginType = ReturnType<typeof auth>
-type statusRequestType = ReturnType<typeof statusRequestAC>
+type statusRequestType = ReturnType<typeof setIsRequestSuccess>
 
 type ActionsType = RegistrationType | LoginType | statusRequestType
 
