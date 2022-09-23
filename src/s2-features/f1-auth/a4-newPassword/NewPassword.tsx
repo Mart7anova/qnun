@@ -10,7 +10,7 @@ import {useAppDispatch, useAppSelector} from '../../../s1-main/m2-bll/store';
 import {Navigate, useParams} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {statusRequestAC, updatePassword} from '../../../s1-main/m2-bll/reducers/auth-reducer';
-import {login} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {PATH} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
 
 type FormikErrorType = {
     password?: string
@@ -60,7 +60,7 @@ export const NewPassword = () => {
 
     if(statusRequest === 'setNewPassword success —ฅ/ᐠ.̫ .ᐟฅ—'){
         dispatch(statusRequestAC(null))
-        return <Navigate to={login}/>
+        return <Navigate to={PATH.LOGIN}/>
     }
 
     return (

@@ -2,13 +2,13 @@ import React from 'react';
 import s from './Header.module.scss'
 import logo from '../../../assets/it-inc-logo.svg'
 import {Link, useLocation} from 'react-router-dom'
-import {login, profile} from '../u1-Route/Variables/routeVariables';
+import {PATH} from '../u1-Route/Variables/routeVariables';
 import {Button} from '../common/c1-components/Button/Button';
 import {useSelector} from 'react-redux';
 import {AppRootStateType} from 's1-main/m2-bll/store';
 import noAvatar from '../../../assets/no-avatar.png'
 
-export const Header2 = () => {
+export const Header = () => {
 		const {pathname} = useLocation()
 
 		const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
@@ -23,7 +23,7 @@ export const Header2 = () => {
 								</Link>
 								{isLoggedIn
 										? (
-												<Link to={profile} style={{textDecoration: 'none', color: 'black'}}>
+												<Link to={PATH.PROFILE} style={{textDecoration: 'none', color: 'black'}}>
 														<div className={s.profileContainer}>
 																<div className={s.profileName}>
 																		{useName}
@@ -35,8 +35,8 @@ export const Header2 = () => {
 												</Link>
 										)
 										: (
-												pathname !== login &&
-												<Link to={login}>
+												pathname !== PATH.LOGIN &&
+												<Link to={PATH.LOGIN}>
 														<Button style={{width: '115px'}}>Sign in</Button>
 												</Link>
 										)

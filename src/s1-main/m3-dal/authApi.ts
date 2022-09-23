@@ -1,60 +1,63 @@
-import axios from "axios";
+import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: process.env.NODE_ENV === "development" ? "http://localhost:7542/2.0/" : "https://neko-back.herokuapp.com/2.0/",
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:7542/2.0/' : 'https://neko-back.herokuapp.com/2.0/',
     withCredentials: true,
 })
 
-const instanceForHerokupp = axios.create({
-    baseURL: "https://neko-back.herokuapp.com/2.0/",
+const instanceForHeroku = axios.create({
+    baseURL: 'https://neko-back.herokuapp.com/2.0/',
     withCredentials: true,
 })
 
 export const authApi = {
     auth() {
-        return instance.post<BaseResponseType>("/auth/me")
+        return instance.post<ProfileResponseType>('/auth/me')
     },
     registration(email: string, password: string) {
-        return instance.post("auth/register", {email, password})
+        return instance.post<ResponseRegister>('auth/register', {email, password})
     },
     login(email: string, password: string, rememberMe: boolean) {
-        return instance.post("/auth/login", {
+        return instance.post<ProfileResponseType>('/auth/login', {
             email,
             password,
             rememberMe
         })
     },
     logout() {
-        return instance.delete<{ info: string, error: string }>("auth/me")
+        return instance.delete<ResponseLogout>('auth/me')
     },
-    updateUser(name?: string, avatar?: string) {
-        return instance.put<{ updatedUser: BaseResponseType, token: string, tokenDeathTime: number }>("auth/me", {name, avatar})
-    },
-    forgotPass(data: RecoverRequestType) {
-        // ForgotResetPassType<{ emailRegExp: {} }>
-        return instanceForHerokupp.post<ResponseForgotPassword>("auth/forgot", data)
+    forgotPass(data: forgotPasswordDataType) {
+        return instanceForHeroku.post<ResponseForgotPassword>('auth/forgot', data)
     },
     resetPass(password: string, resetPasswordToken: string) {
-        //ForgotResetPassType<{ resetPasswordToken: string }>
-        return instanceForHerokupp.post<{ info: string }>("auth/set-new-password", {
+        return instanceForHeroku.post<{ info: string }>('auth/set-new-password', {
             password,
             resetPasswordToken
         })
     },
+    updateUser(name?: string, avatar?: string) {
+        return instance.put<ResponseUpdateUser>('auth/me', {
+            name,
+            avatar
+        })
+    },
     blockUser(id: string, blockReason: string) {
-        return instance.post<{ error: string, in: string }>("/auth/block", {id, blockReason})
+        return instance.post('/auth/block', {id, blockReason})
     }
 }
 
-type RecoverRequestType = {
+//types
+type forgotPasswordDataType = {
     email: string
     from: string
     message: string
 }
 
-export type BaseResponseType<T = string, D = number> = {
+export type ProfileResponseType<T = string, D = number> = {
     _id: string
     email: string
+    rememberMe: boolean
     isAdmin: boolean
     name: string
     verified: boolean
@@ -62,28 +65,30 @@ export type BaseResponseType<T = string, D = number> = {
     created: string
     updated: string
     __v: number
-    error: string
     token: T
     tokenDeathTime: D
     avatar?: null | string
 }
 
-export type AuthMeType = {
+type ResponseRegister = {
     error: string
-    method: string
-    url: string
-    query: string
-    body: {}
-}
-export type ResponseForgotPassword = {
-    answer: boolean,
-    html: boolean,
-    info: string,
-    success: boolean
-}
-export type ForgotResetPassType<T = {}, D = string> = {
-    error: string
-    emailRegExp: T
-    resetPasswordToken: D
+    email: string
     in: string
+}
+
+type ResponseLogout = {
+    info: string
+}
+
+export type ResponseForgotPassword = {
+    info: string
+    success: boolean
+    answer: boolean
+    html: boolean
+}
+
+type ResponseUpdateUser = {
+    updatedUser: ProfileResponseType,
+    token: string,
+    tokenDeathTime: number
 }

@@ -10,7 +10,7 @@ import arrow from '../../s1-main/m1-ui/common/c3-image/photo/arrow.png'
 import {Button} from '../../s1-main/m1-ui/common/c1-components/Button/Button';
 
 import {Link, Navigate} from 'react-router-dom';
-import {login, packsList} from '../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {PATH} from '../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useAppDispatch, useAppSelector} from '../../s1-main/m2-bll/store';
 import {EditableSpan} from '../../s1-main/m1-ui/common/c1-components/EditableSpan/EditableSpan';
 import {logout} from '../../s1-main/m2-bll/reducers/auth-reducer';
@@ -32,13 +32,13 @@ export const Profile = () => {
     }
 
     if(!isLoggedIn){
-        return <Navigate to={login}/>
+        return <Navigate to={PATH.LOGIN}/>
     }
 
     return (
         <div className={`${styleContainer.container} ${style.profileContainer}`}>
 
-            <Link to={packsList} className={style.link}>
+            <Link to={PATH.PACKS_LIST} className={style.link}>
                 <img src={arrow} alt={'arrow'} className={style.arrowImg}/>
                 <span className={style.textLink}>Back to Packs List</span>
             </Link>
