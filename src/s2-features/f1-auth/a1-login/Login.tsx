@@ -51,7 +51,7 @@ export const Login = () => {
             dispatch(login(values.email, values.password, values.rememberMe, formik.setStatus))
         }
     })
-    if (isLoggedIn) return <Navigate to={PATH.PROFILE}/>
+    if (isLoggedIn) return <Navigate to={PATH.PACKS_LIST}/>
 
     return (
         <div className={s.loginPage}>

@@ -1759,11 +1759,6 @@
   resolved "https://registry.yarnpkg.com/@react-buddy/ide-toolbox/-/ide-toolbox-2.2.1.tgz#44d5977fbd9459d0221dce9f558f09032864eba9"
   integrity sha512-oQWiiY0MJKeeHjW0wm6mO4ebarUdAW5z2g2p3gY5lF4ybDqm6CSU0oA9A6VFqGHLyG93w9W6rvRt/Ajd5cNNAQ==
 
-"@react-buddy/palette-mui@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@react-buddy/palette-mui/-/palette-mui-1.2.2.tgz#4bc67e77d20a4650682e4f9da3112dbc5d4ade92"
-  integrity sha512-wqzE7bbaJ6NnXCSMwXrs7uvfkKpEsvaaC8aLpfChzu0iRsiSl/8rA53drS1E76AqVf8ySEGc3OJtFGtu2Z2hPA==
-
 "@remix-run/router@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.0.0.tgz#a2189335a5f6428aa904ccc291988567018b6e01"
