@@ -2,8 +2,8 @@ import {instance} from 's1-main/m3-dal/authApi';
 
 
 export const packApi = {
-		getPacks() {
-				return instance.get<ResponseType>(`/cards/pack`)
+		getPacks(params: SearchParamsType) {
+				return instance.get<ResponseType>(`/cards/pack`, {params})
 		},
 		createPack(name: string, isPrivate = false) {
 				return instance.post(`cards/pack`, {
@@ -27,21 +27,21 @@ export const packApi = {
 }
 //types
 export type PackType = {
-		cardsCount:number
-		created:Date
-		grade:number
-		more_id:string
-		name:string
-		path:string
-		private:boolean
-		rating:number
-		shots:number
-		type:string
-		updated:Date
-		user_id:string
-		user_name:string
-		__v:number
-		_id:string
+		cardsCount: number
+		created: Date
+		grade: number
+		more_id: string
+		name: string
+		path: string
+		private: boolean
+		rating: number
+		shots: number
+		type: string
+		updated: Date
+		user_id: string
+		user_name: string
+		__v: number
+		_id: string
 }
 type ResponseType = {
 		cardPacks: PackType[]
@@ -50,4 +50,11 @@ type ResponseType = {
 		minCardsCount: number
 		page: number
 		pageCount: number
+}
+type SearchParamsType = {
+		page: number
+		pageCount: number
+		sortPacks: string
+		packName: string
+		isMyPacks: boolean
 }
