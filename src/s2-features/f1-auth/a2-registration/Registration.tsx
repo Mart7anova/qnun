@@ -1,16 +1,16 @@
 import React from 'react'
 import {useFormik} from 'formik';
 import {Link, Navigate} from 'react-router-dom';
-import {PATH} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import style from '../a2-registration/Registration.module.scss'
-import {AppRootStateType, useAppDispatch} from '../../../s1-main/m2-bll/store';
-import {registration} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {AppRootStateType, useAppDispatch} from 's1-main/m2-bll/store';
+import {registration} from 's1-main/m2-bll/reducers/auth/auth-reducer';
 import {useSelector} from 'react-redux';
-import {PasswordView} from '../../../s1-main/m1-ui/common/c1-components/passwordView/PasswordView';
-import {Input} from '../../../s1-main/m1-ui/common/c1-components/Input/Input';
-import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
-import styleContainer from '../../../s1-main/m1-ui/common/c2-styles/Container.module.css';
-import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css';
+import {PasswordView} from 's1-main/m1-ui/common/c1-components/passwordView/PasswordView';
+import {Input} from 's1-main/m1-ui/common/c1-components/Input/Input';
+import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
+import styleContainer from 's1-main/m1-ui/common/c2-styles/Container.module.css';
+import styleBlock from 's1-main/m1-ui/common/c2-styles/Block.module.css';
 
 type FormikErrorType = {
     email?: string

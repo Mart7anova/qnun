@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
-import {createCard, fetchCards} from 's1-main/m2-bll/reducers/cards-reducer';
+import {createCard, fetchCards} from 's1-main/m2-bll/reducers/cards/cards-reducer';
 import {useParams} from 'react-router-dom';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 

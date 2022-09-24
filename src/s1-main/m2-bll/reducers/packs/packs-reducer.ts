@@ -1,4 +1,4 @@
-import {AppThunk} from '../store';
+import {AppThunk} from 's1-main/m2-bll/store';
 import {packApi, PackType} from 's1-main/m3-dal/packApi';
 
 const initialState = {

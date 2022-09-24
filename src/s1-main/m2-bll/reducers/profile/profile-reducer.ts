@@ -1,5 +1,5 @@
-import {AppThunk} from '../store';
-import {authApi, ProfileResponseType} from '../../m3-dal/authApi';
+import {AppThunk} from 's1-main/m2-bll/store';
+import {authApi, ProfileResponseType} from 's1-main/m3-dal/authApi';
 
 const initialState = {
 		profile: {} as ProfileResponseType,

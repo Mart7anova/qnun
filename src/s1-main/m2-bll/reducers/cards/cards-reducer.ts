@@ -1,4 +1,4 @@
-import {AppThunk} from '../store';
+import {AppThunk} from 's1-main/m2-bll/store';
 import {cardsApi, CardType} from 's1-main/m3-dal/cardsApi';
 
 const initialState = {

@@ -4,16 +4,16 @@ import logo from '../../../assets/it-inc-logo.svg'
 import {Link, useLocation} from 'react-router-dom'
 import {PATH} from '../u1-Route/Variables/routeVariables';
 import {Button} from '../common/c1-components/Button/Button';
-import {useSelector} from 'react-redux';
-import {AppRootStateType} from 's1-main/m2-bll/store';
+import {useAppSelector} from 's1-main/m2-bll/store';
 import noAvatar from '../../../assets/no-avatar.png'
+import {getIsLoggedIn} from 's1-main/m2-bll/reducers/auth/auth-selectors';
+import {getProfileInfo} from 's1-main/m2-bll/reducers/profile/profile-selectors';
 
 export const Header = () => {
 		const {pathname} = useLocation()
 
-		const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-		const useName = useSelector<AppRootStateType, string>(state => state.profile.profile.name || 'error')
-		const userAvatar = useSelector<AppRootStateType, string>(state => state.profile.profile?.avatar || noAvatar)
+		const isLoggedIn = useAppSelector(getIsLoggedIn)
+		const profile = useAppSelector(getProfileInfo)
 
 		return (
 				<header className={s.header}>
@@ -26,10 +26,10 @@ export const Header = () => {
 												<Link to={PATH.PROFILE} style={{textDecoration: 'none', color: 'black'}}>
 														<div className={s.profileContainer}>
 																<div className={s.profileName}>
-																		{useName}
+																		{profile.name}
 																</div>
 																<img
-																		src={userAvatar}
+																		src={profile.avatar || noAvatar}
 																		alt="ava" style={{width: '36px', height: '36px', borderRadius: '50%'}}/>
 														</div>
 												</Link>

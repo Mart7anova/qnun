@@ -1,6 +1,6 @@
-import {authApi} from '../../m3-dal/authApi';
-import {setProfile} from './profile-reducer';
-import {AppThunk} from '../store';
+import {authApi} from 's1-main/m3-dal/authApi';
+import {setProfile} from 's1-main/m2-bll/reducers/profile/profile-reducer';
+import {AppThunk} from 's1-main/m2-bll/store';
 import {AxiosError} from 'axios';
 
 const initialState = {
