@@ -4,6 +4,8 @@ import {authReducer} from './reducers/auth-reducer';
 import {profileReducer} from './reducers/profile-reducer';
 import {appReducer} from './reducers/app-reducer';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {packsReducer} from 's1-main/m2-bll/reducers/packs-reducer';
+import {cardsReducer} from 's1-main/m2-bll/reducers/cards-reducer';
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
 		auth: authReducer,
 		profile: profileReducer,
 		app: appReducer,
+		packs:packsReducer,
+		cards:cardsReducer,
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware))
