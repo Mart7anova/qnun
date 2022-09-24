@@ -26,13 +26,22 @@ export const packApi = {
 		},
 }
 //types
-type PackType = {
-		_id: string
-		user_id: string
-		name: string
-		cardsCount: number
-		created: Date
-		updated: Date
+export type PackType = {
+		cardsCount:number
+		created:Date
+		grade:number
+		more_id:string
+		name:string
+		path:string
+		private:boolean
+		rating:number
+		shots:number
+		type:string
+		updated:Date
+		user_id:string
+		user_name:string
+		__v:number
+		_id:string
 }
 type ResponseType = {
 		cardPacks: PackType[]
