@@ -29,7 +29,7 @@ export const cardsApi = {
 
 }
 //types
-type CardType = {
+export type CardType = {
 		answer: string
 		question: string
 		cardsPack_id: string
