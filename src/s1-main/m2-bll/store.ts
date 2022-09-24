@@ -1,11 +1,11 @@
 import {AnyAction, applyMiddleware, combineReducers, legacy_createStore} from 'redux';
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
-import {authReducer} from 's1-main/m2-bll/reducers/auth/auth-reducer';
-import {profileReducer} from 's1-main/m2-bll/reducers/profile/profile-reducer';
-import {appReducer} from 's1-main/m2-bll/reducers/app/app-reducer';
+import {authReducer} from 's1-main/m2-bll/reducers/auth-reducer';
+import {profileReducer} from 's1-main/m2-bll/reducers/profile-reducer';
+import {appReducer} from 's1-main/m2-bll/reducers/app-reducer';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {packsReducer} from 's1-main/m2-bll/reducers/packs/packs-reducer';
-import {cardsReducer} from 's1-main/m2-bll/reducers/cards/cards-reducer';
+import {packsReducer} from 's1-main/m2-bll/reducers/packs-reducer';
+import {cardsReducer} from 's1-main/m2-bll/reducers/cards-reducer';
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 

@@ -9,7 +9,7 @@ import {PasswordView} from 's1-main/m1-ui/common/c1-components/passwordView/Pass
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {Navigate, useParams} from 'react-router-dom';
 import {useFormik} from 'formik';
-import {setIsRequestSuccess, updatePassword} from 's1-main/m2-bll/reducers/auth/auth-reducer';
+import {setIsRequestSuccess, updatePassword} from 's1-main/m2-bll/reducers/auth-reducer';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 
 type FormikErrorType = {

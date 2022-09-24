@@ -1,5 +1,5 @@
 import {authApi} from 's1-main/m3-dal/authApi';
-import {setProfile} from 's1-main/m2-bll/reducers/profile/profile-reducer';
+import {setProfile} from 's1-main/m2-bll/reducers/profile-reducer';
 import {AppThunk} from 's1-main/m2-bll/store';
 import {AxiosError} from 'axios';
 
@@ -26,31 +26,18 @@ export const authReducer = (state: AuthType = initialState, action: ActionsType)
 }
 
 //AC
-export const isLoggedIn = (value: boolean) => {
-    return {
-        type: 'AUTH/LOGIN',
-        payload: {value}
-    } as const
-}
-const auth = (value: boolean) => {
-    return {
-        type: 'AUTH/REGISTRATION',
-        payload: {value}
-    } as const
-}
-
-export const setIsRequestSuccess = (value: boolean) => {
-    return {
-        type: 'STATUS-REQUEST/REGISTRATION',
-        payload: {value}
-    } as const
-}
+export const isLoggedIn = (value: boolean) => ({type: 'AUTH/LOGIN', payload: {value}} as const)
+export const setIsAuth = (value: boolean) => ({type: 'AUTH/REGISTRATION', payload: {value}} as const)
+export const setIsRequestSuccess = (value: boolean) => ({
+    type: 'STATUS-REQUEST/REGISTRATION',
+    payload: {value}
+} as const)
 
 //thunk
 export const registration = (email: string, password: string): AppThunk => async (dispatch) => {
     try {
         await authApi.registration(email, password)
-        dispatch(auth(true))
+        dispatch(setIsAuth(true))
     } catch (e) {
         console.log(e)
     }
@@ -103,9 +90,7 @@ export const updatePassword = (password: string, resetPasswordToken: string): Ap
 //types
 export type AuthType = typeof initialState
 
-type RegistrationType = ReturnType<typeof isLoggedIn>
-type LoginType = ReturnType<typeof auth>
-type statusRequestType = ReturnType<typeof setIsRequestSuccess>
-
-type ActionsType = RegistrationType | LoginType | statusRequestType
+type ActionsType = ReturnType<typeof isLoggedIn>
+    | ReturnType<typeof setIsAuth>
+    | ReturnType<typeof setIsRequestSuccess>
 

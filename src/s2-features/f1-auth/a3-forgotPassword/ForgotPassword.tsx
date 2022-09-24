@@ -8,7 +8,7 @@ import {Link, Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useFormik} from 'formik';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
-import {forgotPassword, setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth/auth-reducer';
+import {forgotPassword, setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth-reducer';
 
 type FormikErrorType = {
     email?: string

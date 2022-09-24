@@ -7,10 +7,10 @@ import {Link, Navigate} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {login} from 's1-main/m2-bll/reducers/auth/auth-reducer';
+import {login} from 's1-main/m2-bll/reducers/auth-reducer';
 import styleContainer from 's1-main/m1-ui/common/c2-styles/Container.module.css';
 import {PasswordView} from 's1-main/m1-ui/common/c1-components/passwordView/PasswordView';
-import {getIsLoggedIn} from 's1-main/m2-bll/reducers/auth/auth-selectors';
+import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 
 
 type FormikErrorType = {

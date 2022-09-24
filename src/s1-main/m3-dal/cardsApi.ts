@@ -1,4 +1,4 @@
-import {instance} from 's1-main/m3-dal/authApi';
+import {instance} from './instance/instance';
 
 
 export const cardsApi = {

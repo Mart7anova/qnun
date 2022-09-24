@@ -1,4 +1,4 @@
-import {instance} from 's1-main/m3-dal/authApi';
+import {instance} from './instance/instance';
 
 
 export const packApi = {
@@ -43,7 +43,7 @@ export type PackType = {
     __v: number
     _id: string
 }
-type ResponseType = {
+export type ResponseType = {
     cardPacks: PackType[]
     cardPacksTotalCount: number
     maxCardsCount: number
@@ -51,10 +51,10 @@ type ResponseType = {
     page: number
     pageCount: number
 }
-type SearchParamsType = {
-    page: number
-    pageCount: number
-    sortPacks: string
-    packName: string
-    isMyPacks: boolean
+export type SearchParamsType = {
+    page?: number
+    pageCount?: number
+    sortPacks?: string
+    packName?: string
+    isMyPacks?: boolean
 }

@@ -10,7 +10,7 @@ import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useAppDispatch} from 's1-main/m2-bll/store';
-import {setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth/auth-reducer';
+import {setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth-reducer';
 
 export const CheckEmail = () => {
     const [linkToLogin, setLinkToLogin] = useState(false)

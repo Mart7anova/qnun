@@ -1,7 +1,7 @@
 import {AppThunk} from 's1-main/m2-bll/store';
 import {authApi} from 's1-main/m3-dal/authApi';
-import {isLoggedIn} from 's1-main/m2-bll/reducers/auth/auth-reducer';
-import {setProfile} from 's1-main/m2-bll/reducers/profile/profile-reducer';
+import {isLoggedIn} from 's1-main/m2-bll/reducers/auth-reducer';
+import {setProfile} from 's1-main/m2-bll/reducers/profile-reducer';
 
 const initialState = {
     isInitialized: false,

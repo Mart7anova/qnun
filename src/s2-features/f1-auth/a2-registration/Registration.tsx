@@ -4,7 +4,7 @@ import {Link, Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import style from '../a2-registration/Registration.module.scss'
 import {AppRootStateType, useAppDispatch} from 's1-main/m2-bll/store';
-import {registration} from 's1-main/m2-bll/reducers/auth/auth-reducer';
+import {registration} from 's1-main/m2-bll/reducers/auth-reducer';
 import {useSelector} from 'react-redux';
 import {PasswordView} from 's1-main/m1-ui/common/c1-components/passwordView/PasswordView';
 import {Input} from 's1-main/m1-ui/common/c1-components/Input/Input';

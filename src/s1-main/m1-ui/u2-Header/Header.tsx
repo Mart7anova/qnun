@@ -6,8 +6,8 @@ import {PATH} from '../u1-Route/Variables/routeVariables';
 import {Button} from '../common/c1-components/Button/Button';
 import {useAppSelector} from 's1-main/m2-bll/store';
 import noAvatar from '../../../assets/no-avatar.png'
-import {getIsLoggedIn} from 's1-main/m2-bll/reducers/auth/auth-selectors';
-import {getProfileInfo} from 's1-main/m2-bll/reducers/profile/profile-selectors';
+import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
+import {getProfileInfo} from 's1-main/m2-bll/selectors/profile-selectors';
 
 export const Header = () => {
 		const {pathname} = useLocation()

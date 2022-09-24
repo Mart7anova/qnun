@@ -13,10 +13,10 @@ import {Link, Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {EditableSpan} from 's1-main/m1-ui/common/c1-components/EditableSpan/EditableSpan';
-import {logout} from 's1-main/m2-bll/reducers/auth/auth-reducer';
-import {updateUser} from 's1-main/m2-bll/reducers/profile/profile-reducer';
-import {getIsLoggedIn} from 's1-main/m2-bll/reducers/auth/auth-selectors';
-import {getProfileInfo} from 's1-main/m2-bll/reducers/profile/profile-selectors';
+import {logout} from 's1-main/m2-bll/reducers/auth-reducer';
+import {updateUser} from 's1-main/m2-bll/reducers/profile-reducer';
+import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
+import {getProfileInfo} from 's1-main/m2-bll/selectors/profile-selectors';
 
 
 export const Profile = () => {
