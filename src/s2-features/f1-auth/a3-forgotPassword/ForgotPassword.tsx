@@ -2,13 +2,13 @@ import React, {useEffect} from 'react';
 import styleContainer from '../../../s1-main/m1-ui/common/c2-styles/Container.module.css';
 import style from './ForgotPassword.module.scss';
 import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css';
-import {Input} from '../../../s1-main/m1-ui/common/c1-components/Input/Input';
-import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
+import {Input} from 's1-main/m1-ui/common/c1-components/Input/Input';
+import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {Link, Navigate} from 'react-router-dom';
-import {PATH} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useFormik} from 'formik';
-import {useAppDispatch, useAppSelector} from '../../../s1-main/m2-bll/store';
-import {forgotPassword, setIsRequestSuccess} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
+import {forgotPassword, setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth/auth-reducer';
 
 type FormikErrorType = {
     email?: string

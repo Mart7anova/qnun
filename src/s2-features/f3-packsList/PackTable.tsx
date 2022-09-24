@@ -11,7 +11,7 @@ import studyImg from 'assets/study.svg';
 import editImg from 'assets/edit.svg';
 import deleteImg from 'assets/delete.svg';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
-import {deletePack, updatePack} from 's1-main/m2-bll/reducers/packs-reducer';
+import {deletePack, updatePack} from 's1-main/m2-bll/reducers/packs/packs-reducer';
 import {Link} from 'react-router-dom';
 
 type TablePropsType = {

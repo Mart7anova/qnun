@@ -5,12 +5,12 @@ import style from './CheckEmail.module.scss';
 import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css';
 
 import emailImg from '../../../s1-main/m1-ui/common/c3-image/photo/email.png'
-import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
+import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 
 import {Navigate} from 'react-router-dom';
-import {PATH} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {useAppDispatch} from '../../../s1-main/m2-bll/store';
-import {setIsRequestSuccess} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {useAppDispatch} from 's1-main/m2-bll/store';
+import {setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth/auth-reducer';
 
 export const CheckEmail = () => {
     const [linkToLogin, setLinkToLogin] = useState(false)
