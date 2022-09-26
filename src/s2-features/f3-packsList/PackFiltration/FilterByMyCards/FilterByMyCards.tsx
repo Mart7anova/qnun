@@ -14,7 +14,7 @@ const FilterByMyCards = () => {
         dispatch(setIsMyPacksFilter(profileId))
     }
     return (
-        <ButtonGroup color="primary">
+        <ButtonGroup color="primary" size={'medium'}>
             <Button variant={packsForUserId !== '' ? 'contained' : 'outlined'}
                     onClick={()=>onIsMyPacksFilterChange(profileId)}>
                 My
