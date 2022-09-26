@@ -8,7 +8,9 @@ const initialState = {
         pageCount: 10,
         sortPacks: '0updated',
         packName: '',
-        isMyPacks: false
+        user_id: '',
+        min: 0,
+        max: 100,
     } as SearchParamsType,
 }
 
@@ -18,9 +20,14 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
         case 'PACKS/SET-PACKS': {
             return {...state, packs: action.payload.packs}
         }
-        case 'PACKS/SET-SEARCH-PARAMS': {
-            return {...state, searchParams: {...state.searchParams, ...action.payload.params}}
+        case 'PACKS/SET-SEARCH-BY-NAME-FILTER': {
+            return {...state, searchParams: {...state.searchParams, packName: action.payload.packName}}
         }
+        case 'PACKS/SET-IS-MY-PACKS-FILTER':{
+            return {...state, searchParams: {...state.searchParams, user_id: action.payload.userId}}
+        }
+        case 'PACKS/CLEAR-FILTERS':
+            return {...state, searchParams: {...state.searchParams, ...action.payload}}
         default:
             return state
     }
@@ -29,10 +36,9 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
 
 //actions
 export const setPacks = (packs: PackType[]) => ({type: 'PACKS/SET-PACKS', payload: {packs}} as const)
-export const setSearchParams = (params: SearchParamsType) => ({
-    type: 'PACKS/SET-SEARCH-PARAMS',
-    payload: {params}
-} as const)
+export const setSearchByNameFilter = (packName: string) => ({type: 'PACKS/SET-SEARCH-BY-NAME-FILTER', payload: {packName}} as const)
+export const setIsMyPacksFilter = (userId: string) => ({type: 'PACKS/SET-IS-MY-PACKS-FILTER', payload: {userId}} as const)
+export const clearFilters = () => ({type: 'PACKS/CLEAR-FILTERS', payload: {packName: '', isMyPack: false, min: 0, max: 100}} as const)
 
 //thunks
 export const fetchPacks = (): AppThunk => async (dispatch, getState) => {
@@ -68,5 +74,8 @@ export const updatePack = (id: string): AppThunk => async (dispatch) => {
 //types
 export type PacksReducerType = typeof initialState
 
-type ActionsType = ReturnType<typeof setPacks>
-    | ReturnType<typeof setSearchParams>
+type ActionsType =
+    | ReturnType<typeof setPacks>
+    | ReturnType<typeof setSearchByNameFilter>
+    | ReturnType<typeof clearFilters>
+    | ReturnType<typeof setIsMyPacksFilter>

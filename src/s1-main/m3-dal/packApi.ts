@@ -52,9 +52,11 @@ export type ResponseType = {
     pageCount: number
 }
 export type SearchParamsType = {
-    page?: number
-    pageCount?: number
-    sortPacks?: string
-    packName?: string
-    isMyPacks?: boolean
+    page: number
+    pageCount: number
+    sortPacks: string
+    packName: string
+    user_id: string
+    min: number
+    max: number
 }
