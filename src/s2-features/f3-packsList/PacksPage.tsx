@@ -5,16 +5,15 @@ import {PackTable} from 's2-features/f3-packsList/PackTable';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {PackFiltration} from 's2-features/f3-packsList/PackFiltration/PackFiltration';
 import {
-		getCurrentMaxCount,
-		getCurrentMinCount,
-		getPackName,
-		getPacks,
-		getPacksForUserId
+	getCurrentMaxCount,
+	getCurrentMinCount,
+	getPackName,
+	getPacks,
+	getPacksForUserId
 } from 's1-main/m2-bll/selectors/packs-selectors';
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {Pagination} from '@mui/material';
 import {Paginator} from 's1-main/m1-ui/common/c1-components/Pagination/Pagination';
 
 export const PacksPage = () => {

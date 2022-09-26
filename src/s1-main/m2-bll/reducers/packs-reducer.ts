@@ -12,7 +12,7 @@ const initialState = {
 				packName: '',
 				user_id: '',
 				min: 0,
-				max: 100,
+				max: 10,
 		} as SearchParamsType,
 		packsTotalCount: 0,
 }

@@ -1,7 +1,12 @@
 import * as React from 'react';
 import {ChangeEvent, useEffect} from 'react';
 import Slider from '@mui/material/Slider';
-import {getMaxCardsCount, getMinCardsCount} from '../../../../s1-main/m2-bll/selectors/packs-selectors';
+import {
+    getCurrentMaxCount,
+    getCurrentMinCount,
+    getMaxCardsCount,
+    getMinCardsCount
+} from '../../../../s1-main/m2-bll/selectors/packs-selectors';
 import {useAppDispatch, useAppSelector} from '../../../../s1-main/m2-bll/store';
 import {useDebounce} from '../../../../s1-main/m2-bll/hooks/hookDebonce';
 import {setRangeCards} from '../../../../s1-main/m2-bll/reducers/packs-reducer';
@@ -10,10 +15,13 @@ import style from './DoubleRangeFilter.module.scss'
 
 
 export function DoubleRangeFilter() {
-    const [value, setValue] = React.useState<number[]>([0, 10])
-
     const minCardsCount = useAppSelector(getMinCardsCount)
     const maxCardsCount = useAppSelector(getMaxCardsCount)
+    const currentMinCount = useAppSelector(getCurrentMinCount)
+    const currentMaxCount = useAppSelector(getCurrentMaxCount)
+
+    const [value, setValue] = React.useState<number[]>([currentMinCount, currentMaxCount])
+
     const debouncedValue = useDebounce<number[]>(value, 1000)
 
     const dispatch = useAppDispatch()
@@ -45,6 +53,10 @@ export function DoubleRangeFilter() {
     useEffect(() => {
         dispatch(setRangeCards(value[0], value[1]))
     }, [debouncedValue])
+
+    useEffect(() => {
+        setValue([currentMinCount, currentMaxCount])
+    }, [currentMinCount, currentMaxCount])
 
     return (
         <div className={style.mainContainer}>
