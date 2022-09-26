@@ -10,7 +10,7 @@ import {PATH} from './Variables/routeVariables';
 import {Main} from '../Main';
 import {PacksPage} from 's2-features/f3-packsList/PacksPage';
 import {CheckEmail} from '../../../s2-features/f1-auth/a5-checkEmail/CheckEmail';
-import {CardsPage} from 's2-features/f3-packsList/cardsList/CardsPage';
+import {CardsPage} from 's2-features/f3-packsList/CardsPage/CardsPage';
 
 export const AppRoute = () => {
 

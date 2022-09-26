@@ -3,8 +3,11 @@ import {cardsApi, CardType} from 's1-main/m3-dal/cardsApi';
 
 const initialState = {
 		cards: [] as CardType[],
-		packUserId: '',
+		packOwnerUserId: '',
 		packName: '',
+		cardsTotalCount: 0,
+		currentPage: 1,
+		elementPerPage: 10,
 }
 
 //reducer
@@ -13,9 +16,13 @@ export const cardsReducer = (state: PacksReducerType = initialState, action: Act
 				case 'CARDS/SET-CARDS':
 						return {...state, cards: action.payload.cards}
 				case 'CARDS/SET-USER-ID':
-						return {...state, packUserId: action.payload.id}
+						return {...state, packOwnerUserId: action.payload.id}
 				case 'CARDS/SET-PACK-NAME':
 						return {...state, packName: action.payload.packName}
+				case 'CARDS/SET-CARDS-TOTAL-COUNT':
+						return {...state, cardsTotalCount: action.payload.cardsTotalCount}
+				case 'PACKS/SET-CURRENT-PAGE':
+						return {...state, currentPage: action.payload.page}
 				default:
 						return state
 		}
@@ -23,18 +30,26 @@ export const cardsReducer = (state: PacksReducerType = initialState, action: Act
 
 
 //actions
-export const setCards = (cards: CardType[]) => ({type: 'CARDS/SET-CARDS', payload: {cards}} as const)
-export const setUserId = (id: string) => ({type: 'CARDS/SET-USER-ID', payload: {id}} as const)
-export const setPackName = (packName: string) => ({type: 'CARDS/SET-PACK-NAME', payload: {packName}} as const)
-
+export const setCards = (cards: CardType[]) =>
+		({type: 'CARDS/SET-CARDS', payload: {cards}} as const)
+export const setPackOwnerUserId = (id: string) =>
+		({type: 'CARDS/SET-USER-ID', payload: {id}} as const)
+export const setPackName = (packName: string) =>
+		({type: 'CARDS/SET-PACK-NAME', payload: {packName}} as const)
+export const setCardsTotalCount = (cardsTotalCount: number) =>
+		({type: 'CARDS/SET-CARDS-TOTAL-COUNT', payload: {cardsTotalCount}} as const)
+export const setCurrentPage = (page: number) =>
+		({type: 'PACKS/SET-CURRENT-PAGE', payload: {page}} as const)
 
 //thunks
-export const fetchCards = (packId: string): AppThunk => async (dispatch) => {
+export const fetchCards = (packId: string): AppThunk => async (dispatch, getState) => {
 		try {
-				const {data} = await cardsApi.getCards(packId)
+				const {data} = await cardsApi.getCards(packId, getState().cards.currentPage)
 				dispatch(setCards(data.cards))
-				dispatch(setUserId(data.packUserId))
+				dispatch(setPackOwnerUserId(data.packUserId))
 				dispatch(setPackName(data.packName))
+				dispatch(setCardsTotalCount(data.cardsTotalCount))
+				console.log(data)
 		} catch (e) {
 		}
 }
@@ -45,16 +60,16 @@ export const createCard = (packId: string): AppThunk => async (dispatch) => {
 		} catch (e) {
 		}
 }
-export const deleteCard = (packId:string,cardId: string): AppThunk => async (dispatch) => {
+export const deleteCard = (packId: string, cardId: string): AppThunk => async (dispatch) => {
 		try {
 				await cardsApi.deleteCard(cardId)
 				dispatch(fetchCards(packId))
 		} catch (e) {
 		}
 }
-export const updateCard = (packId:string, cardId: string): AppThunk => async (dispatch) => {
+export const updateCard = (packId: string, cardId: string): AppThunk => async (dispatch) => {
 		try {
-				await cardsApi.updateCard(cardId,'updated question','updated answer')
+				await cardsApi.updateCard(cardId, 'updated question', 'updated answer')
 				dispatch(fetchCards(packId))
 		} catch (e) {
 		}
@@ -64,5 +79,7 @@ export const updateCard = (packId:string, cardId: string): AppThunk => async (di
 export type PacksReducerType = typeof initialState
 type ActionsType =
 		| ReturnType<typeof setCards>
-		| ReturnType<typeof setUserId>
+		| ReturnType<typeof setPackOwnerUserId>
 		| ReturnType<typeof setPackName>
+		| ReturnType<typeof setCardsTotalCount>
+		| ReturnType<typeof setCurrentPage>
