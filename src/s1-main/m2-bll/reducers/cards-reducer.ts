@@ -5,7 +5,6 @@ const initialState = {
 		cards: [] as CardType[],
 		packUserId: '',
 		packName: '',
-		pageInitialized: false,
 }
 
 //reducer
@@ -17,8 +16,6 @@ export const cardsReducer = (state: PacksReducerType = initialState, action: Act
 						return {...state, packUserId: action.payload.id}
 				case 'CARDS/SET-PACK-NAME':
 						return {...state, packName: action.payload.packName}
-				case 'CARDS/SET-INITIALIZED-PAGE':
-						return {...state, pageInitialized: action.payload.value}
 				default:
 						return state
 		}
@@ -29,23 +26,15 @@ export const cardsReducer = (state: PacksReducerType = initialState, action: Act
 export const setCards = (cards: CardType[]) => ({type: 'CARDS/SET-CARDS', payload: {cards}} as const)
 export const setUserId = (id: string) => ({type: 'CARDS/SET-USER-ID', payload: {id}} as const)
 export const setPackName = (packName: string) => ({type: 'CARDS/SET-PACK-NAME', payload: {packName}} as const)
-export const setPageInitialized = (value: boolean) => ({type: 'CARDS/SET-INITIALIZED-PAGE', payload: {value}} as const)
+
 
 //thunks
-export const initializePage = (packId: string): AppThunk => async (dispatch) => {
+export const fetchCards = (packId: string): AppThunk => async (dispatch) => {
 		try {
 				const {data} = await cardsApi.getCards(packId)
 				dispatch(setCards(data.cards))
 				dispatch(setUserId(data.packUserId))
 				dispatch(setPackName(data.packName))
-				dispatch(setPageInitialized(true))
-		} catch (e) {
-		}
-}
-export const fetchCards = (packId: string): AppThunk => async (dispatch) => {
-		try {
-				const {data} = await cardsApi.getCards(packId)
-				dispatch(setCards(data.cards))
 		} catch (e) {
 		}
 }
@@ -77,4 +66,3 @@ type ActionsType =
 		| ReturnType<typeof setCards>
 		| ReturnType<typeof setUserId>
 		| ReturnType<typeof setPackName>
-		| ReturnType<typeof setPageInitialized>
