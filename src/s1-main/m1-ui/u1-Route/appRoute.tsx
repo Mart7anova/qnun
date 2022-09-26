@@ -1,46 +1,35 @@
 import React from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import {PageNotFound} from '../PageNotFound/PageNotFound';
+import {PageNotFound} from '../common/c1-components/PageNotFound/PageNotFound';
 import {Login} from '../../../s2-features/f1-auth/a1-login/Login';
 import {Registration} from '../../../s2-features/f1-auth/a2-registration/Registration';
 import {ForgotPassword} from '../../../s2-features/f1-auth/a3-forgotPassword/ForgotPassword';
 import {NewPassword} from '../../../s2-features/f1-auth/a4-newPassword/NewPassword';
 import {Profile} from '../../../s2-features/f2-profile/Profile';
-import {
-    checkEmail,
-    login,
-    newPassword,
-    otherRoutes,
-    packsList,
-    pageNotFound,
-    profile,
-    registration,
-    forgotPassword,
-    showComponents
-} from './Variables/routeVariables';
+import {PATH} from './Variables/routeVariables';
 import {Main} from '../Main';
-import {PacksList} from '../../../s2-features/f3-packsList/PacksList';
+import {PacksPage} from 's2-features/f3-packsList/PacksPage';
 import {CheckEmail} from '../../../s2-features/f1-auth/a5-checkEmail/CheckEmail';
-import {ShowComponents} from '../../../s2-features/f0-test/ShowComponents';
+import {CardsPage} from 's2-features/f3-packsList/CardsPage/CardsPage';
 
 export const AppRoute = () => {
 
-    return (
-        <Routes>
-            <Route path={profile} element={<Main/>}>
-                <Route path={otherRoutes} element={<Navigate to={pageNotFound}/>}/>
-                <Route path={pageNotFound} element={<PageNotFound/>}/>
+		return (
+				<Routes>
+						<Route path={PATH.PACKS_LIST} element={<Main/>}>
+								<Route path={PATH.OTHER_ROUTS} element={<Navigate to={PATH.PAGE_NOT_FOUND}/>}/>
+								<Route path={PATH.PAGE_NOT_FOUND} element={<PageNotFound/>}/>
 
-                <Route path={login} element={<Login/>}/>
-                <Route path={registration} element={<Registration/>}/>
-                <Route path={forgotPassword} element={<ForgotPassword/>}/>
-                <Route path={newPassword} element={<NewPassword/>}/>
+								<Route path={PATH.LOGIN} element={<Login/>}/>
+								<Route path={PATH.REGISTRATION} element={<Registration/>}/>
+								<Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
+								<Route path={PATH.NEW_PASSWORD} element={<NewPassword/>}/>
 
-                <Route index element={<Profile/>}/>
-                <Route path={showComponents} element={<ShowComponents/>}/>
-                <Route path={packsList} element={<PacksList/>}/>
-                <Route path={checkEmail} element={<CheckEmail/>}/>
-            </Route>
-        </Routes>
-    );
+								<Route index element={<PacksPage/>}/>
+								<Route path={`pack/:packId`} element={<CardsPage/>}/>
+								<Route path={PATH.PROFILE} element={<Profile/>}/>
+								<Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
+						</Route>
+				</Routes>
+		);
 };

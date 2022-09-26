@@ -1,52 +1,36 @@
-import {AppThunk} from '../store';
-import {authApi, BaseResponseType} from '../../m3-dal/authApi';
+import {AppThunk} from 's1-main/m2-bll/store';
+import {authApi, ProfileResponseType} from 's1-main/m3-dal/authApi';
 
 const initialState = {
-		profile: {} as BaseResponseType,
+    profile: {} as ProfileResponseType,
 }
 
 export const profileReducer = (state: ProfileStateType = initialState, action: ActionsType): ProfileStateType => {
-		switch (action.type) {
-				case 'PROFILE/SET-PROFILE':
-						return {...state, profile: action.profile}
-				default:
-						return {...state}
-		}
+    switch (action.type) {
+        case 'PROFILE/SET-PROFILE':
+            return {...state, profile: action.profile}
+        default:
+            return state
+    }
 }
 //actions
-export const setProfile = (profile: BaseResponseType) =>
-		({type: 'PROFILE/SET-PROFILE', profile} as const)
+export const setProfile = (profile: ProfileResponseType) => ({type: 'PROFILE/SET-PROFILE', profile} as const)
 
 //thunks
-export const updateUser = (name?: string, avatar?: string):AppThunk => async (dispatch) =>{
-	try {
-		const {data} = await authApi.updateUser(name, avatar)
-		console.log(data)
-		dispatch(setProfile(data.updatedUser))
-	}catch (e) {
+export const updateUser = (name?: string, avatar?: string): AppThunk => async (dispatch) => {
+    try {
+        const {data} = await authApi.updateUser(name, avatar)
+        console.log(data)
+        dispatch(setProfile(data.updatedUser))
+    } catch (e) {
 
-	}
+    }
 }
 
 //types
-type ProfileStateType = {
-		profile: BaseResponseType
-}
-type ActionsType = SetProfileActionType
+type ProfileStateType = typeof initialState
 
-export type SetProfileActionType = ReturnType<typeof setProfile>
+type ActionsType = ReturnType<typeof setProfile>
 
-/*
-export type ProfileType = {
-		_id: string
-		email: string
-		name: string
-		avatar?: string
-		publicCardPacksCount: number
-		created: Date
-		updated: Date
-		isAdmin: boolean
-		verified: boolean
-		rememberMe: boolean;
-		error?: string;
-}*/
+
+

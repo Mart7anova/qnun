@@ -1,16 +1,16 @@
 import React from 'react'
 import {useFormik} from 'formik';
 import {Link, Navigate} from 'react-router-dom';
-import {login} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
-import registration from '../a2-registration/Registration.module.scss'
-import {AppRootStateType, useAppDispatch} from '../../../s1-main/m2-bll/store';
-import {registrationThunk} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
+import style from '../a2-registration/Registration.module.scss'
+import {AppRootStateType, useAppDispatch} from 's1-main/m2-bll/store';
+import {registration} from 's1-main/m2-bll/reducers/auth-reducer';
 import {useSelector} from 'react-redux';
-import {PasswordView} from '../../../s1-main/m1-ui/common/c1-components/passwordView/PasswordView';
-import {Input} from '../../../s1-main/m1-ui/common/c1-components/Input/Input';
-import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
-import styleContainer from '../../../s1-main/m1-ui/common/c2-styles/Container.module.css';
-import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css';
+import {PasswordView} from 's1-main/m1-ui/common/c1-components/passwordView/PasswordView';
+import {Input} from 's1-main/m1-ui/common/c1-components/Input/Input';
+import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
+import styleContainer from 's1-main/m1-ui/common/c2-styles/Container.module.css';
+import styleBlock from 's1-main/m1-ui/common/c2-styles/Block.module.css';
 
 type FormikErrorType = {
     email?: string
@@ -60,7 +60,7 @@ export const Registration = () => {
                 email: values.email,
                 password: values.password
             }
-            dispatch(registrationThunk(authData.email, authData.password))
+            dispatch(registration(authData.email, authData.password))
             formik.resetForm()
         }
     })
@@ -70,31 +70,31 @@ export const Registration = () => {
     const errorConfirmPassword = formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ''
 
     if (isLoggedIn) {
-        return <Navigate to={login}/>
+        return <Navigate to={PATH.LOGIN}/>
     }
     return (
         <div>
-            <div className={`${styleContainer.container} ${registration.mainBlock}`}>
-                <div className={`${styleBlock.block} ${registration.childrenBlock}`}>
-                    <h1 className={registration.title}>Sing up</h1>
+            <div className={`${styleContainer.container} ${style.mainBlock}`}>
+                <div className={`${styleBlock.block} ${style.childrenBlock}`}>
+                    <h1 className={style.title}>Sing up</h1>
                     <form onSubmit={formik.handleSubmit}>
-                        <div className={registration.nameDirection}>Email</div>
+                        <div className={style.nameDirection}>Email</div>
                         <Input type={'email'}
                                error={errorEmail} {...formik.getFieldProps('email')}/>
 
-                        <div className={registration.nameDirection}>Password</div>
-                        <PasswordView className={registration.input}
+                        <div className={style.nameDirection}>Password</div>
+                        <PasswordView className={style.input}
                                       error={errorPass} {...formik.getFieldProps('password')}/>
 
-                        <div className={registration.nameDirection}>Confirm password</div>
-                        <PasswordView className={registration.input}
+                        <div className={style.nameDirection}>Confirm password</div>
+                        <PasswordView className={style.input}
                                       error={errorConfirmPassword} {...formik.getFieldProps('confirmPassword')}/>
 
-                        <Button className={registration.btn}>Sign Up</Button>
+                        <Button className={style.btn}>Sign Up</Button>
                     </form>
 
-                    <div className={registration.infoBlock}>Already have account?</div>
-                    <Link to={login} className={registration.linkStyle}>Sign In</Link>
+                    <div className={style.infoBlock}>Already have account?</div>
+                    <Link to={PATH.LOGIN} className={style.linkStyle}>Sign In</Link>
                 </div>
             </div>
         </div>

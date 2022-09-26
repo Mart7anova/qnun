@@ -1,21 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styleContainer from '../../../s1-main/m1-ui/common/c2-styles/Container.module.css';
 import style from './ForgotPassword.module.scss';
 import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css';
-import {Input} from '../../../s1-main/m1-ui/common/c1-components/Input/Input';
-import {Button} from '../../../s1-main/m1-ui/common/c1-components/Button/Button';
+import {Input} from 's1-main/m1-ui/common/c1-components/Input/Input';
+import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {Link, Navigate} from 'react-router-dom';
-import {checkEmail, login} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useFormik} from 'formik';
-import {useAppDispatch, useAppSelector} from '../../../s1-main/m2-bll/store';
-import {forgotPass, statusRequestAC} from '../../../s1-main/m2-bll/reducers/auth-reducer';
+import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
+import {forgotPassword, setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth-reducer';
 
 type FormikErrorType = {
     email?: string
 }
 
 export const ForgotPassword = () => {
-    const statusRequest = useAppSelector(state => state.auth.statusRequest)
+    const isRequestSuccess = useAppSelector(state => state.auth.isRequestSuccess)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -32,15 +32,18 @@ export const ForgotPassword = () => {
             return errors
         },
         onSubmit: (values) => {
-            dispatch(forgotPass(values.email))
+            dispatch(forgotPassword(values.email))
         }
     })
 
     const errorEmail = formik.touched.email && formik.errors.email ? formik.errors.email : ''
 
-    if (statusRequest === 'request has been sent') {
-        dispatch(statusRequestAC(null))
-        return <Navigate to={checkEmail}/>
+    useEffect(()=>{
+        dispatch(setIsRequestSuccess(false))
+    },[])
+
+    if (isRequestSuccess) {
+        return <Navigate to={PATH.CHECK_EMAIL}/>
     }
 
     return (
@@ -65,7 +68,7 @@ export const ForgotPassword = () => {
                     <span className={style.informationText}>
                     <b>Did you remember your password?</b>
                 </span>
-                    <Link to={login}>
+                    <Link to={PATH.LOGIN}>
                         <span className={style.linkToLogin}>Try logging in</span>
                     </Link>
                 </div>

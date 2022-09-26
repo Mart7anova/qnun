@@ -5,16 +5,21 @@ import {Checkbox} from 's1-main/m1-ui/common/c1-components/Checkbox/Checkbox';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {Link, Navigate} from 'react-router-dom';
 import {useFormik} from 'formik';
-import {useSelector} from 'react-redux';
-import {AppRootStateType, useAppDispatch} from 's1-main/m2-bll/store';
-import {forgotPassword, profile, registration} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {loginThunk} from 's1-main/m2-bll/reducers/auth-reducer';
+import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
+import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {login} from 's1-main/m2-bll/reducers/auth-reducer';
 import styleContainer from 's1-main/m1-ui/common/c2-styles/Container.module.css';
 import {PasswordView} from 's1-main/m1-ui/common/c1-components/passwordView/PasswordView';
+import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 
+
+type FormikErrorType = {
+		email?: string
+		password?: string
+}
 
 export const Login = () => {
-		const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn)
+		const isLoggedIn = useAppSelector(getIsLoggedIn)
 		const dispatch = useAppDispatch()
 
 		const formik = useFormik({
@@ -23,14 +28,31 @@ export const Login = () => {
 						password: '',
 						rememberMe: false,
 				},
-				// validate: values => {
-				// },
+				validate: (values) => {
+						const errors: FormikErrorType = {};
+
+						if (!values.email) {
+								errors.email = 'Required'
+						} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+								errors.email = 'Invalid email address'
+						}
+
+						if (!values.password) {
+								errors.password = 'Required'
+						} else if (values.password.length < 8) {
+								errors.password = 'Put more then 8 symbols, please.'
+						} else if (!values.password) {
+								errors.password = 'Symbol required!'
+						}
+
+						return errors
+				},
 				onSubmit: (values) => {
-						dispatch(loginThunk(values.email, values.password, values.rememberMe, formik.setStatus))
+						dispatch(login(values.email, values.password, values.rememberMe, formik.setStatus))
 				}
 		})
-		if (isLoggedIn) return <Navigate to={profile}/>
 
+		if (isLoggedIn) return <Navigate to={PATH.PACKS_LIST}/>
 		return (
 				<div className={s.loginPage}>
 						<div className={styleContainer.container}>
@@ -48,14 +70,14 @@ export const Login = () => {
 																me</Checkbox>
 												</div>
 
-												<Link to={forgotPassword} className={s.forgotPasswordLink}>
+												<Link to={PATH.FORGOT_PASSWORD} className={s.forgotPasswordLink}>
 														<span>Forgot Password?</span>
 												</Link>
 												{formik.status && <span className={s.generalFormError}>{formik.status.error}</span>}
 												<Button>Sign in</Button>
 
 												<span className={s.alreadyHaveAccount}>Do not have account?</span>
-												<Link to={registration} className={s.signUpButton}>
+												<Link to={PATH.REGISTRATION} className={s.signUpButton}>
 														Sign Up
 												</Link>
 										</form>
