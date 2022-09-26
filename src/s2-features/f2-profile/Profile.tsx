@@ -17,52 +17,58 @@ import {logout} from 's1-main/m2-bll/reducers/auth-reducer';
 import {updateUser} from 's1-main/m2-bll/reducers/profile-reducer';
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {getProfileInfo} from 's1-main/m2-bll/selectors/profile-selectors';
+import {appStatus} from "../../s1-main/m2-bll/selectors/app-selectors";
+import {LinearProgress} from "@mui/material";
 
 
 export const Profile = () => {
-		const profile = useAppSelector(getProfileInfo)
-		const isLoggedIn = useAppSelector(getIsLoggedIn)
-		const dispatch = useAppDispatch()
+    const profile = useAppSelector(getProfileInfo)
+    const status = useAppSelector(appStatus)
+    const isLoggedIn = useAppSelector(getIsLoggedIn)
+    const dispatch = useAppDispatch()
 
-		const onChangeUserName = (name: string) => {
-				dispatch(updateUser(name))
-		}
+    const onChangeUserName = (name: string) => {
+        dispatch(updateUser(name))
+    }
 
-		const onLogoutClick = () => {
-				dispatch(logout())
-		}
+    const onLogoutClick = () => {
+        dispatch(logout())
+    }
 
-		if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
-		return (
-				<div className={`${styleContainer.container} ${style.profileContainer}`}>
+    if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
 
-						<Link to={PATH.PACKS_LIST} className={style.link}>
-								<img src={arrow} alt={'arrow'} className={style.arrowImg}/>
-								<span className={style.textLink}>Back to Packs List</span>
-						</Link>
+    return (
+        <div>
+            {status === "loading" && <LinearProgress color="success"/>}
+            <div className={`${styleContainer.container} ${style.profileContainer}`}>
+                <Link to={PATH.PACKS_LIST} className={style.link}>
+                    <img src={arrow} alt={'arrow'} className={style.arrowImg}/>
+                    <span className={style.textLink}>Back to Packs List</span>
+                </Link>
 
-						<div className={`${styleBlock.block} ${style.profileBlock}`}>
-								<h1 className={style.header}>
-										Personal Information
-								</h1>
+                <div className={`${styleBlock.block} ${style.profileBlock}`}>
+                    <h1 className={style.header}>
+                        Personal Information
+                    </h1>
 
-								<img className={style.userPhoto}
-								     src={userPhoto}
-								     alt={'user'}
-								/>
+                    <img className={style.userPhoto}
+                         src={userPhoto}
+                         alt={'user'}
+                    />
 
-								<h2 className={style.name}>
-										<EditableSpan value={profile.name}
-										              onChange={(value) => onChangeUserName(value)}
-										              className={style.editableSpan}/>
-								</h2>
-								<h3 className={style.email}>
-										{profile.email}
-								</h3>
-								<Button className={style.btnLogout} onClick={onLogoutClick}>
-										Log out
-								</Button>
-						</div>
-				</div>
-		)
+                    <h2 className={style.name}>
+                        <EditableSpan value={profile.name}
+                                      onChange={(value) => onChangeUserName(value)}
+                                      className={style.editableSpan}/>
+                    </h2>
+                    <h3 className={style.email}>
+                        {profile.email}
+                    </h3>
+                    <Button className={style.btnLogout} onClick={onLogoutClick}>
+                        Log out
+                    </Button>
+                </div>
+            </div>
+        </div>
+    )
 }

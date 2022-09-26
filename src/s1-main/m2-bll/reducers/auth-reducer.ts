@@ -2,6 +2,7 @@ import {authApi} from 's1-main/m3-dal/authApi';
 import {setProfile} from 's1-main/m2-bll/reducers/profile-reducer';
 import {AppThunk} from 's1-main/m2-bll/store';
 import {AxiosError} from 'axios';
+import {changeStatus} from "./app-reducer";
 
 const initialState = {
     isLoggedIn: false,
@@ -35,15 +36,19 @@ export const setIsRequestSuccess = (value: boolean) => ({
 
 //thunk
 export const registration = (email: string, password: string): AppThunk => async (dispatch) => {
+    dispatch(changeStatus("loading"))
     try {
         await authApi.registration(email, password)
         dispatch(setIsAuth(true))
     } catch (e) {
         console.log(e)
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, setLoginFormStatus: ({error}: { error: string }) => void): AppThunk => async (dispatch) => {
+    dispatch(changeStatus("loading"))
     try {
         const {data} = await authApi.login(email, password, rememberMe)
         dispatch(isLoggedIn(true))
@@ -53,19 +58,25 @@ export const login = (email: string, password: string, rememberMe: boolean, setL
         err.response?.data.error
             ? setLoginFormStatus({error: err.response.data.error})
             : setLoginFormStatus({error: 'some error'})
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 
 export const logout = (): AppThunk => async (dispatch) => {
+    dispatch(changeStatus("loading"))
     try {
         await authApi.logout()
         dispatch(isLoggedIn(false))
     } catch (e) {
 
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 
 export const forgotPassword = (email: string): AppThunk => async (dispatch) => {
+    dispatch(changeStatus("loading"))
     try {
         await authApi.forgotPass({
             email,
@@ -75,15 +86,20 @@ export const forgotPassword = (email: string): AppThunk => async (dispatch) => {
         dispatch(setIsRequestSuccess(true))
     } catch (e) {
 
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 
 export const updatePassword = (password: string, resetPasswordToken: string): AppThunk => async (dispatch) => {
+    dispatch(changeStatus("loading"))
     try {
         await authApi.resetPass(password, resetPasswordToken)
         dispatch(setIsRequestSuccess(true))
     } catch (e) {
 
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 

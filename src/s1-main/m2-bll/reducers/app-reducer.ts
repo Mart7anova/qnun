@@ -3,7 +3,10 @@ import {authApi} from 's1-main/m3-dal/authApi';
 import {isLoggedIn} from 's1-main/m2-bll/reducers/auth-reducer';
 import {setProfile} from 's1-main/m2-bll/reducers/profile-reducer';
 
+export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed" | ""
+
 const initialState = {
+    status: "" as RequestStatusType,
     isInitialized: false,
 }
 
@@ -12,6 +15,8 @@ export const appReducer = (state: AppReducerType = initialState, action: Actions
     switch (action.type) {
         case 'APP/SET-IS-INITIALIZED':
             return {...state, isInitialized: action.value}
+        case "APP/CHANGE-STATUS":
+            return {...state, status: action.status}
         default:
             return state
     }
@@ -20,7 +25,7 @@ export const appReducer = (state: AppReducerType = initialState, action: Actions
 
 //actions
 export const setAppInitialized = (value: boolean) => ({type: 'APP/SET-IS-INITIALIZED', value} as const)
-
+export const changeStatus = (status: RequestStatusType) => ({type: "APP/CHANGE-STATUS", status} as const)
 //thunks
 export const initializeApp = (): AppThunk => async (dispatch) => {
     try {
@@ -37,4 +42,7 @@ export const initializeApp = (): AppThunk => async (dispatch) => {
 //types
 export type AppReducerType = typeof initialState
 
-type ActionsType = ReturnType<typeof setAppInitialized>
+type ActionsType = SetAppInitializedType | ChangeStatusType
+
+type SetAppInitializedType = ReturnType<typeof setAppInitialized>
+type ChangeStatusType = ReturnType<typeof changeStatus>

@@ -9,6 +9,8 @@ import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useFormik} from 'formik';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {forgotPassword, setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth-reducer';
+import {appStatus} from "../../../s1-main/m2-bll/selectors/app-selectors";
+import {LinearProgress} from "@mui/material";
 
 type FormikErrorType = {
     email?: string
@@ -16,6 +18,7 @@ type FormikErrorType = {
 
 export const ForgotPassword = () => {
     const isRequestSuccess = useAppSelector(state => state.auth.isRequestSuccess)
+    const status = useAppSelector(appStatus)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -38,41 +41,45 @@ export const ForgotPassword = () => {
 
     const errorEmail = formik.touched.email && formik.errors.email ? formik.errors.email : ''
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(setIsRequestSuccess(false))
-    },[])
+    }, [])
 
     if (isRequestSuccess) {
         return <Navigate to={PATH.CHECK_EMAIL}/>
     }
 
     return (
-        <div className={`${styleContainer.container} ${style.forgotPassContainer}`}>
-            <form onSubmit={formik.handleSubmit}>
-                <div className={`${styleBlock.block} ${style.forgotPassBlock}`}>
-                    <h1 className={style.header}>
-                        Forgot your password?
-                    </h1>
+        <div>
+            {status === "loading" && <LinearProgress color="success"/>}
+            <div className={`${styleContainer.container} ${style.forgotPassContainer}`}>
 
-                    <Input placeholder={'Email'}
-                           className={style.input}
-                           error={errorEmail}
-                           {...formik.getFieldProps('email')}
-                    />
-                    <span className={style.instructionBlock}>
+                <form onSubmit={formik.handleSubmit}>
+                    <div className={`${styleBlock.block} ${style.forgotPassBlock}`}>
+                        <h1 className={style.header}>
+                            Forgot your password?
+                        </h1>
+
+                        <Input placeholder={'Email'}
+                               className={style.input}
+                               error={errorEmail}
+                               {...formik.getFieldProps('email')}
+                        />
+                        <span className={style.instructionBlock}>
                     Enter your email address and we will send you further instruction
                 </span>
 
-                    <Button type={'submit'} className={style.button}>Send Instruction</Button>
+                        <Button type={'submit'} className={style.button}>Send Instruction</Button>
 
-                    <span className={style.informationText}>
+                        <span className={style.informationText}>
                     <b>Did you remember your password?</b>
                 </span>
-                    <Link to={PATH.LOGIN}>
-                        <span className={style.linkToLogin}>Try logging in</span>
-                    </Link>
-                </div>
-            </form>
+                        <Link to={PATH.LOGIN}>
+                            <span className={style.linkToLogin}>Try logging in</span>
+                        </Link>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
