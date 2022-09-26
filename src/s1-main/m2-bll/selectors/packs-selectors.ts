@@ -8,5 +8,7 @@ export const getMaxCardsCount = (state: AppRootStateType) => state.packs.packs.m
 export const getCurrentMinCount = (state: AppRootStateType) => state.packs.searchParams.min
 export const getCurrentMaxCount = (state: AppRootStateType) => state.packs.searchParams.max
 
+export const getSortPacks = (state: AppRootStateType) => state.packs.searchParams.sortPacks
+
 export const getPacksForUserId = (state: AppRootStateType) => state.packs.searchParams.user_id
 export const getPackName = (state: AppRootStateType) => state.packs.searchParams.packName

@@ -13,14 +13,18 @@ import deleteImg from 'assets/delete.svg';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {deletePack, updatePack} from 's1-main/m2-bll/reducers/packs-reducer';
 import {Link} from 'react-router-dom';
+import {PackTableHeader} from './PackTableHeader';
+import style from './PackTable.module.scss'
+import { PATH } from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 
 type TablePropsType = {
     packs: PackType[]
 }
 
 export function PackTable({packs}: TablePropsType) {
-    const dispatch = useAppDispatch()
     const userID = useAppSelector(state => state.profile.profile._id)
+    const dispatch = useAppDispatch()
+
     const deletePackHandle = (id: string) => {
         dispatch(deletePack(id))
     }
@@ -28,16 +32,17 @@ export function PackTable({packs}: TablePropsType) {
         dispatch(updatePack(id))
     }
 
+
     return (
         <TableContainer component={Paper}>
-            <Table sx={{minWidth: 650}}>
-                <TableHead sx={{backgroundColor: '#EFEFEF', height: '48px'}}>
+            <Table className={style.table}>
+                <TableHead className={style.tableHead}>
                     <TableRow>
-                        <TableCell align="left" style={{width: '45%'}}>Name</TableCell>
-                        <TableCell align="center" style={{width: '10%'}}>Cards</TableCell>
-                        <TableCell align="center" style={{width: '15%'}}>Last Updated</TableCell>
-                        <TableCell align="center" style={{width: '20%'}}>Created by</TableCell>
-                        <TableCell align="left" style={{width: '10%'}}>Actions</TableCell>
+                        <PackTableHeader name={'Name'} align={'left'} sortName={'name'} className={style.name} />
+                        <PackTableHeader name={'Cards'} align={'right'} sortName={'cardsCount'} className={style.cards}/>
+                        <PackTableHeader name={'Last Updated'} align={'center'} sortName={'updated'} className={style.lastUpdated}/>
+                        <PackTableHeader name={'Created by'} align={'center'} sortName={'user_name'} className={style.createdBy}/>
+                        <TableCell align="left" className={style.actions}>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -47,7 +52,7 @@ export function PackTable({packs}: TablePropsType) {
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
                             <TableCell align="left">
-                                <Link to={`/pack/${pack._id}`}>
+                                <Link to={PATH.PACK + `${pack._id}`}>
                                     {pack.name}
                                 </Link>
                             </TableCell>

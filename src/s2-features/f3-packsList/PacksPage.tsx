@@ -9,7 +9,7 @@ import {
 	getCurrentMinCount,
 	getPackName,
 	getPacks,
-	getPacksForUserId
+	getPacksForUserId, getSortPacks
 } from 's1-main/m2-bll/selectors/packs-selectors';
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {Navigate} from 'react-router-dom';
@@ -24,13 +24,14 @@ export const PacksPage = () => {
 		const packsForUserId = useAppSelector(getPacksForUserId)
 		const currentMinCount = useAppSelector(getCurrentMinCount)
 		const currentMaxCount = useAppSelector(getCurrentMaxCount)
+		const sortPacks = useAppSelector(getSortPacks)
 		const page = useAppSelector(state => state.packs.searchParams.page)
 		const packsTotalCount = useAppSelector(state => state.packs.packsTotalCount)
 		const elementsPerPage = useAppSelector(state => state.packs.searchParams.pageCount)
 
 		useEffect(() => {
 				dispatch(fetchPacks())
-		}, [packName, packsForUserId, currentMinCount, currentMaxCount, page])
+		}, [packName, packsForUserId, currentMinCount, currentMaxCount, page, sortPacks])
 
 		const addNewPackHandler = () => {
 				dispatch(createNewPack())

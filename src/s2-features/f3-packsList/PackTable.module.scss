@@ -1,0 +1,30 @@
+.table {
+  min-width: 650px;
+
+  .tableHead {
+    background-color: #EFEFEF;
+    height: 48px;
+
+    .name {
+      width: 30%;
+    }
+
+    .cards {
+      width: 15%;
+    }
+
+    .lastUpdated {
+      width: 20%;
+    }
+
+    .createdBy {
+      width: 20%;
+    }
+
+    .actions {
+      width: 10%;
+    }
+  }
+
+}
+

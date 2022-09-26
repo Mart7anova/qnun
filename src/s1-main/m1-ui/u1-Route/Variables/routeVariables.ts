@@ -9,6 +9,7 @@ export enum PATH {
     CHECK_EMAIL = '/check-Email',
 
     PROFILE = '/profile',
-    PACKS_LIST = '/'
+    PACKS_LIST = '/',
+    PACK = '/pack/'
 }
 
