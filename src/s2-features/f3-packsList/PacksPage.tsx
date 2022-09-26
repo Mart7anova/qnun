@@ -10,28 +10,29 @@ import {Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 
 export const PacksPage = () => {
-    const dispatch = useAppDispatch()
-    const packs = useAppSelector(getPacks)
-    const isLoggedIn = useAppSelector(getIsLoggedIn)
+		const dispatch = useAppDispatch()
+		const packs = useAppSelector(getPacks)
+		const isLoggedIn = useAppSelector(getIsLoggedIn)
+		const packName = useAppSelector(state => state.packs.searchParams.packName)
 
-    useEffect(() => {
-        dispatch(fetchPacks())
-    }, [])
-    const addNewPackHandler = () => {
-        dispatch(createNewPack())
-    }
-    if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
-    return (
-        <div>
-            <div style={{maxWidth: '1008px', margin: '0 auto'}}>
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <h1>PacksList</h1>
-                    <Button onClick={addNewPackHandler}>Add new pack</Button>
-                </div>
-                <PackFiltration/>
-                <PackTable packs={packs}/>
-                <h2>here will be pagination</h2>
-            </div>
-        </div>
-    );
+		useEffect(() => {
+				dispatch(fetchPacks())
+		}, [packName])
+		const addNewPackHandler = () => {
+				dispatch(createNewPack())
+		}
+		if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
+		return (
+				<div>
+						<div style={{maxWidth: '1008px', margin: '0 auto'}}>
+								<div style={{display: 'flex', justifyContent: 'space-between'}}>
+										<h1>PacksList</h1>
+										<Button onClick={addNewPackHandler}>Add new pack</Button>
+								</div>
+								<PackFiltration packName={packName}/>
+								<PackTable packs={packs}/>
+								<h2>here will be pagination</h2>
+						</div>
+				</div>
+		);
 };
