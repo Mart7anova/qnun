@@ -1,4 +1,4 @@
-import {SliderComponent} from 's1-main/m1-ui/common/c1-components/DoubleRangeSlider/DoubleRangeSlider';
+import {DoubleRangeFilter} from 's2-features/f3-packsList/PackFiltration/DoubleRangeFilter/DoubleRangeFilter';
 import React from 'react';
 import {SearchInput} from 's2-features/f3-packsList/PackFiltration/SearchInput/SearchInput';
 import {useAppDispatch} from 's1-main/m2-bll/store';
@@ -25,7 +25,7 @@ export const PackFiltration = () => {
             </div>
             <div>
                 <div>number of cards</div>
-                <SliderComponent/>
+                <DoubleRangeFilter/>
             </div>
             <div>
                 <button onClick={clearFiltersHandle}>clear filters</button>

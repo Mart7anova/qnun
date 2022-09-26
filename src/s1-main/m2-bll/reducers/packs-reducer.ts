@@ -1,8 +1,10 @@
 import {AppThunk} from 's1-main/m2-bll/store';
-import {packApi, PackType, SearchParamsType} from 's1-main/m3-dal/packApi';
+import {packApi, PackType, ResponseCardPacksType, SearchParamsType} from 's1-main/m3-dal/packApi';
 
 const initialState = {
-    packs: [] as PackType[],
+    packs: {
+        cardPacks: [] as PackType[]
+    } as ResponseCardPacksType,
     searchParams: {
         page: 1,
         pageCount: 10,
@@ -23,8 +25,11 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
         case 'PACKS/SET-SEARCH-BY-NAME-FILTER': {
             return {...state, searchParams: {...state.searchParams, packName: action.payload.packName}}
         }
-        case 'PACKS/SET-IS-MY-PACKS-FILTER':{
+        case 'PACKS/SET-IS-MY-PACKS-FILTER': {
             return {...state, searchParams: {...state.searchParams, user_id: action.payload.userId}}
+        }
+        case 'PACKS/SET-RANGE-CARDS':{
+            return {...state, searchParams: {...state.searchParams, min: action.payload.min, max: action.payload.max}}
         }
         case 'PACKS/CLEAR-FILTERS':
             return {...state, searchParams: {...state.searchParams, ...action.payload}}
@@ -33,19 +38,31 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
     }
 }
 
-
 //actions
-export const setPacks = (packs: PackType[]) => ({type: 'PACKS/SET-PACKS', payload: {packs}} as const)
-export const setSearchByNameFilter = (packName: string) => ({type: 'PACKS/SET-SEARCH-BY-NAME-FILTER', payload: {packName}} as const)
-export const setIsMyPacksFilter = (userId: string) => ({type: 'PACKS/SET-IS-MY-PACKS-FILTER', payload: {userId}} as const)
-export const clearFilters = () => ({type: 'PACKS/CLEAR-FILTERS', payload: {packName: '', isMyPack: false, min: 0, max: 100}} as const)
+export const setPacks = (packs: ResponseCardPacksType) => ({type: 'PACKS/SET-PACKS', payload: {packs}} as const)
+export const setSearchByNameFilter = (packName: string) => ({
+    type: 'PACKS/SET-SEARCH-BY-NAME-FILTER',
+    payload: {packName}
+} as const)
+export const setIsMyPacksFilter = (userId: string) => ({
+    type: 'PACKS/SET-IS-MY-PACKS-FILTER',
+    payload: {userId}
+} as const)
+export const setRangeCards = (min: number, max: number) => ({
+    type: 'PACKS/SET-RANGE-CARDS',
+    payload: {min, max}
+} as const)
+export const clearFilters = () => ({
+    type: 'PACKS/CLEAR-FILTERS',
+    payload: {packName: '', isMyPack: false, min: 0, max: 100}
+} as const)
 
 //thunks
 export const fetchPacks = (): AppThunk => async (dispatch, getState) => {
     try {
         const searchParams = getState().packs.searchParams
         const {data} = await packApi.getPacks(searchParams)
-        dispatch(setPacks(data.cardPacks))
+        dispatch(setPacks(data))
     } catch (e) {
     }
 }
@@ -79,3 +96,4 @@ type ActionsType =
     | ReturnType<typeof setSearchByNameFilter>
     | ReturnType<typeof clearFilters>
     | ReturnType<typeof setIsMyPacksFilter>
+    | ReturnType<typeof setRangeCards>

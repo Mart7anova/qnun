@@ -3,7 +3,7 @@ import {instance} from './instance/instance';
 
 export const packApi = {
     getPacks(params: SearchParamsType) {
-        return instance.get<ResponseType>(`/cards/pack`, {params})
+        return instance.get<ResponseCardPacksType>(`/cards/pack`, {params})
     },
     createPack(name: string, isPrivate = false) {
         return instance.post(`cards/pack`, {
@@ -43,7 +43,7 @@ export type PackType = {
     __v: number
     _id: string
 }
-export type ResponseType = {
+export type ResponseCardPacksType = {
     cardPacks: PackType[]
     cardPacksTotalCount: number
     maxCardsCount: number
