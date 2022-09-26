@@ -48,4 +48,5 @@ type ResponseType = {
     page: number
     pageCount: number
     packUserId: string
+    packName:string
 }
