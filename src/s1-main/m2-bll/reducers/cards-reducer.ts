@@ -49,7 +49,6 @@ export const fetchCards = (packId: string): AppThunk => async (dispatch, getStat
 				dispatch(setPackOwnerUserId(data.packUserId))
 				dispatch(setPackName(data.packName))
 				dispatch(setCardsTotalCount(data.cardsTotalCount))
-				console.log(data)
 		} catch (e) {
 		}
 }
