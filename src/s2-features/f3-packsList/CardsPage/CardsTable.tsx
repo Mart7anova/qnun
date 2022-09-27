@@ -8,9 +8,11 @@ import editImg from 'assets/edit.svg';
 import deleteImg from 'assets/delete.svg';
 import TableContainer from '@mui/material/TableContainer';
 import React from 'react';
-import {deleteCard, updateCard} from 's1-main/m2-bll/reducers/cards-reducer';
+import {deleteCard, setSortCards, updateCard} from 's1-main/m2-bll/reducers/cards-reducer';
 import {useAppDispatch} from 's1-main/m2-bll/store';
 import {CardType} from 's1-main/m3-dal/cardsApi';
+import { TableHeaderItem } from '../TableHeaderItem';
+import style from './CardsTable.module.scss'
 
 type CardsTablePropsType = {
     cards: CardType[]
@@ -30,10 +32,14 @@ export const CardsTable = ({isOwner, cards}: CardsTablePropsType) => {
             <Table sx={{minWidth: 650}}>
                 <TableHead sx={{backgroundColor: '#EFEFEF', height: '48px'}}>
                     <TableRow>
-                        <TableCell align="left" sx={{width: '35%'}}>Question</TableCell>
+                        <TableHeaderItem name={'Question'} align={'left'} sortName={'question'} setSort={setSortCards} className={style.question}/>
+                        <TableHeaderItem name={'Answer'} align={'left'} sortName={'answer'} setSort={setSortCards} className={style.answer}/>
+                        <TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'} setSort={setSortCards} className={style.lastUpdated}/>
+                        <TableHeaderItem name={'Grade'} align={'center'} sortName={'grade'} setSort={setSortCards} className={style.grade}/>
+                     {/*   <TableCell align="left" sx={{width: '35%'}}>Question</TableCell>
                         <TableCell align="left" sx={{width: '35%'}}>Answer</TableCell>
                         <TableCell align="center" sx={{width: '15%'}}>Last Updated</TableCell>
-                        <TableCell align="center" sx={{width: '15%'}}>Grade</TableCell>
+                        <TableCell align="center" sx={{width: '15%'}}>Grade</TableCell>*/}
                         {isOwner && <TableCell>Actions</TableCell>}
                     </TableRow>
                 </TableHead>

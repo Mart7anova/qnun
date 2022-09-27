@@ -23,7 +23,7 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
         case 'PACKS/SET-PACKS': {
             return {...state, packs: action.payload.packs}
         }
-        case 'PACKS/SET-SEARCH-BY-NAME-FILTER': {
+        case 'PACKS/SET-SEARCH-BY-PACKS-NAME-FILTER': {
             return {...state, searchParams: {...state.searchParams, packName: action.payload.packName}}
         }
         case 'PACKS/SET-IS-MY-PACKS-FILTER': {
@@ -50,8 +50,8 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
 //actions
 export const setPacks = (packs: ResponseCardPacksType) => ({type: 'PACKS/SET-PACKS', payload: {packs}} as const)
 
-export const setSearchByNameFilter = (packName: string) => ({
-    type: 'PACKS/SET-SEARCH-BY-NAME-FILTER',
+export const setSearchByPacksNameFilter = (packName: string) => ({
+    type: 'PACKS/SET-SEARCH-BY-PACKS-NAME-FILTER',
     payload: {packName}
 } as const)
 
@@ -122,7 +122,7 @@ export type PacksReducerType = typeof initialState
 
 type ActionsType =
     | ReturnType<typeof setPacks>
-    | ReturnType<typeof setSearchByNameFilter>
+    | ReturnType<typeof setSearchByPacksNameFilter>
     | ReturnType<typeof clearFilters>
     | ReturnType<typeof setIsMyPacksFilter>
     | ReturnType<typeof setRangeCards>

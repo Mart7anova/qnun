@@ -11,9 +11,9 @@ import studyImg from 'assets/study.svg';
 import editImg from 'assets/edit.svg';
 import deleteImg from 'assets/delete.svg';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
-import {deletePack, updatePack} from 's1-main/m2-bll/reducers/packs-reducer';
+import {deletePack, setSortPacks, updatePack} from 's1-main/m2-bll/reducers/packs-reducer';
 import {Link} from 'react-router-dom';
-import {PackTableHeader} from './PackTableHeader';
+import {TableHeaderItem} from './TableHeaderItem';
 import style from './PackTable.module.scss'
 import { PATH } from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 
@@ -38,10 +38,10 @@ export function PackTable({packs}: TablePropsType) {
             <Table className={style.table}>
                 <TableHead className={style.tableHead}>
                     <TableRow>
-                        <PackTableHeader name={'Name'} align={'left'} sortName={'name'} className={style.name} />
-                        <PackTableHeader name={'Cards'} align={'right'} sortName={'cardsCount'} className={style.cards}/>
-                        <PackTableHeader name={'Last Updated'} align={'center'} sortName={'updated'} className={style.lastUpdated}/>
-                        <PackTableHeader name={'Created by'} align={'center'} sortName={'user_name'} className={style.createdBy}/>
+                        <TableHeaderItem name={'Name'} align={'left'} sortName={'name'} setSort={setSortPacks} className={style.name} />
+                        <TableHeaderItem name={'Cards'} align={'right'} sortName={'cardsCount'} setSort={setSortPacks} className={style.cards}/>
+                        <TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'} setSort={setSortPacks} className={style.lastUpdated}/>
+                        <TableHeaderItem name={'Created by'} align={'center'} sortName={'user_name'} setSort={setSortPacks} className={style.createdBy}/>
                         <TableCell align="left" className={style.actions}>Actions</TableCell>
                     </TableRow>
                 </TableHead>

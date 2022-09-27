@@ -3,17 +3,18 @@ import {Checkbox} from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TableCell from '@mui/material/TableCell';
-import {setSortPacks} from '../../s1-main/m2-bll/reducers/packs-reducer';
 import {useAppDispatch} from '../../s1-main/m2-bll/store';
+import {AnyAction} from 'redux';
 
 type PropsType = {
     name: string
     align: 'left' | 'right' | 'center'
     sortName: string
+    setSort: (sortValue: string) => AnyAction
     className: string
 }
 
-export const PackTableHeader = ({name, align, sortName, className}: PropsType) => {
+export const TableHeaderItem = ({name, align, sortName, className, setSort}: PropsType) => {
     const [isSortHeader, setIsSortHeader] = useState(true)
     const dispatch = useAppDispatch()
 
@@ -25,8 +26,7 @@ export const PackTableHeader = ({name, align, sortName, className}: PropsType) =
         } else {
             sortValue = '0' + sortName
         }
-
-        dispatch(setSortPacks(sortValue))
+        dispatch(setSort(sortValue))
     }
 
     return (

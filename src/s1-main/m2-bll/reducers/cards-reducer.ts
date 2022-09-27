@@ -1,5 +1,5 @@
 import {AppThunk} from 's1-main/m2-bll/store';
-import {cardsApi, CardType} from 's1-main/m3-dal/cardsApi';
+import {cardsApi, CardType, ParamsType} from 's1-main/m3-dal/cardsApi';
 
 const initialState = {
     cards: [] as CardType[],
@@ -8,6 +8,7 @@ const initialState = {
     cardsTotalCount: 0,
     currentPage: 1,
     elementPerPage: 10,
+    searchParams: {} as ParamsType,
 }
 
 //reducer
@@ -23,11 +24,14 @@ export const cardsReducer = (state: PacksReducerType = initialState, action: Act
             return {...state, cardsTotalCount: action.payload.cardsTotalCount}
         case 'PACKS/SET-CURRENT-PAGE':
             return {...state, currentPage: action.payload.page}
+        case 'PACKS/SET-SEARCH-BY-CARDS-NAME-FILTER':
+            return {...state, searchParams: {...state.searchParams, cardQuestion: action.payload.cardName}}
+        case 'PACKS/SET-SORT-CARDS':
+            return {...state, searchParams: {...state.searchParams, sortCards: action.payload.sortValue}}
         default:
             return state
     }
 }
-
 
 //actions
 export const setCards = (cards: CardType[]) =>
@@ -45,10 +49,16 @@ export const setCardsTotalCount = (cardsTotalCount: number) =>
 export const setCurrentPage = (page: number) =>
     ({type: 'PACKS/SET-CURRENT-PAGE', payload: {page}} as const)
 
+export const setSearchByCardsNameFilter = (cardName: string) =>
+    ({type: 'PACKS/SET-SEARCH-BY-CARDS-NAME-FILTER', payload: {cardName}} as const)
+
+export const setSortCards = (sortValue: string) =>
+    ({type: 'PACKS/SET-SORT-CARDS', payload: {sortValue}} as const)
+
 //thunks
 export const fetchCards = (packId: string): AppThunk => async (dispatch, getState) => {
     try {
-        const {data} = await cardsApi.getCards(packId, getState().cards.currentPage)
+        const {data} = await cardsApi.getCards(packId, getState().cards.currentPage, getState().cards.searchParams)
         dispatch(setCards(data.cards))
         dispatch(setPackOwnerUserId(data.packUserId))
         dispatch(setPackName(data.packName))
@@ -86,3 +96,5 @@ type ActionsType =
     | ReturnType<typeof setPackName>
     | ReturnType<typeof setCardsTotalCount>
     | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setSearchByCardsNameFilter>
+    | ReturnType<typeof setSortCards>
