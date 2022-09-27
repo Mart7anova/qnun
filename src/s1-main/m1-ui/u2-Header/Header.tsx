@@ -11,7 +11,6 @@ import {getProfileInfo} from 's1-main/m2-bll/selectors/profile-selectors';
 
 export const Header = () => {
 		const {pathname} = useLocation()
-
 		const isLoggedIn = useAppSelector(getIsLoggedIn)
 		const profile = useAppSelector(getProfileInfo)
 

@@ -3,6 +3,7 @@ import {ComponentPreview, Previews} from '@react-buddy/ide-toolbox';
 import {PaletteTree} from './palette';
 import {Registration} from "../s2-features/f1-auth/a2-registration/Registration";
 import {PasswordView} from "../s1-main/m1-ui/common/c1-components/passwordView/PasswordView";
+import {CardsPage} from "../s2-features/f3-packsList/CardsPage/CardsPage";
 
 const ComponentPreviews = () => {
     return (
@@ -15,6 +16,9 @@ const ComponentPreviews = () => {
             </ComponentPreview>
             <ComponentPreview path="/PasswordView">
                 <PasswordView/>
+            </ComponentPreview>
+            <ComponentPreview path="/CardsPage">
+                <CardsPage/>
             </ComponentPreview>
         </Previews>
     );

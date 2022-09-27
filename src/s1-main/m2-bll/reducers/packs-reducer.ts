@@ -1,5 +1,6 @@
 import {AppThunk} from 's1-main/m2-bll/store';
 import {packApi, PackType, ResponseCardPacksType, SearchParamsType} from 's1-main/m3-dal/packApi';
+import {changeStatus, errorMessage} from "./app-reducer";
 
 const initialState = {
     packs: {
@@ -87,33 +88,49 @@ export const setCurrentPage = (page: number) => ({
 
 //thunks
 export const fetchPacks = (): AppThunk => async (dispatch, getState) => {
-    try {
+    dispatch(changeStatus("loading"))
+	try {
         const searchParams = getState().packs.searchParams
         const {data} = await packApi.getPacks(searchParams)
         dispatch(setPacks(data))
         dispatch(setPacksTotalCount(data.cardPacksTotalCount))
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 export const createNewPack = (): AppThunk => async (dispatch) => {
-    try {
+    dispatch(changeStatus("loading"))
+	try {
         await packApi.createPack('new pack')
         dispatch(fetchPacks())
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 export const deletePack = (id: string): AppThunk => async (dispatch) => {
-    try {
+    dispatch(changeStatus("loading"))
+	try {
         await packApi.deletePack(id)
         dispatch(fetchPacks())
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 export const updatePack = (id: string): AppThunk => async (dispatch) => {
-    try {
+    dispatch(changeStatus("loading"))
+	try {
         await packApi.updatePack(id, 'hardcoded updated name')
         dispatch(fetchPacks())
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 

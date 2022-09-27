@@ -9,10 +9,13 @@ import {EmptyPack} from 's2-features/f3-packsList/CardsPage/EmptyPack';
 import {Search} from 's2-features/f3-packsList/CardsPage/Search';
 import {CardsTable} from 's2-features/f3-packsList/CardsPage/CardsTable';
 import {Paginator} from 's1-main/m1-ui/common/c1-components/Pagination/Pagination';
+import {LinearProgress} from "@mui/material";
+import {appStatus} from "../../../s1-main/m2-bll/selectors/app-selectors";
 import {LinkBackTo} from '../../../s1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
 
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
+    const status = useAppSelector(appStatus)
     const {packId} = useParams() as { packId: string }
     const cards = useAppSelector(state => state.cards.cards)
     const packOwnerUserId = useAppSelector(state => state.cards.packOwnerUserId)
@@ -40,7 +43,7 @@ export const CardsPage = () => {
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
     return (
         <div>
-            <div style={{width: '1008px', margin: '0 auto'}}>
+            {status === "loading" && <LinearProgress color="success"/>}<div style={{width: '1008px', margin: '0 auto'}}>
 
                 <LinkBackTo link={PATH.PACKS_LIST}/>
 
