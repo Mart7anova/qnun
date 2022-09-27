@@ -18,7 +18,7 @@ export const Header = () => {
 		return (
 				<header className={s.header}>
 						<div className={s.container}>
-								<Link to={'/'}>
+								<Link to={PATH.PACKS_LIST}>
 										<img src={logo} alt="logo"/>
 								</Link>
 								{isLoggedIn

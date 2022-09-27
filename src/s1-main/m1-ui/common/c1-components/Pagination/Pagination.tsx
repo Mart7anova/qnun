@@ -12,6 +12,8 @@ export const Paginator = ({itemsTotalCount, elementsPerPage,currentPage,onPageCh
 		return (
 				<Pagination count={Math.ceil(itemsTotalCount / elementsPerPage)}
 				            page={currentPage}
-				            onChange={onPageChange}/>
+				            onChange={onPageChange}
+							style={{margin: '20px 0'}}
+				/>
 		)
 }

@@ -49,30 +49,37 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
 
 //actions
 export const setPacks = (packs: ResponseCardPacksType) => ({type: 'PACKS/SET-PACKS', payload: {packs}} as const)
+
 export const setSearchByNameFilter = (packName: string) => ({
     type: 'PACKS/SET-SEARCH-BY-NAME-FILTER',
     payload: {packName}
 } as const)
+
 export const setIsMyPacksFilter = (userId: string) => ({
     type: 'PACKS/SET-IS-MY-PACKS-FILTER',
     payload: {userId}
 } as const)
+
 export const setRangeCards = (min: number, max: number) => ({
     type: 'PACKS/SET-RANGE-CARDS',
     payload: {min, max}
 } as const)
+
 export const setSortPacks = (sortValue: string) => ({
     type: 'PACKS/SET-SORT-PACKS',
     payload: {sortValue}
 } as const)
+
 export const clearFilters = () => ({
     type: 'PACKS/CLEAR-FILTERS',
     payload: {packName: '', isMyPack: false, min: 0, max: 100}
 } as const)
+
 export const setPacksTotalCount = (count: number) => ({
     type: 'PACKS/SET-PACKS-TOTAL-COUNT',
     payload: {count}
 } as const)
+
 export const setCurrentPage = (page: number) => ({
     type: 'PACKS/SET-CURRENT-PAGE',
     payload: {page}

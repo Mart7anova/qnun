@@ -1,8 +1,8 @@
 import {DoubleRangeFilter} from 's2-features/f3-packsList/PackFiltration/DoubleRangeFilter/DoubleRangeFilter';
 import React from 'react';
-import {SearchInput} from 's2-features/f3-packsList/PackFiltration/SearchInput/SearchInput';
+import {SearchInput} from 's1-main/m1-ui/common/c1-components/SearchInput/SearchInput';
 import {useAppDispatch} from 's1-main/m2-bll/store';
-import {clearFilters} from 's1-main/m2-bll/reducers/packs-reducer';
+import {clearFilters, setSearchByNameFilter} from 's1-main/m2-bll/reducers/packs-reducer';
 import FilterByMyCards from './FilterByMyCards/FilterByMyCards';
 
 
@@ -17,7 +17,7 @@ export const PackFiltration = () => {
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
             <div>
                 <div>search</div>
-                <SearchInput/>
+                <SearchInput setSearch={setSearchByNameFilter}/>
             </div>
             <div>
                 <div>Show pack cards</div>

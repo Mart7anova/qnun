@@ -1,11 +1,14 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import {useDebounce} from '../../../../s1-main/m2-bll/hooks/hookDebonce';
-import {useAppDispatch} from '../../../../s1-main/m2-bll/store';
-import {setSearchByNameFilter} from '../../../../s1-main/m2-bll/reducers/packs-reducer';
+import {useDebounce} from '../../../../m2-bll/hooks/hookDebonce';
+import {useAppDispatch} from '../../../../m2-bll/store';
 import {TextField} from '@mui/material';
+import {AnyAction} from 'redux';
 
+type PropsType={
+    setSearch: (value: string) => AnyAction
+}
 
-export const SearchInput = () => {
+export const SearchInput = ({setSearch}: PropsType) => {
     const [searchValue, setSearchValue] = useState('')
     const debouncedValue = useDebounce<string>(searchValue, 500)
     const dispatch = useAppDispatch()
@@ -15,7 +18,7 @@ export const SearchInput = () => {
     }
 
     useEffect(() => {
-        dispatch(setSearchByNameFilter(searchValue))
+        dispatch(setSearch(searchValue))
     }, [debouncedValue])
 
     return (

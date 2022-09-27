@@ -32,12 +32,16 @@ export const cardsReducer = (state: PacksReducerType = initialState, action: Act
 //actions
 export const setCards = (cards: CardType[]) =>
     ({type: 'CARDS/SET-CARDS', payload: {cards}} as const)
+
 export const setPackOwnerUserId = (id: string) =>
     ({type: 'CARDS/SET-USER-ID', payload: {id}} as const)
+
 export const setPackName = (packName: string) =>
     ({type: 'CARDS/SET-PACK-NAME', payload: {packName}} as const)
+
 export const setCardsTotalCount = (cardsTotalCount: number) =>
     ({type: 'CARDS/SET-CARDS-TOTAL-COUNT', payload: {cardsTotalCount}} as const)
+
 export const setCurrentPage = (page: number) =>
     ({type: 'PACKS/SET-CURRENT-PAGE', payload: {page}} as const)
 
