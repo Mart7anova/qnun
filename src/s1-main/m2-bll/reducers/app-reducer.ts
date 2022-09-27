@@ -37,7 +37,6 @@ export const initializeApp = (): AppThunk => async (dispatch) => {
         dispatch(setProfile(data))
         dispatch(isLoggedIn(true))
     } catch (err) {
-        dispatch(errorMessage((err as Error).message))
         dispatch(isLoggedIn(false))
     } finally {
         dispatch(setAppInitialized(true))
