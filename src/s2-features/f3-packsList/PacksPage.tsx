@@ -17,21 +17,21 @@ import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {Paginator} from 's1-main/m1-ui/common/c1-components/Pagination/Pagination';
 
 export const PacksPage = () => {
-		const dispatch = useAppDispatch()
-		const packs = useAppSelector(getPacks)
-		const isLoggedIn = useAppSelector(getIsLoggedIn)
-		const packName = useAppSelector(getPackName)
-		const packsForUserId = useAppSelector(getPacksForUserId)
-		const currentMinCount = useAppSelector(getCurrentMinCount)
-		const currentMaxCount = useAppSelector(getCurrentMaxCount)
-		const sortPacks = useAppSelector(getSortPacks)
+		const dispatch = useAppDispatch()const status = useAppSelector(appStatus)
+    const packs = useAppSelector(getPacks)
+    const isLoggedIn = useAppSelector(getIsLoggedIn)
+    const packName = useAppSelector(getPackName)
+    const packsForUserId = useAppSelector(getPacksForUserId)
+    const currentMinCount = useAppSelector(getCurrentMinCount)
+    const currentMaxCount = useAppSelector(getCurrentMaxCount)
+    const sortPacks = useAppSelector(getSortPacks)
 		const page = useAppSelector(state => state.packs.searchParams.page)
-		const packsTotalCount = useAppSelector(state => state.packs.packsTotalCount)
-		const elementsPerPage = useAppSelector(state => state.packs.searchParams.pageCount)
+    const packsTotalCount = useAppSelector(state => state.packs.packsTotalCount)
+    const elementsPerPage = useAppSelector(state => state.packs.searchParams.pageCount)
 
-		useEffect(() => {
-				dispatch(fetchPacks())
-		}, [packName, packsForUserId, currentMinCount, currentMaxCount, page, sortPacks])
+    useEffect(() => {
+        dispatch(fetchPacks())
+    }, [packName, packsForUserId, currentMinCount, currentMaxCount, page, sortPacks])
 
 		const addNewPackHandler = () => {
 				dispatch(createNewPack())

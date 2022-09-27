@@ -88,7 +88,8 @@ export const setCurrentPage = (page: number) => ({
 
 //thunks
 export const fetchPacks = (): AppThunk => async (dispatch, getState) => {
-    try {
+    dispatch(changeStatus("loading"))
+	try {
         const searchParams = getState().packs.searchParams
         const {data} = await packApi.getPacks(searchParams)
         dispatch(setPacks(data))
@@ -119,6 +120,8 @@ export const updatePack = (id: string): AppThunk => async (dispatch) => {
         dispatch(fetchPacks())
     } catch (err) {
         dispatch(errorMessage((err as Error).message))
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 

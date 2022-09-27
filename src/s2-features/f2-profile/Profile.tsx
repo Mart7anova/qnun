@@ -16,11 +16,14 @@ import {logout} from 's1-main/m2-bll/reducers/auth-reducer';
 import {updateUser} from 's1-main/m2-bll/reducers/profile-reducer';
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {getProfileInfo} from 's1-main/m2-bll/selectors/profile-selectors';
+import {appStatus} from "../../s1-main/m2-bll/selectors/app-selectors";
+import {LinearProgress} from "@mui/material";
 import {LinkBackTo} from '../../s1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
 
 
 export const Profile = () => {
     const profile = useAppSelector(getProfileInfo)
+    const status = useAppSelector(appStatus)
     const isLoggedIn = useAppSelector(getIsLoggedIn)
     const dispatch = useAppDispatch()
 
@@ -34,7 +37,9 @@ export const Profile = () => {
 
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
     return (
-        <div className={`${styleContainer.container} ${style.profileContainer}`}>
+        <div>
+            {status === "loading" && <LinearProgress color="success"/>}
+            <div className={`${styleContainer.container} ${style.profileContainer}`}>
 
             <LinkBackTo link={PATH.PACKS_LIST}/>
 
@@ -61,5 +66,6 @@ export const Profile = () => {
                 </Button>
             </div>
         </div>
+    </div>
     )
 }
