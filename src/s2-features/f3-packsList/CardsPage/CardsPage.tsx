@@ -22,7 +22,7 @@ export const CardsPage = () => {
 		const packName = useAppSelector(state => state.cards.cardsState.packName)
 		const cardsTotalCount = useAppSelector(state => state.cards.cardsState.cardsTotalCount)
 		const elementsPerPage = useAppSelector(state => state.cards.cardsState.pageCount)
-		const currentPage = useAppSelector(state => state.cards.cardsState.page)
+		const currentPage = useAppSelector(state => state.cards.searchParams.page)
 		const searchParams = useAppSelector(state => state.cards.searchParams)
 		const isOwner = packOwnerUserId === userId
 
@@ -38,7 +38,7 @@ export const CardsPage = () => {
 				return () => {
 						dispatch(resetSearchByName())
 				}
-		},[])
+		}, [])
 
 		useEffect(() => {
 				dispatch(fetchCards(packId))

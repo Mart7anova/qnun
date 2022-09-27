@@ -6,7 +6,6 @@ export const cardsApi = {
         return instance.get<CardsResponseType>(`/cards/card?cardsPack_id=${packId}`, {
             params: {
                 pageCount: 10,
-                page: currentPage,
                 ...searchParams
             }
         })
@@ -64,6 +63,6 @@ export type ParamsType = {
     min?: number
     max?: number
     sortCards?: string
-    page?: number
+    page: number
     pageCount?: number
 }
