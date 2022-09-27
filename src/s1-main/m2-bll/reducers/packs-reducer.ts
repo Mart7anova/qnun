@@ -1,5 +1,6 @@
 import {AppThunk} from 's1-main/m2-bll/store';
 import {packApi, PackType, ResponseCardPacksType, SearchParamsType} from 's1-main/m3-dal/packApi';
+import {errorMessage} from "./app-reducer";
 
 const initialState = {
     packs: {
@@ -92,28 +93,32 @@ export const fetchPacks = (): AppThunk => async (dispatch, getState) => {
         const {data} = await packApi.getPacks(searchParams)
         dispatch(setPacks(data))
         dispatch(setPacksTotalCount(data.cardPacksTotalCount))
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     }
 }
 export const createNewPack = (): AppThunk => async (dispatch) => {
     try {
         await packApi.createPack('new pack')
         dispatch(fetchPacks())
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     }
 }
 export const deletePack = (id: string): AppThunk => async (dispatch) => {
     try {
         await packApi.deletePack(id)
         dispatch(fetchPacks())
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     }
 }
 export const updatePack = (id: string): AppThunk => async (dispatch) => {
     try {
         await packApi.updatePack(id, 'hardcoded updated name')
         dispatch(fetchPacks())
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     }
 }
 
