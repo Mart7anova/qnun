@@ -1,16 +1,15 @@
 import React, {useEffect} from 'react'
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {createCard, fetchCards, setCurrentPage} from 's1-main/m2-bll/reducers/cards-reducer';
-import {Link, Navigate, useParams} from 'react-router-dom';
+import {Navigate, useParams} from 'react-router-dom';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
-import style from 's2-features/f2-profile/Profile.module.scss';
-import arrow from 's1-main/m1-ui/common/c3-image/photo/arrow.png';
 import {getAuthUserId, getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {EmptyPack} from 's2-features/f3-packsList/CardsPage/EmptyPack';
 import {Search} from 's2-features/f3-packsList/CardsPage/Search';
 import {CardsTable} from 's2-features/f3-packsList/CardsPage/CardsTable';
 import {Paginator} from 's1-main/m1-ui/common/c1-components/Pagination/Pagination';
+import {LinkBackTo} from '../../../s1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
 
 export const CardsPage = () => {
 		const dispatch = useAppDispatch()
@@ -41,10 +40,9 @@ export const CardsPage = () => {
 		return (
 				<div>
 						<div style={{width: '1008px', margin: '0 auto'}}>
-								<Link to={PATH.PACKS_LIST} className={style.link}>
-										<img src={arrow} alt={'arrow'} className={style.arrowImg}/>
-										<span className={style.textLink}>Back to Packs List</span>
-								</Link>
+
+							<LinkBackTo link={PATH.PACKS_LIST}/>
+
 								<div style={{display: 'flex', justifyContent: 'space-between'}}>
 										<h1>{packName}</h1>
 										{cards.length > 0 && isOwner && <Button onClick={addNewCardHandle}>Add new cards</Button>}

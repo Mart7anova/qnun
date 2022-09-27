@@ -1,0 +1,21 @@
+@import './src/s1-main/m1-ui/common/c2-styles/sass/mixins';
+
+.link {
+    position: absolute;
+    top: 80px;
+    left: 150px;
+
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+    color: $mainBlack;
+
+    .arrowImg {
+        height: 20px;
+    }
+
+    .textLink {
+        padding-left: 10px;
+    }
+}

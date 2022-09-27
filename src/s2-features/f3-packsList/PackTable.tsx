@@ -51,7 +51,7 @@ export function PackTable({packs}: TablePropsType) {
                             key={pack._id}
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
-                            <TableCell align="left">
+                            <TableCell align="left" sx={{overflowWrap: 'anywhere'}}>
                                 <Link to={PATH.PACK + `${pack._id}`}>
                                     {pack.name}
                                 </Link>
