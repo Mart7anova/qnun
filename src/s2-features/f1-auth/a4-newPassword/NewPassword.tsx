@@ -11,8 +11,6 @@ import {Navigate, useParams} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {setIsRequestSuccess, updatePassword} from 's1-main/m2-bll/reducers/auth-reducer';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {appStatus} from "../../../s1-main/m2-bll/selectors/app-selectors";
-import {LinearProgress} from "@mui/material";
 
 type FormikErrorType = {
     password?: string
@@ -21,7 +19,6 @@ type FormikErrorType = {
 
 export const NewPassword = () => {
     const isRequestSuccess = useAppSelector(state => state.auth.isRequestSuccess)
-    const status = useAppSelector(appStatus)
     const dispatch = useAppDispatch()
     const {token} = useParams()
 
@@ -71,7 +68,6 @@ export const NewPassword = () => {
 
     return (
         <div>
-            {status === "loading" && <LinearProgress color="success"/>}
             <div className={`${styleContainer.container} ${style.newPassContainer}`}>
                 <form onSubmit={formik.handleSubmit}>
                     <div className={`${styleBlock.block} ${style.newPassBlock}`}>

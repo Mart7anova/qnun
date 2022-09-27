@@ -58,7 +58,7 @@ export const Login = () => {
     if (isLoggedIn) return <Navigate to={PATH.PACKS_LIST}/>
     return (
         <div className={s.loginPage}>
-			{status === "loading" && <LinearProgress color="success"/>}
+			{/*{status === "loading" && <LinearProgress color="success"/>}*/}
             <div className={styleContainer.container}>
                 <div className={s.formWrapper}>
                     <form onSubmit={formik.handleSubmit} className={s.form}>

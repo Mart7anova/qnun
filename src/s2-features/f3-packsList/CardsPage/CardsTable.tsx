@@ -13,7 +13,6 @@ import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {CardType} from 's1-main/m3-dal/cardsApi';
 import {TableHeaderItem} from '../TableHeaderItem';
 import style from './CardsTable.module.scss'
-import {LinearProgress} from "@mui/material";
 import {appStatus} from "../../../s1-main/m2-bll/selectors/app-selectors";
 
 type CardsTablePropsType = {
@@ -23,7 +22,6 @@ type CardsTablePropsType = {
 
 export const CardsTable = ({isOwner, cards}: CardsTablePropsType) => {
     const dispatch = useAppDispatch()
-    const status = useAppSelector(appStatus)
     const updateCardHandle = (packId: string, cardId: string) => {
         dispatch(updateCard(packId, cardId))
     }
@@ -32,7 +30,6 @@ export const CardsTable = ({isOwner, cards}: CardsTablePropsType) => {
     }
     return (
         <div>
-            {status === "loading" && <LinearProgress color="success"/>}
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}}>
                     <TableHead sx={{backgroundColor: '#EFEFEF', height: '48px'}}>

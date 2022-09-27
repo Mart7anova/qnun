@@ -16,8 +16,6 @@ import {Link} from 'react-router-dom';
 import {TableHeaderItem} from './TableHeaderItem';
 import style from './PackTable.module.scss'
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {LinearProgress} from "@mui/material";
-import {appStatus} from "../../s1-main/m2-bll/selectors/app-selectors";
 
 type TablePropsType = {
     packs: PackType[]
@@ -25,7 +23,6 @@ type TablePropsType = {
 
 export function PackTable({packs}: TablePropsType) {
     const userID = useAppSelector(state => state.profile.profile._id)
-    const status = useAppSelector(appStatus)
     const dispatch = useAppDispatch()
 
     const deletePackHandle = (id: string) => {
@@ -38,7 +35,6 @@ export function PackTable({packs}: TablePropsType) {
 
     return (
         <div>
-            {status === "loading" && <LinearProgress color="success"/>}
             <TableContainer component={Paper}>
                 <Table className={style.table}>
                     <TableHead className={style.tableHead}>

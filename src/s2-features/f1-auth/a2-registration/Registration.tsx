@@ -77,7 +77,7 @@ export const Registration = () => {
     }
     return (
         <div>
-            {status === "loading" && <LinearProgress color="success"/>}
+            {/*{status === "loading" && <LinearProgress color="success"/>}*/}
             <div className={`${styleContainer.container} ${style.mainBlock}`}>
                 <div className={`${styleBlock.block} ${style.childrenBlock}`}>
                     <h1 className={style.title}>Sing up</h1>

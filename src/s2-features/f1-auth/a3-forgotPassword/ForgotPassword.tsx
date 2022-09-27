@@ -51,7 +51,7 @@ export const ForgotPassword = () => {
 
     return (
         <div>
-            {status === "loading" && <LinearProgress color="success"/>}
+            {/*{status === "loading" && <LinearProgress color="success"/>}*/}
             <div className={`${styleContainer.container} ${style.forgotPassContainer}`}>
 
                 <form onSubmit={formik.handleSubmit}>
