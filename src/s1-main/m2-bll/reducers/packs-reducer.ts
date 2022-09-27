@@ -1,6 +1,6 @@
 import {AppThunk} from 's1-main/m2-bll/store';
 import {packApi, PackType, ResponseCardPacksType, SearchParamsType} from 's1-main/m3-dal/packApi';
-import {errorMessage} from "./app-reducer";
+import {changeStatus, errorMessage} from "./app-reducer";
 
 const initialState = {
     packs: {
