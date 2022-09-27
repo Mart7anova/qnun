@@ -21,6 +21,7 @@ export const App = () => {
 
     return (
         <div className={style.App}>
+
             <ErrorSnackBar/>
             <AppRoute/>
         </div>

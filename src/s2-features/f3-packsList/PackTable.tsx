@@ -15,7 +15,9 @@ import {deletePack, setSortPacks, updatePack} from 's1-main/m2-bll/reducers/pack
 import {Link} from 'react-router-dom';
 import {TableHeaderItem} from './TableHeaderItem';
 import style from './PackTable.module.scss'
-import { PATH } from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {LinearProgress} from "@mui/material";
+import {appStatus} from "../../s1-main/m2-bll/selectors/app-selectors";
 
 type TablePropsType = {
     packs: PackType[]
@@ -23,6 +25,7 @@ type TablePropsType = {
 
 export function PackTable({packs}: TablePropsType) {
     const userID = useAppSelector(state => state.profile.profile._id)
+    const status = useAppSelector(appStatus)
     const dispatch = useAppDispatch()
 
     const deletePackHandle = (id: string) => {
@@ -34,32 +37,38 @@ export function PackTable({packs}: TablePropsType) {
 
 
     return (
-        <TableContainer component={Paper}>
-            <Table className={style.table}>
-                <TableHead className={style.tableHead}>
-                    <TableRow>
-                        <TableHeaderItem name={'Name'} align={'left'} sortName={'name'} setSort={setSortPacks} className={style.name} />
-                        <TableHeaderItem name={'Cards'} align={'right'} sortName={'cardsCount'} setSort={setSortPacks} className={style.cards}/>
-                        <TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'} setSort={setSortPacks} className={style.lastUpdated}/>
-                        <TableHeaderItem name={'Created by'} align={'center'} sortName={'user_name'} setSort={setSortPacks} className={style.createdBy}/>
-                        <TableCell align="left" className={style.actions}>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {packs.map((pack) => (
-                        <TableRow
-                            key={pack._id}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                        >
-                            <TableCell align="left" sx={{overflowWrap: 'anywhere'}}>
-                                <Link to={PATH.PACK + `${pack._id}`}>
-                                    {pack.name}
-                                </Link>
-                            </TableCell>
-                            <TableCell align="center">{pack.cardsCount}</TableCell>
-                            <TableCell align="center">{String(pack.updated)}</TableCell>
-                            <TableCell align="center">{pack.user_name}</TableCell>
-                            <TableCell align="left">
+        <div>
+            {status === "loading" && <LinearProgress color="success"/>}
+            <TableContainer component={Paper}>
+                <Table className={style.table}>
+                    <TableHead className={style.tableHead}>
+                        <TableRow>
+                            <TableHeaderItem name={'Name'} align={'left'} sortName={'name'} setSort={setSortPacks}
+                                             className={style.name}/>
+                            <TableHeaderItem name={'Cards'} align={'right'} sortName={'cardsCount'}
+                                             setSort={setSortPacks} className={style.cards}/>
+                            <TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'}
+                                             setSort={setSortPacks} className={style.lastUpdated}/>
+                            <TableHeaderItem name={'Created by'} align={'center'} sortName={'user_name'}
+                                             setSort={setSortPacks} className={style.createdBy}/>
+                            <TableCell align="left" className={style.actions}>Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {packs.map((pack) => (
+                            <TableRow
+                                key={pack._id}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                            >
+                                <TableCell align="left" sx={{overflowWrap: 'anywhere'}}>
+                                    <Link to={PATH.PACK + `${pack._id}`}>
+                                        {pack.name}
+                                    </Link>
+                                </TableCell>
+                                <TableCell align="center">{pack.cardsCount}</TableCell>
+                                <TableCell align="center">{String(pack.updated)}</TableCell>
+                                <TableCell align="center">{pack.user_name}</TableCell>
+                                <TableCell align="left">
 																<span style={{display: 'flex', gap: '8px'}}>
 																		<img src={studyImg} alt="study"
                                                                              style={{cursor: 'pointer'}}/>
@@ -75,11 +84,12 @@ export function PackTable({packs}: TablePropsType) {
                                                                         </>
                                                                     }
 																</span>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
     );
 }

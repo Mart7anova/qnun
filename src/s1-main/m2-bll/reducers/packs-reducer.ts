@@ -96,25 +96,34 @@ export const fetchPacks = (): AppThunk => async (dispatch, getState) => {
         dispatch(setPacksTotalCount(data.cardPacksTotalCount))
     } catch (err) {
         dispatch(errorMessage((err as Error).message))
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 export const createNewPack = (): AppThunk => async (dispatch) => {
+    dispatch(changeStatus("loading"))
     try {
         await packApi.createPack('new pack')
         dispatch(fetchPacks())
     } catch (err) {
         dispatch(errorMessage((err as Error).message))
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 export const deletePack = (id: string): AppThunk => async (dispatch) => {
+    dispatch(changeStatus("loading"))
     try {
         await packApi.deletePack(id)
         dispatch(fetchPacks())
     } catch (err) {
         dispatch(errorMessage((err as Error).message))
+    } finally {
+        dispatch(changeStatus("idle"))
     }
 }
 export const updatePack = (id: string): AppThunk => async (dispatch) => {
+    dispatch(changeStatus("loading"))
     try {
         await packApi.updatePack(id, 'hardcoded updated name')
         dispatch(fetchPacks())

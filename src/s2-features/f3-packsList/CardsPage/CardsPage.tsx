@@ -15,7 +15,6 @@ import {LinkBackTo} from '../../../s1-main/m1-ui/common/c1-components/LinkBackTo
 
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
-    const status = useAppSelector(appStatus)
     const {packId} = useParams() as { packId: string }
 
     const cards = useAppSelector(state => state.cards.cards)
@@ -43,32 +42,30 @@ export const CardsPage = () => {
 
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
     return (
-        <div>
-            {status === "loading" && <LinearProgress color="success"/>}<div style={{width: '1008px', margin: '0 auto'}}>
+        <div style={{width: '1008px', margin: '0 auto'}}>
 
-                <LinkBackTo link={PATH.PACKS_LIST}/>
+            <LinkBackTo link={PATH.PACKS_LIST}/>
 
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <h1>{packName}</h1>
-                    {cards.length > 0 && isOwner && <Button onClick={addNewCardHandle}>Add new cards</Button>}
-                    {cards.length > 0 && !isOwner && <Button>Learn to pack</Button>}
-                </div>
-
-                {cards.length
-                    ? (
-                        <>
-                            <Search/>
-                            <CardsTable isOwner={isOwner} cards={cards}/>
-                            <Paginator currentPage={currentPage}
-                                       elementsPerPage={elementsPerPage}
-                                       onPageChange={onPageChange}
-                                       itemsTotalCount={cardsTotalCount}
-                            />
-                        </>
-                    )
-                    : <EmptyPack isOwner={isOwner} addNewCardHandle={addNewCardHandle}/>
-                }
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <h1>{packName}</h1>
+                {cards.length > 0 && isOwner && <Button onClick={addNewCardHandle}>Add new cards</Button>}
+                {cards.length > 0 && !isOwner && <Button>Learn to pack</Button>}
             </div>
+
+            {cards.length
+                ? (
+                    <>
+                        <Search/>
+                        <CardsTable isOwner={isOwner} cards={cards}/>
+                        <Paginator currentPage={currentPage}
+                                   elementsPerPage={elementsPerPage}
+                                   onPageChange={onPageChange}
+                                   itemsTotalCount={cardsTotalCount}
+                        />
+                    </>
+                )
+                : <EmptyPack isOwner={isOwner} addNewCardHandle={addNewCardHandle}/>
+            }
         </div>
     )
 }

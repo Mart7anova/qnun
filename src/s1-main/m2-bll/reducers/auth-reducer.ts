@@ -53,8 +53,6 @@ export const login = (email: string, password: string, rememberMe: boolean, setL
         const {data} = await authApi.login(email, password, rememberMe)
         dispatch(isLoggedIn(true))
         dispatch(setProfile(data))
-    } catch (err) {
-        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
