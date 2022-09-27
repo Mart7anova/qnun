@@ -33,8 +33,8 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
         case 'PACKS/SET-RANGE-CARDS': {
             return {...state, searchParams: {...state.searchParams, min: action.payload.min, max: action.payload.max}}
         }
-        case 'PACKS/SET-SORT-PACKS':{
-            return {...state, searchParams: {...state.searchParams,sortPacks: action.payload.sortValue}}
+        case 'PACKS/SET-SORT-PACKS': {
+            return {...state, searchParams: {...state.searchParams, sortPacks: action.payload.sortValue}}
         }
         case 'PACKS/CLEAR-FILTERS':
             return {...state, searchParams: {...state.searchParams, ...action.payload}}

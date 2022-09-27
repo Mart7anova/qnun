@@ -14,6 +14,7 @@ import {LinkBackTo} from '../../../s1-main/m1-ui/common/c1-components/LinkBackTo
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
     const {packId} = useParams() as { packId: string }
+
     const cards = useAppSelector(state => state.cards.cards)
     const packOwnerUserId = useAppSelector(state => state.cards.packOwnerUserId)
     const isLoggedIn = useAppSelector(getIsLoggedIn)
