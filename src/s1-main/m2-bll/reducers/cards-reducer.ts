@@ -62,8 +62,6 @@ export const fetchCards = (packId: string): AppThunk => async (dispatch, getStat
         dispatch(setPackOwnerUserId(data.packUserId))
         dispatch(setPackName(data.packName))
         dispatch(setCardsTotalCount(data.cardsTotalCount))
-    } catch (err) {
-        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
