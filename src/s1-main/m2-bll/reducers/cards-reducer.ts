@@ -1,6 +1,6 @@
 import {AppThunk} from 's1-main/m2-bll/store';
 import {cardsApi, CardType} from 's1-main/m3-dal/cardsApi';
-import {changeStatus} from "./app-reducer";
+import {changeStatus, errorMessage} from "./app-reducer";
 
 const initialState = {
     cards: [] as CardType[],
@@ -52,7 +52,8 @@ export const fetchCards = (packId: string): AppThunk => async (dispatch, getStat
         dispatch(setPackName(data.packName))
         dispatch(setCardsTotalCount(data.cardsTotalCount))
         console.log(data)
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
@@ -62,7 +63,8 @@ export const createCard = (packId: string): AppThunk => async (dispatch) => {
     try {
         await cardsApi.createCard(packId, 'hardcoded question', 'hardcoded answer')
         dispatch(fetchCards(packId))
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
@@ -72,7 +74,8 @@ export const deleteCard = (packId: string, cardId: string): AppThunk => async (d
     try {
         await cardsApi.deleteCard(cardId)
         dispatch(fetchCards(packId))
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
@@ -82,7 +85,8 @@ export const updateCard = (packId: string, cardId: string): AppThunk => async (d
     try {
         await cardsApi.updateCard(cardId, 'updated question', 'updated answer')
         dispatch(fetchCards(packId))
-    } catch (e) {
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }

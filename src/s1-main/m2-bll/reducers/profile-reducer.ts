@@ -1,6 +1,6 @@
 import {AppThunk} from 's1-main/m2-bll/store';
 import {authApi, ProfileResponseType} from 's1-main/m3-dal/authApi';
-import {changeStatus} from "./app-reducer";
+import {changeStatus, errorMessage} from "./app-reducer";
 
 const initialState = {
     profile: {} as ProfileResponseType,
@@ -24,8 +24,8 @@ export const updateUser = (name?: string, avatar?: string): AppThunk => async (d
         const {data} = await authApi.updateUser(name, avatar)
         console.log(data)
         dispatch(setProfile(data.updatedUser))
-    } catch (e) {
-
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }

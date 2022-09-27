@@ -2,7 +2,7 @@ import {authApi} from 's1-main/m3-dal/authApi';
 import {setProfile} from 's1-main/m2-bll/reducers/profile-reducer';
 import {AppThunk} from 's1-main/m2-bll/store';
 import {AxiosError} from 'axios';
-import {changeStatus} from "./app-reducer";
+import {changeStatus, errorMessage} from "./app-reducer";
 
 const initialState = {
     isLoggedIn: false,
@@ -40,8 +40,8 @@ export const registration = (email: string, password: string): AppThunk => async
     try {
         await authApi.registration(email, password)
         dispatch(setIsAuth(true))
-    } catch (e) {
-        console.log(e)
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
@@ -53,11 +53,8 @@ export const login = (email: string, password: string, rememberMe: boolean, setL
         const {data} = await authApi.login(email, password, rememberMe)
         dispatch(isLoggedIn(true))
         dispatch(setProfile(data))
-    } catch (e) {
-        const err = e as AxiosError<{ error: string }>
-        err.response?.data.error
-            ? setLoginFormStatus({error: err.response.data.error})
-            : setLoginFormStatus({error: 'some error'})
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
@@ -68,8 +65,8 @@ export const logout = (): AppThunk => async (dispatch) => {
     try {
         await authApi.logout()
         dispatch(isLoggedIn(false))
-    } catch (e) {
-
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
@@ -84,8 +81,8 @@ export const forgotPassword = (email: string): AppThunk => async (dispatch) => {
             message: `<div>Перейдите по ссылке, чтобы продолжить востановление пароля <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`
         })
         dispatch(setIsRequestSuccess(true))
-    } catch (e) {
-
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
@@ -96,8 +93,8 @@ export const updatePassword = (password: string, resetPasswordToken: string): Ap
     try {
         await authApi.resetPass(password, resetPasswordToken)
         dispatch(setIsRequestSuccess(true))
-    } catch (e) {
-
+    } catch (err) {
+        dispatch(errorMessage((err as Error).message))
     } finally {
         dispatch(changeStatus("idle"))
     }
