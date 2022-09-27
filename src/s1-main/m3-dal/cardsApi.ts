@@ -3,7 +3,7 @@ import {instance} from './instance/instance';
 
 export const cardsApi = {
     getCards(packId: string, currentPage: number, searchParams: ParamsType) {
-        return instance.get<ResponseType>(`/cards/card?cardsPack_id=${packId}`, {
+        return instance.get<CardsResponseType>(`/cards/card?cardsPack_id=${packId}`, {
             params: {
                 pageCount: 10,
                 page: currentPage,
@@ -46,7 +46,7 @@ export type CardType = {
     updated: Date
     _id: string
 }
-type ResponseType = {
+export type CardsResponseType = {
     cards: CardType[]
     cardsTotalCount: number
     maxGrade: number

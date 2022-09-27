@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
-import {createCard, fetchCards, setCurrentPage} from 's1-main/m2-bll/reducers/cards-reducer';
+import {createCard, fetchCards, resetSearchByName, setCurrentPage} from 's1-main/m2-bll/reducers/cards-reducer';
 import {Navigate, useParams} from 'react-router-dom';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
@@ -15,14 +15,14 @@ export const CardsPage = () => {
 		const dispatch = useAppDispatch()
 		const {packId} = useParams() as { packId: string }
 		const [isSearching, setIsSearching] = useState(false);
-		const cards = useAppSelector(state => state.cards.cards)
-		const packOwnerUserId = useAppSelector(state => state.cards.packOwnerUserId)
+		const cards = useAppSelector(state => state.cards.cardsState.cards)
+		const packOwnerUserId = useAppSelector(state => state.cards.cardsState.packUserId)
 		const isLoggedIn = useAppSelector(getIsLoggedIn)
 		const userId = useAppSelector(getAuthUserId)
-		const packName = useAppSelector(state => state.cards.packName)
-		const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount)
-		const elementsPerPage = useAppSelector(state => state.cards.elementPerPage)
-		const currentPage = useAppSelector(state => state.cards.currentPage)
+		const packName = useAppSelector(state => state.cards.cardsState.packName)
+		const cardsTotalCount = useAppSelector(state => state.cards.cardsState.cardsTotalCount)
+		const elementsPerPage = useAppSelector(state => state.cards.cardsState.pageCount)
+		const currentPage = useAppSelector(state => state.cards.cardsState.page)
 		const searchParams = useAppSelector(state => state.cards.searchParams)
 		const isOwner = packOwnerUserId === userId
 
@@ -34,6 +34,11 @@ export const CardsPage = () => {
 		const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
 				dispatch(setCurrentPage(page))
 		}
+		useEffect(() => {
+				return () => {
+						dispatch(resetSearchByName())
+				}
+		},[])
 
 		useEffect(() => {
 				dispatch(fetchCards(packId))
