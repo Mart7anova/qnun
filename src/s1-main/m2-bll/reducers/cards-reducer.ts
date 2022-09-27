@@ -1,12 +1,14 @@
 import {AppThunk} from 's1-main/m2-bll/store';
-import {cardsApi, CardsResponseType, CardType, ParamsType} from 's1-main/m3-dal/cardsApi';
+import {cardsApi, CardsResponseType, CardType, CardSearchParamsType} from 's1-main/m3-dal/cardsApi';
 import {changeStatus, errorMessage} from './app-reducer';
 
 const initialState = {
 		cardsState: {
 				cards: [] as CardType[]
 		} as CardsResponseType,
-		searchParams: {} as ParamsType,
+		searchParams: {
+				cardQuestion: ''
+		} as CardSearchParamsType,
 }
 
 //reducer
@@ -17,11 +19,11 @@ export const cardsReducer = (state: PacksReducerType = initialState, action: Act
 				case 'CARDS/SET-SEARCH-BY-CARDS-NAME-FILTER':
 						return {...state, searchParams: {...state.searchParams, cardQuestion: action.payload.cardName}}
 				case 'CARDS/SET-SORT-CARDS':
-						return {...state,searchParams: {...state.searchParams,sortCards:action.payload.sortValue}}
+						return {...state, searchParams: {...state.searchParams, sortCards: action.payload.sortValue}}
 				case 'CARDS/SET-CURRENT-PAGE':
 						return {...state, searchParams: {...state.searchParams, page: action.payload.page}}
 				case 'CARDS/RESET-SEARCH-BY-NAME':
-						return {...state,searchParams: {...state.searchParams,cardQuestion:''}}
+						return {...state, searchParams: {...state.searchParams, cardQuestion: ''}}
 				default:
 						return state
 		}
@@ -44,7 +46,8 @@ export const resetSearchByName = () =>
 export const fetchCards = (packId: string): AppThunk => async (dispatch, getState) => {
 		dispatch(changeStatus('loading'))
 		try {
-				const {data} = await cardsApi.getCards(packId, getState().cards.cardsState.page, getState().cards.searchParams)
+				const searchParams = getState().cards.searchParams
+				const {data} = await cardsApi.getCards(packId, searchParams)
 				dispatch(setCards(data))
 		} finally {
 				dispatch(changeStatus('idle'))

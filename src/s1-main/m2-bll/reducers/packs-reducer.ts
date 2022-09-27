@@ -1,5 +1,5 @@
 import {AppThunk} from 's1-main/m2-bll/store';
-import {packApi, PackType, ResponseCardPacksType, SearchParamsType} from 's1-main/m3-dal/packApi';
+import {packApi, PackType, ResponseCardPacksType, PackSearchParamsType} from 's1-main/m3-dal/packApi';
 import {changeStatus, errorMessage} from "./app-reducer";
 
 const initialState = {
@@ -14,7 +14,7 @@ const initialState = {
         user_id: '',
         min: 0,
         max: 10,
-    } as SearchParamsType,
+    } as PackSearchParamsType,
     packsTotalCount: 0,
 }
 

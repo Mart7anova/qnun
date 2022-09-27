@@ -2,7 +2,7 @@ import {instance} from './instance/instance';
 
 
 export const packApi = {
-    getPacks(params: SearchParamsType) {
+    getPacks(params: PackSearchParamsType) {
         return instance.get<ResponseCardPacksType>(`/cards/pack`, {params})
     },
     createPack(name: string, isPrivate = false) {
@@ -51,7 +51,7 @@ export type ResponseCardPacksType = {
     page: number
     pageCount: number
 }
-export type SearchParamsType = {
+export type PackSearchParamsType = {
     page: number
     pageCount: number
     sortPacks: string
