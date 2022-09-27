@@ -3,14 +3,16 @@ import {useFormik} from 'formik';
 import {Link, Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import style from '../a2-registration/Registration.module.scss'
-import {AppRootStateType, useAppDispatch} from 's1-main/m2-bll/store';
+import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {registration} from 's1-main/m2-bll/reducers/auth-reducer';
-import {useSelector} from 'react-redux';
 import {PasswordView} from 's1-main/m1-ui/common/c1-components/passwordView/PasswordView';
 import {Input} from 's1-main/m1-ui/common/c1-components/Input/Input';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import styleContainer from 's1-main/m1-ui/common/c2-styles/Container.module.css';
 import styleBlock from 's1-main/m1-ui/common/c2-styles/Block.module.css';
+import {isLoggedIn} from "../../../s1-main/m2-bll/selectors/auth-selectors";
+import {appStatus} from "../../../s1-main/m2-bll/selectors/app-selectors";
+import {LinearProgress} from "@mui/material";
 
 type FormikErrorType = {
     email?: string
@@ -19,7 +21,8 @@ type FormikErrorType = {
 }
 
 export const Registration = () => {
-    const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isAuth)
+    const loggedIn = useAppSelector(isLoggedIn)
+    const status = useAppSelector(appStatus)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -69,11 +72,12 @@ export const Registration = () => {
     const errorPass = formik.touched.password && formik.errors.password ? formik.errors.password : ''
     const errorConfirmPassword = formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ''
 
-    if (isLoggedIn) {
+    if (loggedIn) {
         return <Navigate to={PATH.LOGIN}/>
     }
     return (
         <div>
+            {status === "loading" && <LinearProgress color="success"/>}
             <div className={`${styleContainer.container} ${style.mainBlock}`}>
                 <div className={`${styleBlock.block} ${style.childrenBlock}`}>
                     <h1 className={style.title}>Sing up</h1>
