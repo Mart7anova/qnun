@@ -3,7 +3,7 @@ import React from 'react';
 import {SearchInput} from 's1-main/m1-ui/common/c1-components/SearchInput/SearchInput';
 import {useAppDispatch} from 's1-main/m2-bll/store';
 import {clearFilters, setSearchByPacksNameFilter} from 's1-main/m2-bll/reducers/packs-reducer';
-import FilterByMyCards from './FilterByMyCards/FilterByMyCards';
+import {FilterByMyCards} from './FilterByMyCards/FilterByMyCards';
 
 
 export const PackFiltration = () => {

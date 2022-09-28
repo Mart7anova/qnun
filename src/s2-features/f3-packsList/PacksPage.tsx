@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {
-	changeStatusFirstLoading,
-	createNewPack,
-	fetchPacks,
-	setCurrentPage
+    changeStatusFirstLoading,
+    createNewPack,
+    fetchPacks,
+    setCurrentPage
 } from 's1-main/m2-bll/reducers/packs-reducer';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {PackTable} from 's2-features/f3-packsList/PackTable';

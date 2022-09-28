@@ -5,7 +5,7 @@ import {getProfileId} from '../../../../s1-main/m2-bll/selectors/profile-selecto
 import {getPacksForUserId} from '../../../../s1-main/m2-bll/selectors/packs-selectors';
 import {setIsMyPacksFilter} from '../../../../s1-main/m2-bll/reducers/packs-reducer';
 
-const FilterByMyCards = () => {
+export const FilterByMyCards = () => {
     const profileId = useAppSelector(getProfileId)
     const packsForUserId = useAppSelector(getPacksForUserId)
     const dispatch = useAppDispatch()
@@ -13,18 +13,17 @@ const FilterByMyCards = () => {
     const onIsMyPacksFilterChange = (profileId: string) => {
         dispatch(setIsMyPacksFilter(profileId))
     }
+
     return (
         <ButtonGroup color="primary" size={'medium'}>
-            <Button variant={packsForUserId !== '' ? 'contained' : 'outlined'}
+            <Button variant={packsForUserId ? 'contained' : 'outlined'}
                     onClick={()=>onIsMyPacksFilterChange(profileId)}>
                 My
             </Button>
-            <Button variant={packsForUserId === '' ? 'contained' : 'outlined'}
+            <Button variant={!packsForUserId ? 'contained' : 'outlined'}
                     onClick={()=>onIsMyPacksFilterChange('')}>
                 All
             </Button>
         </ButtonGroup>
     );
 };
-
-export default FilterByMyCards;
