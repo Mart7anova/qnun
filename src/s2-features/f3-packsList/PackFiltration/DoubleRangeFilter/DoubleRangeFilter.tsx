@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ChangeEvent, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Slider from '@mui/material/Slider';
 import {
     getCurrentMaxCount,
@@ -10,8 +10,8 @@ import {
 import {useAppDispatch, useAppSelector} from '../../../../s1-main/m2-bll/store';
 import {useDebounce} from '../../../../s1-main/m2-bll/hooks/hookDebonce';
 import {setRangeCards} from '../../../../s1-main/m2-bll/reducers/packs-reducer';
-import {TextField} from '@mui/material';
 import style from './DoubleRangeFilter.module.scss'
+import {InputForRangeFilter} from './InputForRangeFilter';
 
 
 export function DoubleRangeFilter() {
@@ -20,34 +20,21 @@ export function DoubleRangeFilter() {
     const currentMinCount = useAppSelector(getCurrentMinCount)
     const currentMaxCount = useAppSelector(getCurrentMaxCount)
 
-    const [value, setValue] = React.useState<number[]>([currentMinCount, currentMaxCount])
+    const [value, setValue] = useState<number[]>([minCardsCount, maxCardsCount])
 
     const debouncedValue = useDebounce<number[]>(value, 1000)
-
     const dispatch = useAppDispatch()
 
-    const onChangeFirstRange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const firstValue = Number(e.currentTarget.value)
-
-        if (firstValue < -1 || Object.is(firstValue, NaN)) {
-            setValue([0, value[1]])
-        } else {
-            setValue([firstValue, value[1]])
-        }
+    const onChangeFirstRange = (newValue: number) => {
+        setValue([newValue, value[1]])
     }
 
     const onChangeDoubleRange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
     };
 
-    const onChangeSecondRange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const secondValue = Number(e.currentTarget.value)
-
-        if (secondValue < -1 || Object.is(secondValue, NaN) || secondValue > maxCardsCount) {
-            setValue([value[0], maxCardsCount])
-        } else {
-            setValue([value[0], secondValue])
-        }
+    const onChangeSecondRange = (newValue: number) => {
+        setValue([value[0], newValue])
     }
 
     useEffect(() => {
@@ -60,12 +47,7 @@ export function DoubleRangeFilter() {
 
     return (
         <div className={style.mainContainer}>
-            <TextField size={'small'}
-                       className={style.input}
-                       type={'tel'}
-                       value={value[0]}
-                       onChange={onChangeFirstRange}
-            />
+            <InputForRangeFilter currentValue={value[0]} setCurrentValue={onChangeFirstRange}/>
             <Slider
                 value={value}
                 onChange={onChangeDoubleRange}
@@ -73,12 +55,7 @@ export function DoubleRangeFilter() {
                 min={minCardsCount}
                 max={maxCardsCount}
             />
-            <TextField size={'small'}
-                       className={style.input}
-                       type={'tel'}
-                       value={value[1]}
-                       onChange={onChangeSecondRange}
-            />
+            <InputForRangeFilter currentValue={value[1]} setCurrentValue={onChangeSecondRange}/>
         </div>
     );
 }
