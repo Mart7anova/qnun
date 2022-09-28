@@ -23,8 +23,6 @@ export const cardsReducer = (state: PacksReducerType = initialState, action: Act
 						return {...state, searchParams: {...state.searchParams, sortCards: action.payload.sortValue}}
 				case 'CARDS/SET-CURRENT-PAGE':
 						return {...state, searchParams: {...state.searchParams, page: action.payload.page}}
-				case 'CARDS/RESET-SEARCH-BY-NAME':
-						return {...state, searchParams: {...state.searchParams, cardQuestion: ''}}
 				default:
 						return state
 		}
@@ -40,8 +38,6 @@ export const setSearchByCardsNameFilter = (cardName: string) =>
 		({type: 'CARDS/SET-SEARCH-BY-CARDS-NAME-FILTER', payload: {cardName}} as const)
 export const setSortCards = (sortValue: string) =>
 		({type: 'CARDS/SET-SORT-CARDS', payload: {sortValue}} as const)
-export const resetSearchByName = () =>
-		({type: 'CARDS/RESET-SEARCH-BY-NAME'} as const)
 
 //thunks
 export const fetchCards = (packId: string): AppThunk => async (dispatch, getState) => {
@@ -97,4 +93,3 @@ type ActionsType =
 		| ReturnType<typeof setCurrentPage>
 		| ReturnType<typeof setSearchByCardsNameFilter>
 		| ReturnType<typeof setSortCards>
-		| ReturnType<typeof resetSearchByName>

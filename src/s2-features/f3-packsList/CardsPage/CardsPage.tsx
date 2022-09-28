@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
-import {createCard, fetchCards, resetSearchByName, setCurrentPage} from 's1-main/m2-bll/reducers/cards-reducer';
+import {
+		createCard,
+		fetchCards,
+		setCurrentPage,
+		setSearchByCardsNameFilter
+} from 's1-main/m2-bll/reducers/cards-reducer';
 import {Navigate, useParams} from 'react-router-dom';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
@@ -36,7 +41,7 @@ export const CardsPage = () => {
 		}
 		useEffect(() => {
 				return () => {
-						dispatch(resetSearchByName())
+						dispatch(setSearchByCardsNameFilter(''))
 				}
 		}, [])
 

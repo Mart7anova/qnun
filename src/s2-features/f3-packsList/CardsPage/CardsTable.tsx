@@ -9,71 +9,66 @@ import deleteImg from 'assets/delete.svg';
 import TableContainer from '@mui/material/TableContainer';
 import React from 'react';
 import {deleteCard, setSortCards, updateCard} from 's1-main/m2-bll/reducers/cards-reducer';
-import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
+import {useAppDispatch} from 's1-main/m2-bll/store';
 import {CardType} from 's1-main/m3-dal/cardsApi';
 import {TableHeaderItem} from '../TableHeaderItem';
 import style from './CardsTable.module.scss'
-import {appStatus} from "../../../s1-main/m2-bll/selectors/app-selectors";
 
 type CardsTablePropsType = {
-    cards: CardType[]
-    isOwner: boolean
+		cards: CardType[]
+		isOwner: boolean
 }
 
 export const CardsTable = ({isOwner, cards}: CardsTablePropsType) => {
-    const dispatch = useAppDispatch()
-    const updateCardHandle = (packId: string, cardId: string) => {
-        dispatch(updateCard(packId, cardId))
-    }
-    const deleteCardHandle = (packId: string, cardId: string) => {
-        dispatch(deleteCard(packId, cardId))
-    }
-    return (
-        <div>
-            <TableContainer component={Paper}>
-                <Table sx={{minWidth: 650}}>
-                    <TableHead sx={{backgroundColor: '#EFEFEF', height: '48px'}}>
-                        <TableRow>
-                            <TableHeaderItem name={'Question'} align={'left'} sortName={'question'}
-                                             setSort={setSortCards} className={style.question}/>
-                            <TableHeaderItem name={'Answer'} align={'left'} sortName={'answer'} setSort={setSortCards}
-                                             className={style.answer}/>
-                            <TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'}
-                                             setSort={setSortCards} className={style.lastUpdated}/>
-                            <TableHeaderItem name={'Grade'} align={'center'} sortName={'grade'} setSort={setSortCards}
-                                             className={style.grade}/>
-                            {/*   <TableCell align="left" sx={{width: '35%'}}>Question</TableCell>
-                        <TableCell align="left" sx={{width: '35%'}}>Answer</TableCell>
-                        <TableCell align="center" sx={{width: '15%'}}>Last Updated</TableCell>
-                        <TableCell align="center" sx={{width: '15%'}}>Grade</TableCell>*/}
-                            {isOwner && <TableCell>Actions</TableCell>}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {cards.map(card => (
-                            <TableRow
-                                key={card._id}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
-                                <TableCell align="left">{card.question}</TableCell>
-                                <TableCell align="left">{card.answer}</TableCell>
-                                <TableCell align="center">{String(card.updated)}</TableCell>
-                                <TableCell align="center">{card.grade}</TableCell>
-                                {
-                                    isOwner && <TableCell align="center">
+		const dispatch = useAppDispatch()
+		const updateCardHandle = (packId: string, cardId: string) => {
+				dispatch(updateCard(packId, cardId))
+		}
+		const deleteCardHandle = (packId: string, cardId: string) => {
+				dispatch(deleteCard(packId, cardId))
+		}
+		return (
+				<div>
+						<TableContainer component={Paper}>
+								<Table sx={{minWidth: 650}}>
+										<TableHead sx={{backgroundColor: '#EFEFEF', height: '48px'}}>
+												<TableRow>
+														<TableHeaderItem name={'Question'} align={'left'} sortName={'question'}
+														                 setSort={setSortCards} className={style.question}/>
+														<TableHeaderItem name={'Answer'} align={'left'} sortName={'answer'} setSort={setSortCards}
+														                 className={style.answer}/>
+														<TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'}
+														                 setSort={setSortCards} className={style.lastUpdated}/>
+														<TableHeaderItem name={'Grade'} align={'center'} sortName={'grade'} setSort={setSortCards}
+														                 className={style.grade}/>
+														{isOwner && <TableCell>Actions</TableCell>}
+												</TableRow>
+										</TableHead>
+										<TableBody>
+												{cards.map(card => (
+														<TableRow
+																key={card._id}
+																sx={{'&:last-child td, &:last-child th': {border: 0}}}
+														>
+																<TableCell align="left">{card.question}</TableCell>
+																<TableCell align="left">{card.answer}</TableCell>
+																<TableCell align="center">{String(card.updated)}</TableCell>
+																<TableCell align="center">{card.grade}</TableCell>
+																{
+																		isOwner && <TableCell align="center">
 									<span style={{display: 'flex', gap: '8px'}}>
 										<img src={editImg} alt="edit"
-                                             onClick={() => updateCardHandle(card.cardsPack_id, card._id)}/>
+										     onClick={() => updateCardHandle(card.cardsPack_id, card._id)}/>
 										<img src={deleteImg} alt="detele"
-                                             onClick={() => deleteCardHandle(card.cardsPack_id, card._id)}/>
+										     onClick={() => deleteCardHandle(card.cardsPack_id, card._id)}/>
 									</span>
-                                    </TableCell>
-                                }
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
-    )
+																		</TableCell>
+																}
+														</TableRow>
+												))}
+										</TableBody>
+								</Table>
+						</TableContainer>
+				</div>
+		)
 }

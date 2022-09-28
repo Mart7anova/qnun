@@ -27,7 +27,7 @@ export const PacksPage = () => {
 		const currentMaxCount = useAppSelector(getCurrentMaxCount)
 		const sortPacks = useAppSelector(getSortPacks)
 		const page = useAppSelector(state => state.packs.searchParams.page)
-		const packsTotalCount = useAppSelector(state => state.packs.packsTotalCount)
+		const packsTotalCount = useAppSelector(state => state.packs.packs.cardPacksTotalCount)
 		const elementsPerPage = useAppSelector(state => state.packs.searchParams.pageCount)
 
 		useEffect(() => {
