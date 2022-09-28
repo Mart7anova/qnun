@@ -44,7 +44,7 @@ export const Header = () => {
                     )
                 }
             </div>
-            {status === "loading" && <LinearProgress color="success"/>}
+            {status === "loading" && <LinearProgress color="primary"/>}
         </header>
     );
 };

@@ -10,7 +10,6 @@ import {Search} from 's2-features/f3-packsList/CardsPage/Search';
 import {CardsTable} from 's2-features/f3-packsList/CardsPage/CardsTable';
 import {Paginator} from 's1-main/m1-ui/common/c1-components/Pagination/Pagination';
 import {LinkBackTo} from 's1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
-import {Spinner} from 'assets/Spinner';
 
 export const CardsPage = () => {
 		const dispatch = useAppDispatch()
@@ -45,7 +44,7 @@ export const CardsPage = () => {
 		}, [currentPage, cardQuestionSearch])
 
 		if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
-		if (!packName && !packOwnerUserId) return <Spinner/>
+		if (!packName && !packOwnerUserId) return null
 		return (
 				<div style={{maxWidth: '1008px', margin: '0 auto'}}>
 
