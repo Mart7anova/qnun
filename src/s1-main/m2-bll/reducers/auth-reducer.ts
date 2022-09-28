@@ -10,17 +10,14 @@ const initialState = {
     isRequestSuccess: false
 }
 
-export const authReducer = (state: AuthType = initialState, action: ActionsType): AuthType => {
+export const authReducer = (state: AuthReducerType = initialState, action: ActionsType): AuthReducerType => {
     switch (action.type) {
-        case 'AUTH/LOGIN': {
+        case 'AUTH/LOGIN':
             return {...state, isLoggedIn: action.payload.value}
-        }
-        case 'AUTH/REGISTRATION': {
+        case 'AUTH/REGISTRATION':
             return {...state, isAuth: action.payload.value}
-        }
-        case 'STATUS-REQUEST/REGISTRATION': {
+        case 'STATUS-REQUEST/REGISTRATION':
             return {...state, isRequestSuccess: action.payload.value}
-        }
         default:
             return state
     }
@@ -101,7 +98,7 @@ export const updatePassword = (password: string, resetPasswordToken: string): Ap
 }
 
 //types
-export type AuthType = typeof initialState
+export type AuthReducerType = typeof initialState
 
 type ActionsType = ReturnType<typeof isLoggedIn>
     | ReturnType<typeof setIsAuth>

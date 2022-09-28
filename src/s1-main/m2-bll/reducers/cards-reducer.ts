@@ -8,12 +8,14 @@ const initialState = {
 				cards: [] as CardType[]
 		} as CardsResponseType,
 		searchParams: {
-				cardQuestion: ''
+				cardQuestion: '',
+				page: 1,
+				pageCount: 10,
 		} as CardSearchParamsType,
 }
 
 //reducer
-export const cardsReducer = (state: PacksReducerType = initialState, action: ActionsType): PacksReducerType => {
+export const cardsReducer = (state: CardsReducerType = initialState, action: ActionsType): CardsReducerType => {
 		switch (action.type) {
 				case 'CARDS/SET-CARDS':
 						return {...state, cardsState: action.payload.cards}
@@ -47,7 +49,7 @@ export const fetchCards = (packId: string): AppThunk => async (dispatch, getStat
 				const {data} = await cardsApi.getCards(packId, searchParams)
 				dispatch(setCards(data))
 		} catch (e) {
-				errorUtils(e,dispatch)
+				errorUtils(e, dispatch)
 		} finally {
 				dispatch(setAppStatus('idle'))
 		}
@@ -58,7 +60,7 @@ export const createCard = (packId: string): AppThunk => async (dispatch) => {
 				await cardsApi.createCard(packId, 'hardcoded question', 'hardcoded answer')
 				dispatch(fetchCards(packId))
 		} catch (e) {
-				errorUtils(e,dispatch)
+				errorUtils(e, dispatch)
 		} finally {
 				dispatch(setAppStatus('idle'))
 		}
@@ -69,7 +71,7 @@ export const deleteCard = (packId: string, cardId: string): AppThunk => async (d
 				await cardsApi.deleteCard(cardId)
 				dispatch(fetchCards(packId))
 		} catch (e) {
-				errorUtils(e,dispatch)
+				errorUtils(e, dispatch)
 		} finally {
 				dispatch(setAppStatus('idle'))
 		}
@@ -80,14 +82,14 @@ export const updateCard = (packId: string, cardId: string): AppThunk => async (d
 				await cardsApi.updateCard(cardId, 'updated question', 'updated answer')
 				dispatch(fetchCards(packId))
 		} catch (e) {
-				errorUtils(e,dispatch)
+				errorUtils(e, dispatch)
 		} finally {
 				dispatch(setAppStatus('idle'))
 		}
 }
 
 //types
-export type PacksReducerType = typeof initialState
+export type CardsReducerType = typeof initialState
 type ActionsType =
 		| ReturnType<typeof setCards>
 		| ReturnType<typeof setCurrentPage>

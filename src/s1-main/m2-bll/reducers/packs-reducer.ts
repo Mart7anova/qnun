@@ -68,13 +68,9 @@ export const setSortPacks = (sortValue: string) => ({
 
 export const clearFilters = () => ({
     type: 'PACKS/CLEAR-FILTERS',
-    payload: {packName: '', isMyPack: false, min: 0, max: 100}
+    payload: {packName: '', user_id:'', min: 0, max: 100}
 } as const)
 
-export const setPacksTotalCount = (count: number) => ({
-    type: 'PACKS/SET-PACKS-TOTAL-COUNT',
-    payload: {count}
-} as const)
 
 export const setCurrentPage = (page: number) => ({
     type: 'PACKS/SET-CURRENT-PAGE',
@@ -141,7 +137,6 @@ type ActionsType =
     | ReturnType<typeof clearFilters>
     | ReturnType<typeof setIsMyPacksFilter>
     | ReturnType<typeof setRangeCards>
-    | ReturnType<typeof setPacksTotalCount>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setSortPacks>
     | ReturnType<typeof changeStatusFirstLoading>

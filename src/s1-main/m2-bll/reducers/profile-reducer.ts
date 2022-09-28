@@ -7,7 +7,7 @@ const initialState = {
     profile: {} as ProfileResponseType,
 }
 
-export const profileReducer = (state: ProfileStateType = initialState, action: ActionsType): ProfileStateType => {
+export const profileReducer = (state: ProfileReducerType = initialState, action: ActionsType): ProfileReducerType => {
     switch (action.type) {
         case 'PROFILE/SET-PROFILE':
             return {...state, profile: action.profile}
@@ -32,6 +32,6 @@ export const updateUser = (name?: string, avatar?: string): AppThunk => async (d
 }
 
 //types
-type ProfileStateType = typeof initialState
+export type ProfileReducerType = typeof initialState
 
 type ActionsType = ReturnType<typeof setProfile>
