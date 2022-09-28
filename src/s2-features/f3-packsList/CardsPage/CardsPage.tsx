@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
-import {
-		createCard,
-		fetchCards, setCardsIsFirstLoading,
-		setCurrentPage,
-		setSearchByCardsNameFilter
-} from 's1-main/m2-bll/reducers/cards-reducer';
+import {createCard, fetchCards, resetCardsState, setCurrentPage} from 's1-main/m2-bll/reducers/cards-reducer';
 import {Navigate, useParams} from 'react-router-dom';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
@@ -20,7 +15,7 @@ import {Spinner} from 'assets/Spinner';
 export const CardsPage = () => {
 		const dispatch = useAppDispatch()
 		const {packId} = useParams() as { packId: string }
-		const [isSearching, setIsSearching] = useState(false);
+		const [isSearching, setIsSearching] = useState(false)
 		const cards = useAppSelector(state => state.cards.cardsState.cards)
 		const packOwnerUserId = useAppSelector(state => state.cards.cardsState.packUserId)
 		const isLoggedIn = useAppSelector(getIsLoggedIn)
@@ -31,7 +26,6 @@ export const CardsPage = () => {
 		const currentPage = useAppSelector(state => state.cards.searchParams.page)
 		const cardQuestionSearch = useAppSelector(state => state.cards.searchParams.cardQuestion)
 		const isOwner = packOwnerUserId === userId
-		const isFirstLoading = useAppSelector(state => state.cards.isFirstLoading)
 
 		const addNewCardHandle = () => {
 				dispatch(createCard(packId))
@@ -42,8 +36,7 @@ export const CardsPage = () => {
 		}
 		useEffect(() => {
 				return () => {
-						dispatch(setSearchByCardsNameFilter(''))
-						dispatch(setCardsIsFirstLoading(true))
+						dispatch(resetCardsState())
 				}
 		}, [])
 
@@ -52,7 +45,7 @@ export const CardsPage = () => {
 		}, [currentPage, cardQuestionSearch])
 
 		if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
-		if (isFirstLoading) return <Spinner/>
+		if (!packName && !packOwnerUserId) return <Spinner/>
 		return (
 				<div style={{maxWidth: '1008px', margin: '0 auto'}}>
 

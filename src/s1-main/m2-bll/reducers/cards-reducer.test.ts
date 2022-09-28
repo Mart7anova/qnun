@@ -1,7 +1,7 @@
 import {
 		cardsReducer,
-		CardsReducerType,
-		setCards, setCardsIsFirstLoading,
+		CardsReducerType, resetCardsState,
+		setCards,
 		setCurrentPage,
 		setSearchByCardsNameFilter, setSortCards
 } from 's1-main/m2-bll/reducers/cards-reducer';
@@ -40,7 +40,6 @@ beforeEach(() => {
 						min: 0,
 						sortCards: '0updated',
 				},
-				isFirstLoading: true,
 		}
 })
 test('cards from response should be set', () => {
@@ -101,8 +100,8 @@ test('sort card should work properly', () => {
 		const endState = cardsReducer(startState, action)
 		expect(endState.searchParams.sortCards).toBe('1updated')
 })
-test('isFirstLoading should be set', () => {
-		const action = setCardsIsFirstLoading(false)
+test('state should be set to initial', () => {
+		const action = resetCardsState()
 		const endState = cardsReducer(startState, action)
-		expect(endState.isFirstLoading).toBe(false)
+		expect(endState.cardsState.cards.length).toBe(0)
 })
