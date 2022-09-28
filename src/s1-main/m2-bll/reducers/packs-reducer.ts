@@ -7,42 +7,30 @@ const initialState = {
         cardPacks: [] as PackType[]
     } as ResponseCardPacksType,
     searchParams: {
-        page: 1,
         pageCount: 10,
-        sortPacks: '0updated',
         packName: '',
-        user_id: '',
-        min: 0,
-        max: 10,
     } as PackSearchParamsType,
-    packsTotalCount: 0,
 }
 
 //reducer
 export const packsReducer = (state: PacksReducerType = initialState, action: ActionsType): PacksReducerType => {
     switch (action.type) {
-        case 'PACKS/SET-PACKS': {
+        case 'PACKS/SET-PACKS':
             return {...state, packs: action.payload.packs}
-        }
-        case 'PACKS/SET-SEARCH-BY-PACKS-NAME-FILTER': {
+        case 'PACKS/SET-SEARCH-BY-PACKS-NAME-FILTER':
             return {...state, searchParams: {...state.searchParams, packName: action.payload.packName}}
-        }
-        case 'PACKS/SET-IS-MY-PACKS-FILTER': {
+        case 'PACKS/SET-IS-MY-PACKS-FILTER':
             return {...state, searchParams: {...state.searchParams, user_id: action.payload.userId}}
-        }
-        case 'PACKS/SET-RANGE-CARDS': {
+        case 'PACKS/SET-RANGE-CARDS':
             return {...state, searchParams: {...state.searchParams, min: action.payload.min, max: action.payload.max}}
-        }
-        case 'PACKS/SET-SORT-PACKS': {
+        case 'PACKS/SET-SORT-PACKS':
             return {...state, searchParams: {...state.searchParams, sortPacks: action.payload.sortValue}}
-        }
         case 'PACKS/CLEAR-FILTERS':
             return {...state, searchParams: {...state.searchParams, ...action.payload}}
         case 'PACKS/SET-PACKS-TOTAL-COUNT':
-            return {...state, packsTotalCount: action.payload.count}
-        case 'PACKS/SET-CURRENT-PAGE': {
+            return {...state, packs: {...state.packs, cardPacksTotalCount: action.payload.count}}
+        case 'PACKS/SET-CURRENT-PAGE':
             return {...state, searchParams: {...state.searchParams, page: action.payload.page}}
-        }
         default:
             return state
     }
