@@ -7,13 +7,7 @@ const initialState = {
         cardPacks: [] as PackType[]
     } as ResponseCardPacksType,
     searchParams: {
-        page: 1,
         pageCount: 10,
-        sortPacks: '0updated',
-        packName: '',
-        user_id: '',
-        min: 0,
-        max: 10,
     } as PackSearchParamsType,
     packsTotalCount: 0,
 }
