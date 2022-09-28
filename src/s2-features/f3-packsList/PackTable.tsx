@@ -24,7 +24,7 @@ type TablePropsType = {
 
 export const PackTable = ({packs}: TablePropsType) => {
 		const userID = useAppSelector(state => state.profile.profile._id)
-		const appStatus = useAppSelector(state => state.app.status)
+		const isFirstLoading = useAppSelector(state => state.packs.isFirstLoading)
 		const elementsPerPage = useAppSelector(state => state.packs.searchParams.pageCount)
 		const dispatch = useAppDispatch()
 
@@ -53,7 +53,7 @@ export const PackTable = ({packs}: TablePropsType) => {
 												</TableRow>
 										</TableHead>
 										<TableBody>
-												{packs.length > 0 && appStatus !== 'loading' && packs.map((pack) => (
+												{packs.map(pack => (
 														<TableRow
 																key={pack._id}
 																sx={{'&:last-child td, &:last-child th': {border: 0}}}
@@ -85,13 +85,12 @@ export const PackTable = ({packs}: TablePropsType) => {
 																</TableCell>
 														</TableRow>
 												))}
-												{appStatus === 'loading' &&
-														<SkeletonTableRow items={packs.length || elementsPerPage}
-														                  elementsPerPage={elementsPerPage}/>
+												{isFirstLoading &&
+														<SkeletonTableRow elementsPerPage={elementsPerPage}/>
 												}
 										</TableBody>
 								</Table>
-								{!packs.length && appStatus !== 'loading' &&
+								{!packs.length && !isFirstLoading &&
 										<div style={{textAlign: 'center', fontSize: '25px'}}>No result try to use other params.</div>}
 						</TableContainer>
 				</div>

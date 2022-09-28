@@ -4,13 +4,11 @@ import TableCell from '@mui/material/TableCell';
 import {Skeleton} from '@mui/material';
 
 type SkeletonTableRow = {
-		items: number
 		elementsPerPage: number
 }
-export const SkeletonTableRow = React.memo(({items = 10, elementsPerPage = 10}: SkeletonTableRow) => {
+export const SkeletonTableRow = React.memo(({elementsPerPage = 10}: SkeletonTableRow) => {
 		const fakeArray = []
-		const howManyItemsRender = items < 10 ? items : elementsPerPage
-		for (let i = 0; i < howManyItemsRender; i++) {
+		for (let i = 0; i < elementsPerPage; i++) {
 				fakeArray.push(i)
 		}
 		return (
