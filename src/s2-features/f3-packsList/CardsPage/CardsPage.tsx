@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {
 		createCard,
-		fetchCards,
+		fetchCards, setCardsIsFirstLoading,
 		setCurrentPage,
 		setSearchByCardsNameFilter
 } from 's1-main/m2-bll/reducers/cards-reducer';
@@ -15,6 +15,7 @@ import {Search} from 's2-features/f3-packsList/CardsPage/Search';
 import {CardsTable} from 's2-features/f3-packsList/CardsPage/CardsTable';
 import {Paginator} from 's1-main/m1-ui/common/c1-components/Pagination/Pagination';
 import {LinkBackTo} from 's1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
+import {Spinner} from 'assets/Spinner';
 
 export const CardsPage = () => {
 		const dispatch = useAppDispatch()
@@ -30,7 +31,7 @@ export const CardsPage = () => {
 		const currentPage = useAppSelector(state => state.cards.searchParams.page)
 		const cardQuestionSearch = useAppSelector(state => state.cards.searchParams.cardQuestion)
 		const isOwner = packOwnerUserId === userId
-
+		const isFirstLoading = useAppSelector(state => state.cards.isFirstLoading)
 
 		const addNewCardHandle = () => {
 				dispatch(createCard(packId))
@@ -42,6 +43,7 @@ export const CardsPage = () => {
 		useEffect(() => {
 				return () => {
 						dispatch(setSearchByCardsNameFilter(''))
+						dispatch(setCardsIsFirstLoading(true))
 				}
 		}, [])
 
@@ -50,6 +52,7 @@ export const CardsPage = () => {
 		}, [currentPage, cardQuestionSearch])
 
 		if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
+		if (isFirstLoading) return <Spinner/>
 		return (
 				<div style={{width: '1008px', margin: '0 auto'}}>
 

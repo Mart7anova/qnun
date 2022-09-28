@@ -12,6 +12,7 @@ const initialState = {
 				page: 1,
 				pageCount: 10,
 		} as CardSearchParamsType,
+		isFirstLoading: true,
 }
 
 //reducer
@@ -25,6 +26,8 @@ export const cardsReducer = (state: CardsReducerType = initialState, action: Act
 						return {...state, searchParams: {...state.searchParams, sortCards: action.payload.sortValue}}
 				case 'CARDS/SET-CURRENT-PAGE':
 						return {...state, searchParams: {...state.searchParams, page: action.payload.page}}
+				case 'CARDS/SET-CARDS-IS-FIRST-LOADING':
+						return {...state, isFirstLoading: action.payload.value}
 				default:
 						return state
 		}
@@ -40,6 +43,8 @@ export const setSearchByCardsNameFilter = (cardName: string) =>
 		({type: 'CARDS/SET-SEARCH-BY-CARDS-NAME-FILTER', payload: {cardName}} as const)
 export const setSortCards = (sortValue: string) =>
 		({type: 'CARDS/SET-SORT-CARDS', payload: {sortValue}} as const)
+export const setCardsIsFirstLoading = (value: boolean) =>
+		({type: 'CARDS/SET-CARDS-IS-FIRST-LOADING', payload: {value}} as const)
 
 //thunks
 export const fetchCards = (packId: string): AppThunk => async (dispatch, getState) => {
@@ -48,6 +53,9 @@ export const fetchCards = (packId: string): AppThunk => async (dispatch, getStat
 				const searchParams = getState().cards.searchParams
 				const {data} = await cardsApi.getCards(packId, searchParams)
 				dispatch(setCards(data))
+				if (getState().cards.isFirstLoading) {
+						dispatch(setCardsIsFirstLoading(false))
+				}
 		} catch (e) {
 				errorUtils(e, dispatch)
 		} finally {
@@ -95,3 +103,4 @@ type ActionsType =
 		| ReturnType<typeof setCurrentPage>
 		| ReturnType<typeof setSearchByCardsNameFilter>
 		| ReturnType<typeof setSortCards>
+		| ReturnType<typeof setCardsIsFirstLoading>
