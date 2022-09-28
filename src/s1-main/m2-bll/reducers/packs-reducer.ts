@@ -1,6 +1,6 @@
 import {AppThunk} from 's1-main/m2-bll/store';
 import {packApi, PackType, ResponseCardPacksType, PackSearchParamsType} from 's1-main/m3-dal/packApi';
-import {changeStatus, errorMessage} from "./app-reducer";
+import {changeStatus, errorMessage} from './app-reducer';
 
 const initialState = {
     packs: {
@@ -10,6 +10,7 @@ const initialState = {
         pageCount: 10,
         packName: '',
     } as PackSearchParamsType,
+    isFirstLoading: true
 }
 
 //reducer
@@ -31,6 +32,8 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
             return {...state, packs: {...state.packs, cardPacksTotalCount: action.payload.count}}
         case 'PACKS/SET-CURRENT-PAGE':
             return {...state, searchParams: {...state.searchParams, page: action.payload.page}}
+        case 'PACKS/CHANGE-STATUS-FIRST-LOADING':
+            return {...state, isFirstLoading: action.payload.value}
         default:
             return state
     }
@@ -38,6 +41,8 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
 
 //actions
 export const setPacks = (packs: ResponseCardPacksType) => ({type: 'PACKS/SET-PACKS', payload: {packs}} as const)
+
+export const changeStatusFirstLoading = (value: boolean) => ({type: 'PACKS/CHANGE-STATUS-FIRST-LOADING', payload: {value}} as const)
 
 export const setSearchByPacksNameFilter = (packName: string) => ({
     type: 'PACKS/SET-SEARCH-BY-PACKS-NAME-FILTER',
@@ -76,49 +81,53 @@ export const setCurrentPage = (page: number) => ({
 
 //thunks
 export const fetchPacks = (): AppThunk => async (dispatch, getState) => {
-    dispatch(changeStatus("loading"))
-	try {
+    dispatch(changeStatus('loading'))
+    try {
         const searchParams = getState().packs.searchParams
         const {data} = await packApi.getPacks(searchParams)
         dispatch(setPacks(data))
         dispatch(setPacksTotalCount(data.cardPacksTotalCount))
+        if(getState().packs.isFirstLoading){
+            dispatch(setRangeCards(data.minCardsCount, data.maxCardsCount))
+            dispatch(changeStatusFirstLoading(false))
+        }
     } catch (err) {
         dispatch(errorMessage((err as Error).message))
     } finally {
-        dispatch(changeStatus("idle"))
+        dispatch(changeStatus('idle'))
     }
 }
 export const createNewPack = (): AppThunk => async (dispatch) => {
-    dispatch(changeStatus("loading"))
+    dispatch(changeStatus('loading'))
     try {
         await packApi.createPack('new pack')
         dispatch(fetchPacks())
     } catch (err) {
         dispatch(errorMessage((err as Error).message))
     } finally {
-        dispatch(changeStatus("idle"))
+        dispatch(changeStatus('idle'))
     }
 }
 export const deletePack = (id: string): AppThunk => async (dispatch) => {
-    dispatch(changeStatus("loading"))
+    dispatch(changeStatus('loading'))
     try {
         await packApi.deletePack(id)
         dispatch(fetchPacks())
     } catch (err) {
         dispatch(errorMessage((err as Error).message))
     } finally {
-        dispatch(changeStatus("idle"))
+        dispatch(changeStatus('idle'))
     }
 }
 export const updatePack = (id: string): AppThunk => async (dispatch) => {
-    dispatch(changeStatus("loading"))
+    dispatch(changeStatus('loading'))
     try {
         await packApi.updatePack(id, 'hardcoded updated name')
         dispatch(fetchPacks())
     } catch (err) {
         dispatch(errorMessage((err as Error).message))
     } finally {
-        dispatch(changeStatus("idle"))
+        dispatch(changeStatus('idle'))
     }
 }
 
@@ -134,3 +143,4 @@ type ActionsType =
     | ReturnType<typeof setPacksTotalCount>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setSortPacks>
+    | ReturnType<typeof changeStatusFirstLoading>
