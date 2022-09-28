@@ -86,7 +86,7 @@ export const PackTable = ({packs}: TablePropsType) => {
 														</TableRow>
 												))}
 												{appStatus === 'loading' &&
-														<SkeletonTableRow items={packs.length > 0 ? packs.length : elementsPerPage}
+														<SkeletonTableRow items={packs.length || elementsPerPage}
 														                  elementsPerPage={elementsPerPage}/>
 												}
 										</TableBody>

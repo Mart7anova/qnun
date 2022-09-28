@@ -54,7 +54,7 @@ export const CardsPage = () => {
 		if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
 		if (isFirstLoading) return <Spinner/>
 		return (
-				<div style={{width: '1008px', margin: '0 auto'}}>
+				<div style={{maxWidth: '1008px', margin: '0 auto'}}>
 
 						<LinkBackTo link={PATH.PACKS_LIST}/>
 
@@ -69,9 +69,6 @@ export const CardsPage = () => {
 								? <>
 										<Search setIsSearching={setIsSearching}/>
 										<CardsTable isOwner={isOwner} cards={cards}/>
-										{!cards.length && isSearching &&
-												<div style={{textAlign: 'center', fontSize: '25px', color: 'gray'}}>no results</div>
-										}
 										{cards.length > 0 &&
 												<Paginator currentPage={currentPage}
 												           elementsPerPage={elementsPerPage}
