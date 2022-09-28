@@ -1,6 +1,7 @@
 import {AppThunk} from 's1-main/m2-bll/store';
-import {cardsApi, CardsResponseType, CardType, CardSearchParamsType} from 's1-main/m3-dal/cardsApi';
-import {changeStatus, errorMessage} from './app-reducer';
+import {cardsApi, CardSearchParamsType, CardsResponseType, CardType} from 's1-main/m3-dal/cardsApi';
+import {setAppStatus} from './app-reducer';
+import {errorUtils} from 'utils/error-utils';
 
 const initialState = {
 		cardsState: {
@@ -44,46 +45,48 @@ export const resetSearchByName = () =>
 
 //thunks
 export const fetchCards = (packId: string): AppThunk => async (dispatch, getState) => {
-		dispatch(changeStatus('loading'))
+		dispatch(setAppStatus('loading'))
 		try {
 				const searchParams = getState().cards.searchParams
 				const {data} = await cardsApi.getCards(packId, searchParams)
 				dispatch(setCards(data))
+		} catch (e) {
+				errorUtils(e,dispatch)
 		} finally {
-				dispatch(changeStatus('idle'))
+				dispatch(setAppStatus('idle'))
 		}
 }
 export const createCard = (packId: string): AppThunk => async (dispatch) => {
-		dispatch(changeStatus('loading'))
+		dispatch(setAppStatus('loading'))
 		try {
 				await cardsApi.createCard(packId, 'hardcoded question', 'hardcoded answer')
 				dispatch(fetchCards(packId))
-		} catch (err) {
-				dispatch(errorMessage((err as Error).message))
+		} catch (e) {
+				errorUtils(e,dispatch)
 		} finally {
-				dispatch(changeStatus('idle'))
+				dispatch(setAppStatus('idle'))
 		}
 }
 export const deleteCard = (packId: string, cardId: string): AppThunk => async (dispatch) => {
-		dispatch(changeStatus('loading'))
+		dispatch(setAppStatus('loading'))
 		try {
 				await cardsApi.deleteCard(cardId)
 				dispatch(fetchCards(packId))
-		} catch (err) {
-				dispatch(errorMessage((err as Error).message))
+		} catch (e) {
+				errorUtils(e,dispatch)
 		} finally {
-				dispatch(changeStatus('idle'))
+				dispatch(setAppStatus('idle'))
 		}
 }
 export const updateCard = (packId: string, cardId: string): AppThunk => async (dispatch) => {
-		dispatch(changeStatus('loading'))
+		dispatch(setAppStatus('loading'))
 		try {
 				await cardsApi.updateCard(cardId, 'updated question', 'updated answer')
 				dispatch(fetchCards(packId))
-		} catch (err) {
-				dispatch(errorMessage((err as Error).message))
+		} catch (e) {
+				errorUtils(e,dispatch)
 		} finally {
-				dispatch(changeStatus('idle'))
+				dispatch(setAppStatus('idle'))
 		}
 }
 

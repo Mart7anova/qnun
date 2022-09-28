@@ -1,6 +1,7 @@
 import {AppThunk} from 's1-main/m2-bll/store';
-import {packApi, PackType, ResponseCardPacksType, PackSearchParamsType} from 's1-main/m3-dal/packApi';
-import {changeStatus, errorMessage} from "./app-reducer";
+import {packApi, PackSearchParamsType, PackType, ResponseCardPacksType} from 's1-main/m3-dal/packApi';
+import {setAppStatus} from './app-reducer';
+import {errorUtils} from 'utils/error-utils';
 
 const initialState = {
     packs: {
@@ -88,49 +89,49 @@ export const setCurrentPage = (page: number) => ({
 
 //thunks
 export const fetchPacks = (): AppThunk => async (dispatch, getState) => {
-    dispatch(changeStatus("loading"))
+    dispatch(setAppStatus("loading"))
 	try {
         const searchParams = getState().packs.searchParams
         const {data} = await packApi.getPacks(searchParams)
         dispatch(setPacks(data))
         dispatch(setPacksTotalCount(data.cardPacksTotalCount))
-    } catch (err) {
-        dispatch(errorMessage((err as Error).message))
-    } finally {
-        dispatch(changeStatus("idle"))
+    } catch (e) {
+      errorUtils(e as any,dispatch)
+  } finally {
+        dispatch(setAppStatus("idle"))
     }
 }
 export const createNewPack = (): AppThunk => async (dispatch) => {
-    dispatch(changeStatus("loading"))
+    dispatch(setAppStatus("loading"))
     try {
         await packApi.createPack('new pack')
         dispatch(fetchPacks())
-    } catch (err) {
-        dispatch(errorMessage((err as Error).message))
+    } catch (e) {
+        errorUtils(e as any,dispatch)
     } finally {
-        dispatch(changeStatus("idle"))
+        dispatch(setAppStatus("idle"))
     }
 }
 export const deletePack = (id: string): AppThunk => async (dispatch) => {
-    dispatch(changeStatus("loading"))
+    dispatch(setAppStatus("loading"))
     try {
         await packApi.deletePack(id)
         dispatch(fetchPacks())
-    } catch (err) {
-        dispatch(errorMessage((err as Error).message))
+    } catch (e) {
+        errorUtils(e as any,dispatch)
     } finally {
-        dispatch(changeStatus("idle"))
+        dispatch(setAppStatus("idle"))
     }
 }
 export const updatePack = (id: string): AppThunk => async (dispatch) => {
-    dispatch(changeStatus("loading"))
+    dispatch(setAppStatus("loading"))
     try {
         await packApi.updatePack(id, 'hardcoded updated name')
         dispatch(fetchPacks())
-    } catch (err) {
-        dispatch(errorMessage((err as Error).message))
+    } catch (e) {
+        errorUtils(e,dispatch)
     } finally {
-        dispatch(changeStatus("idle"))
+        dispatch(setAppStatus("idle"))
     }
 }
 

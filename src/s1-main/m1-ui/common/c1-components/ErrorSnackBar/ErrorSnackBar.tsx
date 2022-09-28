@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, {AlertProps} from '@mui/material/Alert';
-import {useAppDispatch, useAppSelector} from "../../../../m2-bll/store";
-import {appErrorMessage} from "../../../../m2-bll/selectors/app-selectors";
-import {errorMessage} from "../../../../m2-bll/reducers/app-reducer";
+import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
+import {appErrorMessage} from 's1-main/m2-bll/selectors/app-selectors';
+import {setAppError} from 's1-main/m2-bll/reducers/app-reducer';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props, ref) {
@@ -18,7 +18,7 @@ export const ErrorSnackBar = memo(() => {
         if (reason === "clickaway") {
             return
         }
-        dispatch(errorMessage(null));
+        dispatch(setAppError(null));
     }
 
     return (

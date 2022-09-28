@@ -16,9 +16,9 @@ export const appReducer = (state: AppReducerType = initialState, action: Actions
     switch (action.type) {
         case 'APP/SET-IS-INITIALIZED':
             return {...state, isInitialized: action.value}
-        case "APP/CHANGE-STATUS":
+        case "APP/SET-APP-STATUS-STATUS":
             return {...state, status: action.status}
-        case "APP/ERROR":
+        case "APP/SET-APP-ERROR":
             return {...state, error: action.error}
         default:
             return state
@@ -28,8 +28,8 @@ export const appReducer = (state: AppReducerType = initialState, action: Actions
 
 //actions
 export const setAppInitialized = (value: boolean) => ({type: 'APP/SET-IS-INITIALIZED', value} as const)
-export const changeStatus = (status: RequestStatusType) => ({type: "APP/CHANGE-STATUS", status} as const)
-export const errorMessage = (error: string | null) => ({type: "APP/ERROR", error} as const)
+export const setAppStatus = (status: RequestStatusType) => ({type: "APP/SET-APP-STATUS-STATUS", status} as const)
+export const setAppError = (error: string | null) => ({type: "APP/SET-APP-ERROR", error} as const)
 //thunks
 export const initializeApp = (): AppThunk => async (dispatch) => {
     try {
@@ -49,5 +49,5 @@ export type AppReducerType = typeof initialState
 type ActionsType = SetAppInitializedType | ChangeStatusType | ErrorMessageType
 
 type SetAppInitializedType = ReturnType<typeof setAppInitialized>
-type ChangeStatusType = ReturnType<typeof changeStatus>
-type ErrorMessageType = ReturnType<typeof errorMessage>
+type ChangeStatusType = ReturnType<typeof setAppStatus>
+type ErrorMessageType = ReturnType<typeof setAppError>

@@ -11,8 +11,6 @@ import {login} from 's1-main/m2-bll/reducers/auth-reducer';
 import styleContainer from 's1-main/m1-ui/common/c2-styles/Container.module.css';
 import {PasswordView} from 's1-main/m1-ui/common/c1-components/passwordView/PasswordView';
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
-import {appStatus} from "../../../s1-main/m2-bll/selectors/app-selectors";
-import {LinearProgress} from "@mui/material";
 
 
 type FormikErrorType = {
@@ -22,7 +20,6 @@ type FormikErrorType = {
 
 export const Login = () => {
     const isLoggedIn = useAppSelector(getIsLoggedIn)
-    const status = useAppSelector(appStatus)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -51,14 +48,13 @@ export const Login = () => {
             return errors
         },
         onSubmit: (values) => {
-            dispatch(login(values.email, values.password, values.rememberMe, formik.setStatus))
+            dispatch(login(values.email, values.password, values.rememberMe))
         }
     })
 
     if (isLoggedIn) return <Navigate to={PATH.PACKS_LIST}/>
     return (
         <div className={s.loginPage}>
-			{/*{status === "loading" && <LinearProgress color="success"/>}*/}
             <div className={styleContainer.container}>
                 <div className={s.formWrapper}>
                     <form onSubmit={formik.handleSubmit} className={s.form}>
@@ -77,7 +73,6 @@ export const Login = () => {
                         <Link to={PATH.FORGOT_PASSWORD} className={s.forgotPasswordLink}>
                             <span>Forgot Password?</span>
                         </Link>
-                        {formik.status && <span className={s.generalFormError}>{formik.status.error}</span>}
                         <Button>Sign in</Button>
 
                         <span className={s.alreadyHaveAccount}>Do not have account?</span>
