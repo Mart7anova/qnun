@@ -8,7 +8,7 @@ import {
     getMinCardsCount
 } from '../../../../s1-main/m2-bll/selectors/packs-selectors';
 import {useAppDispatch, useAppSelector} from '../../../../s1-main/m2-bll/store';
-import {useDebounce} from '../../../../s1-main/m2-bll/hooks/hookDebonce';
+import {useDebounce} from '../../../../s1-main/m2-bll/hooks/useDebonce';
 import {setRangeCards} from '../../../../s1-main/m2-bll/reducers/packs-reducer';
 import style from './DoubleRangeFilter.module.scss'
 import {InputForRangeFilter} from './InputForRangeFilter';

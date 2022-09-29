@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import {useDebounce} from 's1-main/m2-bll/hooks/hookDebonce';
+import {useDebounce} from 's1-main/m2-bll/hooks/useDebonce';
 import {useAppDispatch} from 's1-main/m2-bll/store';
 import {TextField} from '@mui/material';
 import {AnyAction} from 'redux';

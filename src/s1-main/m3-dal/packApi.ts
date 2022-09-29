@@ -1,9 +1,10 @@
 import {instance} from './instance/instance';
+import {AxiosResponse} from 'axios';
 
 
 export const packApi = {
     getPacks(params: PackSearchParamsType) {
-        return instance.get<ResponseCardPacksType>(`/cards/pack`, {params})
+        return instance.get<PackSearchParamsType, AxiosResponse<ResponseCardPacksType>>(`/cards/pack`, {params})
     },
     createPack(name: string, isPrivate = false) {
         return instance.post(`cards/pack`, {
