@@ -85,11 +85,6 @@ test('new currentPage should be set', () => {
 		const endState = cardsReducer(startState, action)
 		expect(endState.searchParams.page).toBe(5)
 })
-test('new currentPage should be set', () => {
-		const action = setCurrentPage(5)
-		const endState = cardsReducer(startState, action)
-		expect(endState.searchParams.page).toBe(5)
-})
 test('card question param should be set', () => {
 		const action = setSearchByCardsNameFilter('searched card question')
 		const endState = cardsReducer(startState, action)

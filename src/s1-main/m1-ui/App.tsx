@@ -6,7 +6,6 @@ import {AppRootStateType, useAppDispatch} from '../m2-bll/store';
 import {AppRoute} from './u1-Route/appRoute';
 import {Spinner} from 'assets/Spinner';
 import {initializeApp} from 's1-main/m2-bll/reducers/app-reducer';
-import {ErrorSnackBar} from "./common/c1-components/ErrorSnackBar/ErrorSnackBar";
 
 export const App = () => {
     const appInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
@@ -21,8 +20,6 @@ export const App = () => {
 
     return (
         <div className={style.App}>
-
-            <ErrorSnackBar/>
             <AppRoute/>
         </div>
     );

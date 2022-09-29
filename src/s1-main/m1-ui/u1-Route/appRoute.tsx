@@ -26,7 +26,7 @@ export const AppRoute = () => {
 								<Route path={PATH.NEW_PASSWORD} element={<NewPassword/>}/>
 
 								<Route index element={<PacksPage/>}/>
-								<Route path={`pack/:packId`} element={<CardsPage/>}/>
+								<Route path={PATH.PACK} element={<CardsPage/>}/>
 								<Route path={PATH.PROFILE} element={<Profile/>}/>
 								<Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
 						</Route>
