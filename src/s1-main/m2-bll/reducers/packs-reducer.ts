@@ -10,6 +10,7 @@ const initialState = {
     searchParams: {
         page: 1,
         pageCount: 10,
+        packName: '',
     } as PackSearchParamsType,
     isFirstLoading: true
 }
@@ -22,13 +23,11 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
 
         case 'PACKS/SET-PACKS':
             return {...state, packs: action.payload.packs}
-
         case 'PACKS/SET-SEARCH-BY-PACKS-NAME-FILTER':
         case 'PACKS/SET-IS-MY-PACKS-FILTER':
         case 'PACKS/SET-RANGE-CARDS':
         case 'PACKS/SET-SORT-PACKS':
-        case 'PACKS/SET-CURRENT-PAGE':
-        case 'PACKS/CLEAR-FILTERS':
+        case 'PACKS/SET-CURRENT-PAGE':case 'PACKS/CLEAR-FILTERS':
             return {...state, searchParams: {...state.searchParams, ...action.payload}}
 
         default:
@@ -38,38 +37,30 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
 
 //actions
 export const setPacks = (packs: ResponseCardPacksType) => ({type: 'PACKS/SET-PACKS', payload: {packs}} as const)
-
 export const changeStatusFirstLoading = (value: boolean) => ({
     type: 'PACKS/CHANGE-STATUS-FIRST-LOADING',
     payload: {value}
 } as const)
-
 export const setSearchByPacksNameFilter = (packName: string) => ({
     type: 'PACKS/SET-SEARCH-BY-PACKS-NAME-FILTER',
     payload: {packName}
 } as const)
-
 export const setIsMyPacksFilter = (user_id: string) => ({
     type: 'PACKS/SET-IS-MY-PACKS-FILTER',
     payload: {user_id}
 } as const)
-
 export const setRangeCards = (min: number, max: number) => ({
     type: 'PACKS/SET-RANGE-CARDS',
     payload: {min, max}
 } as const)
-
 export const setSortPacks = (sortPacks: string) => ({
     type: 'PACKS/SET-SORT-PACKS',
     payload: {sortPacks}
 } as const)
-
 export const clearFilters = () => ({
     type: 'PACKS/CLEAR-FILTERS',
     payload: {packName: '', user_id: '', min: 0, max: 100}
 } as const)
-
-
 export const setCurrentPage = (page: number) => ({
     type: 'PACKS/SET-CURRENT-PAGE',
     payload: {page}

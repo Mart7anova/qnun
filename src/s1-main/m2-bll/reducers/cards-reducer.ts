@@ -37,19 +37,14 @@ export const cardsReducer = (state: CardsReducerType = initialState, action: Act
 //actions
 export const setCards = (cards: CardsResponseType) =>
     ({type: 'CARDS/SET-CARDS', payload: {cards}} as const)
-
 export const resetCardsState = () =>
     ({type: 'CARDS/RESET-CARDS-STATE'} as const)
-
 export const setCurrentPage = (page: number) =>
     ({type: 'CARDS/SET-CURRENT-PAGE', payload: {page}} as const)
-
 export const setSearchByCardsNameFilter = (cardQuestion: string) =>
     ({type: 'CARDS/SET-SEARCH-BY-CARDS-NAME-FILTER', payload: {cardQuestion}} as const)
-
 export const setSortCards = (sortCards: string) =>
     ({type: 'CARDS/SET-SORT-CARDS', payload: {sortCards}} as const)
-
 
 //thunks
 export const fetchCards = (packId: string): AppThunk => async (dispatch, getState) => {

@@ -21,7 +21,6 @@ export const appReducer = (state: AppReducerType = initialState, action: Actions
     }
 }
 
-
 //actions
 export const setAppInitialized = (isInitialized: boolean) => ({type: 'APP/SET-IS-INITIALIZED', payload: {isInitialized}} as const)
 export const setAppStatus = (status: RequestStatusType) => ({
@@ -29,6 +28,7 @@ export const setAppStatus = (status: RequestStatusType) => ({
     payload: {status}
 } as const)
 export const setAppError = (error: string | null) => ({type: 'APP/SET-APP-ERROR', payload: {error}} as const)
+
 //thunks
 export const initializeApp = (): AppThunk => async (dispatch) => {
     try {
