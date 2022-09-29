@@ -6,7 +6,7 @@ import {setProfile} from 's1-main/m2-bll/reducers/profile-reducer';
 export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed" | ""
 
 const initialState = {
-    status: "" as RequestStatusType,
+    status: "loading" as RequestStatusType,
     error: null as null | string,
     isInitialized: false,
 }

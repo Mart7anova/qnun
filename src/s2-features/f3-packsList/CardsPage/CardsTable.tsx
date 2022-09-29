@@ -68,6 +68,9 @@ export const CardsTable = ({isOwner, cards}: CardsTablePropsType) => {
 												))}
 										</TableBody>
 								</Table>
+								{cards.length === 0 &&
+										<div style={{textAlign: 'center', fontSize: '25px'}}>No results.</div>
+								}
 						</TableContainer>
 				</div>
 		)
