@@ -3,23 +3,19 @@ import {authApi} from 's1-main/m3-dal/authApi';
 import {isLoggedIn} from 's1-main/m2-bll/reducers/auth-reducer';
 import {setProfile} from 's1-main/m2-bll/reducers/profile-reducer';
 
-export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed" | ""
-
 const initialState = {
-    status: "loading" as RequestStatusType,
-    error: null as null | string,
     isInitialized: false,
+    status: 'loading' as RequestStatusType,
+    error: null as null | string,
 }
 
 //reducer
 export const appReducer = (state: AppReducerType = initialState, action: ActionsType): AppReducerType => {
     switch (action.type) {
         case 'APP/SET-IS-INITIALIZED':
-            return {...state, isInitialized: action.value}
-        case "APP/SET-APP-STATUS-STATUS":
-            return {...state, status: action.status}
-        case "APP/SET-APP-ERROR":
-            return {...state, error: action.error}
+        case 'APP/SET-APP-STATUS-STATUS':
+        case 'APP/SET-APP-ERROR':
+            return {...state, ...action.payload}
         default:
             return state
     }
@@ -27,9 +23,12 @@ export const appReducer = (state: AppReducerType = initialState, action: Actions
 
 
 //actions
-export const setAppInitialized = (value: boolean) => ({type: 'APP/SET-IS-INITIALIZED', value} as const)
-export const setAppStatus = (status: RequestStatusType) => ({type: "APP/SET-APP-STATUS-STATUS", status} as const)
-export const setAppError = (error: string | null) => ({type: "APP/SET-APP-ERROR", error} as const)
+export const setAppInitialized = (isInitialized: boolean) => ({type: 'APP/SET-IS-INITIALIZED', payload: {isInitialized}} as const)
+export const setAppStatus = (status: RequestStatusType) => ({
+    type: 'APP/SET-APP-STATUS-STATUS',
+    payload: {status}
+} as const)
+export const setAppError = (error: string | null) => ({type: 'APP/SET-APP-ERROR', payload: {error}} as const)
 //thunks
 export const initializeApp = (): AppThunk => async (dispatch) => {
     try {
@@ -44,10 +43,12 @@ export const initializeApp = (): AppThunk => async (dispatch) => {
 }
 
 //types
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed' | ''
+
 export type AppReducerType = typeof initialState
 
-type ActionsType = SetAppInitializedType | ChangeStatusType | ErrorMessageType
+type ActionsType = |
+    ReturnType<typeof setAppInitialized>
+    | ReturnType<typeof setAppStatus>
+    | ReturnType<typeof setAppError>
 
-type SetAppInitializedType = ReturnType<typeof setAppInitialized>
-type ChangeStatusType = ReturnType<typeof setAppStatus>
-type ErrorMessageType = ReturnType<typeof setAppError>

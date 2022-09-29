@@ -13,22 +13,20 @@ const initialState = {
 export const authReducer = (state: AuthReducerType = initialState, action: ActionsType): AuthReducerType => {
     switch (action.type) {
         case 'AUTH/LOGIN':
-            return {...state, isLoggedIn: action.payload.value}
         case 'AUTH/REGISTRATION':
-            return {...state, isAuth: action.payload.value}
         case 'STATUS-REQUEST/REGISTRATION':
-            return {...state, isRequestSuccess: action.payload.value}
+            return {...state, ...action.payload}
         default:
             return state
     }
 }
 
 //AC
-export const isLoggedIn = (value: boolean) => ({type: 'AUTH/LOGIN', payload: {value}} as const)
-export const setIsAuth = (value: boolean) => ({type: 'AUTH/REGISTRATION', payload: {value}} as const)
-export const setIsRequestSuccess = (value: boolean) => ({
+export const isLoggedIn = (isLoggedIn: boolean) => ({type: 'AUTH/LOGIN', payload: {isLoggedIn}} as const)
+export const setIsAuth = (isAuth: boolean) => ({type: 'AUTH/REGISTRATION', payload: {isAuth}} as const)
+export const setIsRequestSuccess = (isRequestSuccess: boolean) => ({
     type: 'STATUS-REQUEST/REGISTRATION',
-    payload: {value}
+    payload: {isRequestSuccess}
 } as const)
 
 //thunk

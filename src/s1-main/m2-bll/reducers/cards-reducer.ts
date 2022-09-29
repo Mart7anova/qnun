@@ -1,5 +1,9 @@
 import {AppThunk} from 's1-main/m2-bll/store';
-import {cardsApi, CardSearchParamsType, CardsResponseType, CardType} from 's1-main/m3-dal/cardsApi';
+import {
+    cardsApi,
+    CardsResponseType,
+    CardType,
+} from 's1-main/m3-dal/cardsApi';
 import {setAppStatus} from './app-reducer';
 import {errorUtils} from 'utils/error-utils';
 
@@ -8,10 +12,9 @@ const initialState = {
         cards: [] as CardType[]
     } as CardsResponseType,
     searchParams: {
-        cardQuestion: '',
-		page: 1,
-		pageCount: 10,
-	} as CardSearchParamsType,
+        page: 1,
+        pageCount: 6,
+    } as CardSearchParamsType,
 }
 
 //reducer
@@ -19,14 +22,13 @@ export const cardsReducer = (state: CardsReducerType = initialState, action: Act
     switch (action.type) {
         case 'CARDS/SET-CARDS':
             return {...state, cardsState: action.payload.cards}
-        case 'CARDS/SET-SEARCH-BY-CARDS-NAME-FILTER':
-            return {...state, searchParams: {...state.searchParams, cardQuestion: action.payload.cardName}}
+        case 'CARDS/RESET-CARDS-STATE':
+            return {...initialState}
+
         case 'CARDS/SET-SORT-CARDS':
-            return {...state, searchParams: {...state.searchParams, sortCards: action.payload.sortValue}}
+        case 'CARDS/SET-SEARCH-BY-CARDS-NAME-FILTER':
         case 'CARDS/SET-CURRENT-PAGE':
-            return {...state, searchParams: {...state.searchParams, page: action.payload.page}}
-				case 'CARDS/RESET-CARDS-STATE':
-						return {...state, ...initialState}
+            return {...state, searchParams: {...state.searchParams, ...action.payload}}
         default:
             return state
     }
@@ -35,16 +37,19 @@ export const cardsReducer = (state: CardsReducerType = initialState, action: Act
 //actions
 export const setCards = (cards: CardsResponseType) =>
     ({type: 'CARDS/SET-CARDS', payload: {cards}} as const)
+
+export const resetCardsState = () =>
+    ({type: 'CARDS/RESET-CARDS-STATE'} as const)
+
 export const setCurrentPage = (page: number) =>
     ({type: 'CARDS/SET-CURRENT-PAGE', payload: {page}} as const)
-export const setSearchByCardsNameFilter = (cardName: string) =>
-    ({type: 'CARDS/SET-SEARCH-BY-CARDS-NAME-FILTER', payload: {cardName}} as const)
-export const setSortCards = (sortValue: string) =>
-    ({type: 'CARDS/SET-SORT-CARDS', payload: {sortValue}} as const)
-export const setCardsIsFirstLoading = (value: boolean) =>
-		({type: 'CARDS/SET-CARDS-IS-FIRST-LOADING', payload: {value}} as const)
-export const resetCardsState = () =>
-		({type: 'CARDS/RESET-CARDS-STATE'} as const)
+
+export const setSearchByCardsNameFilter = (cardQuestion: string) =>
+    ({type: 'CARDS/SET-SEARCH-BY-CARDS-NAME-FILTER', payload: {cardQuestion}} as const)
+
+export const setSortCards = (sortCards: string) =>
+    ({type: 'CARDS/SET-SORT-CARDS', payload: {sortCards}} as const)
+
 
 //thunks
 export const fetchCards = (packId: string): AppThunk => async (dispatch, getState) => {
@@ -100,5 +105,14 @@ type ActionsType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setSearchByCardsNameFilter>
     | ReturnType<typeof setSortCards>
-		| ReturnType<typeof setCardsIsFirstLoading>
-		| ReturnType<typeof resetCardsState>
+    | ReturnType<typeof resetCardsState>
+
+export type CardSearchParamsType = {
+    cardQuestion: string
+    cardsPack_id: number
+    min: number
+    max: number
+    sortCards: string
+    page: number
+    pageCount: number
+}

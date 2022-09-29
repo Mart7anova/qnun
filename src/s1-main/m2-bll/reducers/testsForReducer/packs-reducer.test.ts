@@ -1,10 +1,17 @@
 import {
-		changeStatusFirstLoading, clearFilters,
-		packsReducer,
-		PacksReducerType, setCurrentPage, setIsMyPacksFilter,
-		setPacks, setRangeCards, setSearchByPacksNameFilter, setSortPacks
+	changeStatusFirstLoading,
+	clearFilters, PackSearchParamsType,
+	packsReducer,
+	PacksReducerType,
+	setCurrentPage,
+	setIsMyPacksFilter,
+	setPacks,
+	setRangeCards,
+	setSearchByPacksNameFilter,
+	setSortPacks
 } from 's1-main/m2-bll/reducers/packs-reducer';
-import {PackSearchParamsType, PackType, ResponseCardPacksType} from 's1-main/m3-dal/packApi';
+import {PackType, ResponseCardPacksType} from '../../../m3-dal/packApi';
+
 
 let startState: PacksReducerType
 beforeEach(() => {

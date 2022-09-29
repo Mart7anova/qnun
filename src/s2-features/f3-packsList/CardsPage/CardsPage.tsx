@@ -24,6 +24,7 @@ export const CardsPage = () => {
 		const elementsPerPage = useAppSelector(state => state.cards.cardsState.pageCount)
 		const currentPage = useAppSelector(state => state.cards.searchParams.page)
 		const cardQuestionSearch = useAppSelector(state => state.cards.searchParams.cardQuestion)
+		const sortCards = useAppSelector(state => state.cards.searchParams.sortCards)
 		const isOwner = packOwnerUserId === userId
 
 		const addNewCardHandle = () => {
@@ -41,10 +42,11 @@ export const CardsPage = () => {
 
 		useEffect(() => {
 				dispatch(fetchCards(packId))
-		}, [currentPage, cardQuestionSearch])
+		}, [currentPage, cardQuestionSearch, sortCards])
 
 		if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
 		if (!packName && !packOwnerUserId) return null
+
 		return (
 				<div style={{maxWidth: '1008px', margin: '0 auto'}}>
 
