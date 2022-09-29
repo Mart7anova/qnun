@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
+import qs from 'qs';
 import {
-	changeStatusFirstLoading,
-	createNewPack,
-	fetchPacks,
-	setCurrentPage
+    changeStatusFirstLoading,
+    createNewPack,
+    fetchPacks,
+    setCurrentPage, setIsMyPacksFilter
 } from 's1-main/m2-bll/reducers/packs-reducer';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {PackTable} from 's2-features/f3-packsList/PackTable';
@@ -18,12 +19,15 @@ import {
     getSortPacks
 } from 's1-main/m2-bll/selectors/packs-selectors';
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
-import {Navigate} from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {Paginator} from 's1-main/m1-ui/common/c1-components/Pagination/Pagination';
 
 export const PacksPage = () => {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const isSearch = useRef(false)
+    const isMounted = useRef(false)
     const packs = useAppSelector(getPacks)
     const isLoggedIn = useAppSelector(getIsLoggedIn)
     const packName = useAppSelector(getPackName)
@@ -37,11 +41,31 @@ export const PacksPage = () => {
 
     useEffect(() => {
         dispatch(changeStatusFirstLoading(true))
+
+        if (window.location.search) {
+            const params = qs.parse(window.location.search.substring(1))
+            console.log(params.packsForUserId)
+            dispatch(setIsMyPacksFilter(params.packsForUserId as string))
+            isSearch.current = true
+        }
     }, [])
 
     useEffect(() => {
-        dispatch(fetchPacks())
+        if (!isSearch.current) {
+            dispatch(fetchPacks())
+        }
+        isSearch.current = false
     }, [packName, packsForUserId, currentMinCount, currentMaxCount, page, sortPacks])
+
+    useEffect(() => {
+        if (isMounted.current) {
+            const queryString = qs.stringify({
+                packsForUserId
+            })
+            navigate(`?${queryString}`)
+        }
+        isMounted.current = true
+    }, [packsForUserId])
 
     const addNewPackHandler = () => {
         dispatch(createNewPack())
