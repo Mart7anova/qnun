@@ -11,7 +11,7 @@ const initialState = {
 				pageCount: 10,
 				packName: '',
 				page: 1,
-				user_id: ''
+				//user_id: ''
 		} as PackSearchParamsType,
 		isFirstLoading: true
 }

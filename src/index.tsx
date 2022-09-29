@@ -5,16 +5,16 @@ import {App} from 's1-main/m1-ui/App';
 import reportWebVitals from './reportWebVitals';
 import {store} from './s1-main/m2-bll/store';
 import {Provider} from 'react-redux';
-import {BrowserRouter, HashRouter } from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
             <App/>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>
 );
 

@@ -42,16 +42,20 @@ export const PacksPage = () => {
     useEffect(() => {
         dispatch(changeStatusFirstLoading(true))
 
-        if (window.location.search) {
-            const params = qs.parse(window.location.search.substring(1))
-            console.log(params.packsForUserId)
-            dispatch(setIsMyPacksFilter(params.packsForUserId as string))
-            isSearch.current = true
+        if (window.location.hash) {
+            const params = qs.parse(window.location.hash.substring(3))
+            const packsForUserId =  params.packsForUserId
+
+            if(packsForUserId){
+                dispatch(setIsMyPacksFilter(packsForUserId as string))
+                isSearch.current = true
+            }
         }
     }, [])
 
     useEffect(() => {
         if (!isSearch.current) {
+            console.log('nn')
             dispatch(fetchPacks())
         }
         isSearch.current = false
