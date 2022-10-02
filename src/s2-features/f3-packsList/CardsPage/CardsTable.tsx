@@ -16,63 +16,61 @@ import style from './CardsTable.module.scss'
 import dayjs from 'dayjs';
 
 type CardsTablePropsType = {
-		cards: CardType[]
-		isOwner: boolean
+    cards: CardType[]
+    isOwner: boolean
 }
 
 export const CardsTable = ({isOwner, cards}: CardsTablePropsType) => {
-		const dispatch = useAppDispatch()
-		const updateCardHandle = (packId: string, cardId: string) => {
-				dispatch(updateCard(packId, cardId))
-		}
-		const deleteCardHandle = (packId: string, cardId: string) => {
-				dispatch(deleteCard(packId, cardId))
-		}
-		return (
-				<div>
-						<TableContainer component={Paper}>
-								<Table sx={{minWidth: 650}}>
-										<TableHead sx={{backgroundColor: '#EFEFEF', height: '48px'}}>
-												<TableRow>
-														<TableHeaderItem name={'Question'} align={'left'} sortName={'question'}
-														                 setSort={setSortCards} className={style.question}/>
-														<TableHeaderItem name={'Answer'} align={'left'} sortName={'answer'} setSort={setSortCards}
-														                 className={style.answer}/>
-														<TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'}
-														                 setSort={setSortCards} className={style.lastUpdated}/>
-														<TableHeaderItem name={'Grade'} align={'center'} sortName={'grade'} setSort={setSortCards}
-														                 className={style.grade}/>
-														{isOwner && <TableCell>Actions</TableCell>}
-												</TableRow>
-										</TableHead>
-										<TableBody>
-												{cards.map(card => (
-														<TableRow
-																key={card._id}
-																sx={{'&:last-child td, &:last-child th': {border: 0}}}
-														>
-																<TableCell align="left">{card.question}</TableCell>
-																<TableCell align="left">{card.answer}</TableCell>
-																<TableCell align="center">{dayjs(card.updated).format(`DD.MM.YYYY`)}</TableCell>
-																<TableCell align="center">{card.grade}</TableCell>
-																{
-																		isOwner && <TableCell align="center">
+    const dispatch = useAppDispatch()
+    const updateCardHandle = (packId: string, cardId: string) => {
+        dispatch(updateCard(packId, cardId))
+    }
+    const deleteCardHandle = (packId: string, cardId: string) => {
+        dispatch(deleteCard(packId, cardId))
+    }
+    return (
+        <TableContainer sx={{marginTop: '25px'}} component={Paper}>
+            <Table sx={{minWidth: 650}}>
+                <TableHead sx={{backgroundColor: '#EFEFEF', height: '48px'}}>
+                    <TableRow>
+                        <TableHeaderItem name={'Question'} align={'left'} sortName={'question'}
+                                         setSort={setSortCards} className={style.question}/>
+                        <TableHeaderItem name={'Answer'} align={'left'} sortName={'answer'} setSort={setSortCards}
+                                         className={style.answer}/>
+                        <TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'}
+                                         setSort={setSortCards} className={style.lastUpdated}/>
+                        <TableHeaderItem name={'Grade'} align={'center'} sortName={'grade'} setSort={setSortCards}
+                                         className={style.grade}/>
+                        {isOwner && <TableCell>Actions</TableCell>}
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {cards.map(card => (
+                        <TableRow
+                            key={card._id}
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                        >
+                            <TableCell align="left">{card.question}</TableCell>
+                            <TableCell align="left">{card.answer}</TableCell>
+                            <TableCell align="center">{dayjs(card.updated).format(`DD.MM.YYYY`)}</TableCell>
+                            <TableCell align="center">{card.grade}</TableCell>
+                            {
+                                isOwner && <TableCell align="center">
 									<span style={{display: 'flex', gap: '8px'}}>
 										<img src={editImg} alt="edit"
-										     onClick={() => updateCardHandle(card.cardsPack_id, card._id)}/>
+                                             onClick={() => updateCardHandle(card.cardsPack_id, card._id)}/>
 										<img src={deleteImg} alt="detele"
-										     onClick={() => deleteCardHandle(card.cardsPack_id, card._id)}/>
+                                             onClick={() => deleteCardHandle(card.cardsPack_id, card._id)}/>
 									</span>
-																		</TableCell>
-																}
-														</TableRow>
-												))}
-										</TableBody>
-								</Table>
-								{cards.length === 0 &&
-										<div style={{textAlign: 'center', fontSize: '25px'}}>No results.</div>
-								}
-						</TableContainer>
-				</div>
-		)
+                                </TableCell>
+                            }
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+            {cards.length === 0 &&
+                <div style={{textAlign: 'center', fontSize: '25px'}}>No results.</div>
+            }
+        </TableContainer>
+    )
 }

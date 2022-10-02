@@ -20,79 +20,78 @@ import dayjs from 'dayjs';
 
 
 type TablePropsType = {
-		packs: PackType[]
+    packs: PackType[]
 }
 
 export const PackTable = ({packs}: TablePropsType) => {
-		const userID = useAppSelector(state => state.profile.profile._id)
-		const isFirstLoading = useAppSelector(state => state.packs.isFirstLoading)
-		const elementsPerPage = useAppSelector(state => state.packs.searchParams.pageCount)
-		const dispatch = useAppDispatch()
+    const userID = useAppSelector(state => state.profile.profile._id)
+    const isFirstLoading = useAppSelector(state => state.packs.isFirstLoading)
+    const elementsPerPage = useAppSelector(state => state.packs.searchParams.pageCount)
+    const dispatch = useAppDispatch()
 
-		const deletePackHandle = (id: string) => {
-				dispatch(deletePack(id))
-		}
-		const updatePackHandle = (id: string) => {
-				dispatch(updatePack(id))
-		}
-		return (
-				<div>
-						<TableContainer component={Paper}>
-								<Table className={style.table}>
-										<TableHead className={style.tableHead}>
-												<TableRow>
-														<TableHeaderItem name={'Name'} align={'left'} sortName={'name'} setSort={setSortPacks}
-														                 className={style.name}/>
-														<TableHeaderItem name={'Cards'} align={'right'} sortName={'cardsCount'}
-														                 setSort={setSortPacks} className={style.cards}/>
-														<TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'}
-														                 setSort={setSortPacks} className={style.lastUpdated}/>
-														<TableHeaderItem name={'Created by'} align={'center'} sortName={'user_name'}
-														                 setSort={setSortPacks} className={style.createdBy}/>
-														<TableCell align="left" className={style.actions}>Actions</TableCell>
-												</TableRow>
-										</TableHead>
-										<TableBody>
-												{!isFirstLoading && packs.map(pack => (
-														<TableRow
-																key={pack._id}
-																sx={{'&:last-child td, &:last-child th': {border: 0}}}
-														>
-																<TableCell align="left" sx={{overflowWrap: 'anywhere'}}>
-																		<Link to={`/pack/${pack._id}`}>
-																				{pack.name}
-																		</Link>
-																</TableCell>
-																<TableCell align="center">{pack.cardsCount}</TableCell>
-																<TableCell align="center">{dayjs(pack.updated).format(`DD.MM.YYYY`)}</TableCell>
-																<TableCell align="center">{pack.user_name}</TableCell>
-																<TableCell align="left">
+    const deletePackHandle = (id: string) => {
+        dispatch(deletePack(id))
+    }
+    const updatePackHandle = (id: string) => {
+        dispatch(updatePack(id))
+    }
+    return (
+        <TableContainer sx={{marginTop: '25px'}} component={Paper}>
+            <Table className={style.table}>
+                <TableHead className={style.tableHead}>
+                    <TableRow>
+                        <TableHeaderItem name={'Name'} align={'left'} sortName={'name'} setSort={setSortPacks}
+                                         className={style.name}/>
+                        <TableHeaderItem name={'Cards'} align={'right'} sortName={'cardsCount'}
+                                         setSort={setSortPacks} className={style.cards}/>
+                        <TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'}
+                                         setSort={setSortPacks} className={style.lastUpdated}/>
+                        <TableHeaderItem name={'Created by'} align={'center'} sortName={'user_name'}
+                                         setSort={setSortPacks} className={style.createdBy}/>
+                        <TableCell align="left" className={style.actions}>Actions</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {!isFirstLoading && packs.map(pack => (
+                        <TableRow
+                            key={pack._id}
+                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                        >
+                            <TableCell align="left" sx={{overflowWrap: 'anywhere'}}>
+                                <Link to={`/pack/${pack._id}`}>
+                                    {pack.name}
+                                </Link>
+                            </TableCell>
+                            <TableCell align="center">{pack.cardsCount}</TableCell>
+                            <TableCell align="center">{dayjs(pack.updated).format(`DD.MM.YYYY`)}</TableCell>
+                            <TableCell align="center">{pack.user_name}</TableCell>
+                            <TableCell align="left">
 																<span style={{display: 'flex', gap: '8px'}}>
-																		{pack.cardsCount > 0 && <img src={studyImg} alt="study"
-																		                             style={{cursor: 'pointer'}}/>}
-																		{userID === pack.user_id &&
-																				<>
-																						<img src={editImg} alt="edit"
-																						     style={{cursor: 'pointer'}}
-																						     onClick={() => updatePackHandle(pack._id)}
-																						/>
-																						<img src={deleteImg} alt="delete"
-																						     style={{cursor: 'pointer'}}
-																						     onClick={() => deletePackHandle(pack._id)}/>
-																				</>
-																		}
+																		{pack.cardsCount > 0 &&
+                                                                            <img src={studyImg} alt="study"
+                                                                                 style={{cursor: 'pointer'}}/>}
+                                                                    {userID === pack.user_id &&
+                                                                        <>
+                                                                            <img src={editImg} alt="edit"
+                                                                                 style={{cursor: 'pointer'}}
+                                                                                 onClick={() => updatePackHandle(pack._id)}
+                                                                            />
+                                                                            <img src={deleteImg} alt="delete"
+                                                                                 style={{cursor: 'pointer'}}
+                                                                                 onClick={() => deletePackHandle(pack._id)}/>
+                                                                        </>
+                                                                    }
 																</span>
-																</TableCell>
-														</TableRow>
-												))}
-												{isFirstLoading &&
-														<SkeletonTableRow elementsPerPage={elementsPerPage}/>
-												}
-										</TableBody>
-								</Table>
-								{!packs.length && !isFirstLoading &&
-										<div style={{textAlign: 'center', fontSize: '25px'}}>No result try to use other params.</div>}
-						</TableContainer>
-				</div>
-		);
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                    {isFirstLoading &&
+                        <SkeletonTableRow elementsPerPage={elementsPerPage}/>
+                    }
+                </TableBody>
+            </Table>
+            {!packs.length && !isFirstLoading &&
+                <div style={{textAlign: 'center', fontSize: '25px'}}>No result try to use other params.</div>}
+        </TableContainer>
+    );
 }

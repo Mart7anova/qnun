@@ -44,9 +44,9 @@ export const PacksPage = () => {
 
         if (window.location.hash) {
             const params = qs.parse(window.location.hash.substring(3))
-            const packsForUserId =  params.packsForUserId
+            const packsForUserId = params.packsForUserId
 
-            if(packsForUserId){
+            if (packsForUserId) {
                 dispatch(setIsMyPacksFilter(packsForUserId as string))
                 isSearch.current = true
             }
@@ -55,7 +55,6 @@ export const PacksPage = () => {
 
     useEffect(() => {
         if (!isSearch.current) {
-            console.log('nn')
             dispatch(fetchPacks())
         }
         isSearch.current = false
@@ -82,8 +81,8 @@ export const PacksPage = () => {
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
     return (
         <div style={{maxWidth: '1008px', margin: '0 auto'}}>
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                <h1>PacksList</h1>
+            <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '40px', marginBottom: '40px'}}>
+                <h1 style={{fontWeight: '600', fontSize: '22px'}}>PacksList</h1>
                 <Button onClick={addNewPackHandler}>Add new pack</Button>
             </div>
             <PackFiltration/>

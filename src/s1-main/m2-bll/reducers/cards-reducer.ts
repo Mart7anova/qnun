@@ -14,6 +14,7 @@ const initialState = {
     searchParams: {
         page: 1,
         pageCount: 6,
+        cardQuestion: '',
     } as CardSearchParamsType,
 }
 
