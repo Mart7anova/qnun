@@ -68,8 +68,8 @@ export const PackTable = ({packs}: TablePropsType) => {
 																<TableCell align="center">{pack.user_name}</TableCell>
 																<TableCell align="left">
 																<span style={{display: 'flex', gap: '8px'}}>
-																		<img src={studyImg} alt="study"
-																		     style={{cursor: 'pointer'}}/>
+																		{pack.cardsCount > 0 && <img src={studyImg} alt="study"
+																		                             style={{cursor: 'pointer'}}/>}
 																		{userID === pack.user_id &&
 																				<>
 																						<img src={editImg} alt="edit"
