@@ -15,7 +15,6 @@ import {deletePack, setSortPacks, updatePack} from 's1-main/m2-bll/reducers/pack
 import {Link} from 'react-router-dom';
 import {TableHeaderItem} from './TableHeaderItem';
 import style from './PackTable.module.scss'
-import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {SkeletonTableRow} from 's2-features/f3-packsList/SkeletonTableRow';
 
 type TablePropsType = {
@@ -53,7 +52,7 @@ export const PackTable = ({packs}: TablePropsType) => {
 												</TableRow>
 										</TableHead>
 										<TableBody>
-												{packs.map(pack => (
+												{!isFirstLoading && packs.map(pack => (
 														<TableRow
 																key={pack._id}
 																sx={{'&:last-child td, &:last-child th': {border: 0}}}
