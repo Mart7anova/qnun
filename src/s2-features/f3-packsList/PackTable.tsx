@@ -16,6 +16,8 @@ import {Link} from 'react-router-dom';
 import {TableHeaderItem} from './TableHeaderItem';
 import style from './PackTable.module.scss'
 import {SkeletonTableRow} from 's2-features/f3-packsList/SkeletonTableRow';
+import dayjs from 'dayjs';
+
 
 type TablePropsType = {
 		packs: PackType[]
@@ -33,7 +35,6 @@ export const PackTable = ({packs}: TablePropsType) => {
 		const updatePackHandle = (id: string) => {
 				dispatch(updatePack(id))
 		}
-
 		return (
 				<div>
 						<TableContainer component={Paper}>
@@ -63,7 +64,7 @@ export const PackTable = ({packs}: TablePropsType) => {
 																		</Link>
 																</TableCell>
 																<TableCell align="center">{pack.cardsCount}</TableCell>
-																<TableCell align="center">{String(pack.updated)}</TableCell>
+																<TableCell align="center">{dayjs(pack.updated).format(`DD.MM.YYYY`)}</TableCell>
 																<TableCell align="center">{pack.user_name}</TableCell>
 																<TableCell align="left">
 																<span style={{display: 'flex', gap: '8px'}}>
