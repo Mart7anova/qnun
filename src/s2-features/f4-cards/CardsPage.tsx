@@ -15,8 +15,8 @@ import {EmptyPack} from 's2-features/f4-cards/EmptyPack';
 import {Search} from 's2-features/f4-cards/Search';
 import {CardsTable} from 's2-features/f4-cards/CardsTable/CardsTable';
 import {LinkBackTo} from 's1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
-import {PaginationWithSelect} from "../../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect";
 import {SelectChangeEvent} from "@mui/material";
+import {PaginationWithSelect} from '../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect';
 
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
