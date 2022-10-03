@@ -14,6 +14,7 @@ import {CardType} from 's1-main/m3-dal/cardsApi';
 import {TableHeaderItem} from '../../../s1-main/m1-ui/common/c1-components/TableHeaderItem/TableHeaderItem';
 import style from './CardsTable.module.scss'
 import dayjs from 'dayjs';
+import {Rating} from "@mui/material";
 
 
 type CardsTablePropsType = {
@@ -54,7 +55,7 @@ export const CardsTable = ({isOwner, cards}: CardsTablePropsType) => {
                             <TableCell align="left">{card.question}</TableCell>
                             <TableCell align="left">{card.answer}</TableCell>
                             <TableCell align="center">{dayjs(card.updated).format(`DD.MM.YYYY`)}</TableCell>
-                            <TableCell align="center">{card.grade}</TableCell>
+                            <TableCell align="center"><Rating value={card.grade} readOnly/></TableCell>
                             {
                                 isOwner && <TableCell align="center">
 									<span style={{display: 'flex', gap: '8px'}}>

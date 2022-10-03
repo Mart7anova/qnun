@@ -74,20 +74,20 @@ export const CardsPage = () => {
             </div>
 
             {
-                cards.length || isSearching
-                ? <>
-                    <Search setIsSearching={setIsSearching}/>
-                    <CardsTable isOwner={isOwner} cards={cards}/>
-                    {cardsTotalCount > elementsPerPage &&
-                        <PaginationWithSelect page={currentPage}
-                                              elementsPerPage={elementsPerPage}
-                                              onPageChange={onPageChange}
-                                              totalItemsCount={cardsTotalCount}
-                                              label='Cards'
-                                              onChangeItemsPerPage={onChangeCardsPerPage}/>
-                    }
-                </>
-                : <EmptyPack isOwner={isOwner} addNewCardHandle={addNewCardHandle}/>
+                cards.length > 0 || isSearching
+                    ? <>
+                        <Search setIsSearching={setIsSearching}/>
+                        <CardsTable isOwner={isOwner} cards={cards}/>
+                        {cardsTotalCount > elementsPerPage &&
+                            <PaginationWithSelect page={currentPage}
+                                                  elementsPerPage={elementsPerPage}
+                                                  onPageChange={onPageChange}
+                                                  totalItemsCount={cardsTotalCount}
+                                                  label='Cards'
+                                                  onChangeItemsPerPage={onChangeCardsPerPage}/>
+                        }
+                    </>
+                    : <EmptyPack isOwner={isOwner} addNewCardHandle={addNewCardHandle}/>
             }
         </div>
     )
