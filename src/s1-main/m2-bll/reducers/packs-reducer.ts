@@ -31,7 +31,8 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
         case 'PACKS/SET-RANGE-CARDS':
         case 'PACKS/SET-SORT-PACKS':
         case 'PACKS/SET-CURRENT-PAGE':
-        case 'PACKS/CLEAR-FILTERS':
+        case 'PACKS/SET-PACKS-PER-PAGE':
+        case'PACKS/CLEAR-FILTERS':
             return {...state, searchParams: {...state.searchParams, ...action.payload}}
 
         default:
@@ -68,6 +69,10 @@ export const clearFilters = () => ({
 export const setCurrentPage = (page: number) => ({
     type: 'PACKS/SET-CURRENT-PAGE',
     payload: {page}
+} as const)
+export const setPacksPerPage = (pageCount: number) => ({
+    type: 'PACKS/SET-PACKS-PER-PAGE',
+    payload: {pageCount}
 } as const)
 
 //thunks
@@ -133,6 +138,7 @@ type ActionsType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setSortPacks>
     | ReturnType<typeof changeStatusFirstLoading>
+    | ReturnType<typeof setPacksPerPage>
 
 export type PackSearchParamsType = {
     page: number

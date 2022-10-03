@@ -1,9 +1,5 @@
 import {AppThunk} from 's1-main/m2-bll/store';
-import {
-    cardsApi,
-    CardsResponseType,
-    CardType,
-} from 's1-main/m3-dal/cardsApi';
+import {cardsApi, CardsResponseType, CardType,} from 's1-main/m3-dal/cardsApi';
 import {setAppStatus} from './app-reducer';
 import {errorUtils} from 'utils/error-utils';
 
@@ -13,7 +9,7 @@ const initialState = {
     } as CardsResponseType,
     searchParams: {
         page: 1,
-        pageCount: 6,
+        pageCount: 10,
         cardQuestion: '',
     } as CardSearchParamsType,
 }
@@ -35,9 +31,9 @@ export const cardsReducer = (state: CardsReducerType = initialState, action: Act
             }
         case 'CARDS/RESET-CARDS-STATE':
             return {...initialState}
-
         case 'CARDS/SET-SORT-CARDS':
         case 'CARDS/SET-SEARCH-BY-CARDS-NAME-FILTER':
+        case "CARDS/SET-CARDS-PER-PAGE":
         case 'CARDS/SET-CURRENT-PAGE':
             return {...state, searchParams: {...state.searchParams, ...action.payload}}
         default:
@@ -58,6 +54,8 @@ export const setSortCards = (sortCards: string) =>
     ({type: 'CARDS/SET-SORT-CARDS', payload: {sortCards}} as const)
 export const setUpdateCardGrade = (_id: string, grade: number, shots: number) =>
     ({type: 'CARDS/SET-UPDATE_CARD_GRADE', payload: {_id, grade, shots}} as const)
+export const setCardsPerPage = (pageCount: number) =>
+    ({type: 'CARDS/SET-CARDS-PER-PAGE', payload: {pageCount}} as const)
 
 //thunks
 export const fetchCards = (packId: string): AppThunk => async (dispatch, getState) => {
@@ -126,6 +124,7 @@ type ActionsType =
     | ReturnType<typeof setSortCards>
     | ReturnType<typeof resetCardsState>
     | ReturnType<typeof setUpdateCardGrade>
+    | ReturnType<typeof setCardsPerPage>
 
 export type CardSearchParamsType = {
     cardQuestion: string

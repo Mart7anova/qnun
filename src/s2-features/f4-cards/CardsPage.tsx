@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
-import {createCard, fetchCards, resetCardsState, setCurrentPage} from 's1-main/m2-bll/reducers/cards-reducer';
+import {
+    createCard,
+    fetchCards,
+    resetCardsState,
+    setCardsPerPage,
+    setCurrentPage
+} from 's1-main/m2-bll/reducers/cards-reducer';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
@@ -8,8 +14,9 @@ import {getAuthUserId, getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-select
 import {EmptyPack} from 's2-features/f4-cards/EmptyPack';
 import {Search} from 's2-features/f4-cards/Search';
 import {CardsTable} from 's2-features/f4-cards/CardsTable/CardsTable';
-import {Paginator} from 's1-main/m1-ui/common/c1-components/Pagination/Pagination';
 import {LinkBackTo} from 's1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
+import {PaginationWithSelect} from "../../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect";
+import {SelectChangeEvent} from "@mui/material";
 
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
@@ -22,7 +29,7 @@ export const CardsPage = () => {
     const userId = useAppSelector(getAuthUserId)
     const packName = useAppSelector(state => state.cards.cardsState.packName)
     const cardsTotalCount = useAppSelector(state => state.cards.cardsState.cardsTotalCount)
-    const elementsPerPage = useAppSelector(state => state.cards.cardsState.pageCount)
+    const elementsPerPage = useAppSelector(state => state.cards.searchParams.pageCount)
     const currentPage = useAppSelector(state => state.cards.searchParams.page)
     const cardQuestionSearch = useAppSelector(state => state.cards.searchParams.cardQuestion)
     const sortCards = useAppSelector(state => state.cards.searchParams.sortCards)
@@ -37,6 +44,10 @@ export const CardsPage = () => {
         dispatch(setCurrentPage(page))
     }
 
+    const onChangeCardsPerPage = (event: SelectChangeEvent<number>) => {
+        dispatch(setCardsPerPage(event.target.value as number))
+    }
+
     useEffect(() => {
         return () => {
             dispatch(resetCardsState())
@@ -45,7 +56,7 @@ export const CardsPage = () => {
 
     useEffect(() => {
         dispatch(fetchCards(packId))
-    }, [currentPage, cardQuestionSearch, sortCards, packId])
+    }, [currentPage, cardQuestionSearch, sortCards, packId, elementsPerPage])
 
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
     if (!packName && !packOwnerUserId) return null
@@ -67,11 +78,13 @@ export const CardsPage = () => {
                 ? <>
                     <Search setIsSearching={setIsSearching}/>
                     <CardsTable isOwner={isOwner} cards={cards}/>
-                    {cards.length > 0 &&
-                        <Paginator currentPage={currentPage}
-                                   elementsPerPage={elementsPerPage}
-                                   onPageChange={onPageChange}
-                                   itemsTotalCount={cardsTotalCount}/>
+                    {cardsTotalCount > elementsPerPage &&
+                        <PaginationWithSelect page={currentPage}
+                                              elementsPerPage={elementsPerPage}
+                                              onPageChange={onPageChange}
+                                              totalItemsCount={cardsTotalCount}
+                                              label='Cards'
+                                              onChangeItemsPerPage={onChangeCardsPerPage}/>
                     }
                 </>
                 : <EmptyPack isOwner={isOwner} addNewCardHandle={addNewCardHandle}/>

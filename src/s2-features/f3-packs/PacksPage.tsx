@@ -4,7 +4,9 @@ import {
     changeStatusFirstLoading,
     createNewPack,
     fetchPacks,
-    setCurrentPage, setIsMyPacksFilter
+    setCurrentPage,
+    setIsMyPacksFilter,
+    setPacksPerPage
 } from 's1-main/m2-bll/reducers/packs-reducer';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {PackTable} from 's2-features/f3-packs/PacksTable/PackTable';
@@ -21,7 +23,8 @@ import {
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {Paginator} from 's1-main/m1-ui/common/c1-components/Pagination/Pagination';
+import {SelectChangeEvent} from "@mui/material";
+import {PaginationWithSelect} from "../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect";
 
 export const PacksPage = () => {
     const navigate = useNavigate()
@@ -58,7 +61,7 @@ export const PacksPage = () => {
             dispatch(fetchPacks())
         }
         isSearch.current = false
-    }, [packName, packsForUserId, currentMinCount, currentMaxCount, page, sortPacks])
+    }, [packName, packsForUserId, currentMinCount, currentMaxCount, page, sortPacks, elementsPerPage])
 
     useEffect(() => {
         if (isMounted.current) {
@@ -72,6 +75,9 @@ export const PacksPage = () => {
 
     const addNewPackHandler = () => {
         dispatch(createNewPack())
+    }
+    const onChangePacksPerPage = (event: SelectChangeEvent<number>) => {
+        dispatch(setPacksPerPage(event.target.value as number))
     }
 
     const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
@@ -87,11 +93,12 @@ export const PacksPage = () => {
             </div>
             <PackFiltration/>
             <PackTable packs={packs}/>
-            {packs.length > 0 &&
-                <Paginator currentPage={page}
-                           elementsPerPage={elementsPerPage}
-                           onPageChange={onPageChange}
-                           itemsTotalCount={packsTotalCount}/>
+            {packsTotalCount > elementsPerPage &&
+                <PaginationWithSelect elementsPerPage={elementsPerPage} page={page}
+                                      onChangeItemsPerPage={onChangePacksPerPage}
+                                      onPageChange={onPageChange}
+                                      label='Packs'
+                                      totalItemsCount={packsTotalCount}/>
             }
         </div>
     );
