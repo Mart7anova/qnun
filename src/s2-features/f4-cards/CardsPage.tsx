@@ -17,11 +17,14 @@ import {CardsTable} from 's2-features/f4-cards/CardsTable/CardsTable';
 import {LinkBackTo} from 's1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
 import {SelectChangeEvent} from "@mui/material";
 import {PaginationWithSelect} from '../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect';
+import packMenuIcon from 'assets/pack-menu-icon.svg'
+import {PackMenu} from "../../s1-main/m1-ui/common/c1-components/MiniMenu/PackMenu";
 
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
     const {packId} = useParams() as { packId: string }
     const [isSearching, setIsSearching] = useState(false)
+    const [isOpenPackMenu, setIsOpenPackMenu] = useState(false)
 
     const cards = useAppSelector(state => state.cards.cardsState.cards)
     const packOwnerUserId = useAppSelector(state => state.cards.cardsState.packUserId)
@@ -34,6 +37,7 @@ export const CardsPage = () => {
     const cardQuestionSearch = useAppSelector(state => state.cards.searchParams.cardQuestion)
     const sortCards = useAppSelector(state => state.cards.searchParams.sortCards)
 
+    const packNameChanged = packName && packName.length > 0
     const isOwner = packOwnerUserId === userId
 
     const addNewCardHandle = () => {
@@ -56,7 +60,7 @@ export const CardsPage = () => {
 
     useEffect(() => {
         dispatch(fetchCards(packId))
-    }, [currentPage, cardQuestionSearch, sortCards, packId, elementsPerPage])
+    }, [currentPage, cardQuestionSearch, sortCards, packId, elementsPerPage, packNameChanged])
 
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
     if (!packName && !packOwnerUserId) return null
@@ -67,7 +71,15 @@ export const CardsPage = () => {
             <LinkBackTo link={PATH.PACKS_LIST}/>
 
             <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '70px', marginBottom: '30px'}}>
-                <h1>{packName}</h1>
+                <div style={{position: 'relative', display: 'flex', alignItems: 'center', gap: '10px'}}>
+                    <h1>{packName}</h1>
+                    {isOwner && cardsTotalCount > 0 && <img src={packMenuIcon}
+                                                            alt='packMenuIcon'
+                                                            style={{width: '22px', height: '22px', cursor: 'pointer'}}
+                                                            onClick={() => setIsOpenPackMenu(true)}/>
+                    }
+                    {isOpenPackMenu && <PackMenu packId={packId} closeMenu={() => setIsOpenPackMenu(false)}/>}
+                </div>
                 {cards.length > 0 && isOwner && <Button onClick={addNewCardHandle}>Add new card</Button>}
 
                 {cards.length > 0 && <Link to={PATH.PACK + packId + PATH.LEARN}><Button>Learn to pack</Button></Link>}

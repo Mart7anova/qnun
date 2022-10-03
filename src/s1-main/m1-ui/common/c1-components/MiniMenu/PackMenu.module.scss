@@ -1,0 +1,25 @@
+.wrapper {
+  position: absolute;
+  bottom: -115px;
+  left: 75px;
+  width: 120px;
+  border: 1px solid #CFCFCF;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+  background: #FFFFFF;
+  z-index: 1;
+
+  .menuItem {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
+
