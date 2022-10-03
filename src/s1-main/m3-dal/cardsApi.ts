@@ -27,6 +27,12 @@ export const cardsApi = {
             }
         })
     },
+    updateCardsGrade(card_id: string, grade: number) {
+        return instance.put<ResponseCardGrade>(`/cards/grade`, {
+            card_id,
+            grade
+        })
+    },
 
 }
 //types
@@ -60,4 +66,21 @@ export type RequestCardSearchParamsType = {
     sortCards?: string
     page?: number
     pageCount?: number
+}
+
+export type ResponseCardGrade = {
+    token: string
+    tokenDeathTime: number
+    updateGrade: {
+        card_id: string
+        cardsPack_id: string
+        created: string
+        grade: number
+        more_id: string
+        shots: number
+        updated: string
+        user_id: string
+        __v: number
+        _id: string
+    }
 }
