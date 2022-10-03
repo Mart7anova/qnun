@@ -11,9 +11,10 @@ import React from 'react';
 import {deleteCard, setSortCards, updateCard} from 's1-main/m2-bll/reducers/cards-reducer';
 import {useAppDispatch} from 's1-main/m2-bll/store';
 import {CardType} from 's1-main/m3-dal/cardsApi';
-import {TableHeaderItem} from '../TableHeaderItem';
+import {TableHeaderItem} from '../../../s1-main/m1-ui/common/c1-components/TableHeaderItem/TableHeaderItem';
 import style from './CardsTable.module.scss'
 import dayjs from 'dayjs';
+
 
 type CardsTablePropsType = {
     cards: CardType[]
@@ -58,8 +59,10 @@ export const CardsTable = ({isOwner, cards}: CardsTablePropsType) => {
                                 isOwner && <TableCell align="center">
 									<span style={{display: 'flex', gap: '8px'}}>
 										<img src={editImg} alt="edit"
+                                             style={{cursor: 'pointer'}}
                                              onClick={() => updateCardHandle(card.cardsPack_id, card._id)}/>
 										<img src={deleteImg} alt="detele"
+                                             style={{cursor: 'pointer'}}
                                              onClick={() => deleteCardHandle(card.cardsPack_id, card._id)}/>
 									</span>
                                 </TableCell>

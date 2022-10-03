@@ -1,4 +1,4 @@
-import {DoubleRangeFilter} from 's2-features/f3-packsList/PackFiltration/DoubleRangeFilter/DoubleRangeFilter';
+import {DoubleRangeFilter} from 's2-features/f3-packs/PackFiltration/DoubleRangeFilter/DoubleRangeFilter';
 import React from 'react';
 import {SearchInput} from 's1-main/m1-ui/common/c1-components/SearchInput/SearchInput';
 import {useAppDispatch} from 's1-main/m2-bll/store';

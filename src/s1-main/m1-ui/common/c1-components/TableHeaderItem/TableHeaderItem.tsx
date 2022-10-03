@@ -3,7 +3,7 @@ import {Checkbox} from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TableCell from '@mui/material/TableCell';
-import {useAppDispatch} from '../../s1-main/m2-bll/store';
+import {useAppDispatch} from '../../../../m2-bll/store';
 import {AnyAction} from 'redux';
 
 type PropsType = {

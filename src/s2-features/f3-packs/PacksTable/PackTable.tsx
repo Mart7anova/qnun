@@ -13,10 +13,11 @@ import deleteImg from 'assets/delete.svg';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {deletePack, setSortPacks, updatePack} from 's1-main/m2-bll/reducers/packs-reducer';
 import {Link} from 'react-router-dom';
-import {TableHeaderItem} from './TableHeaderItem';
+import {TableHeaderItem} from '../../../s1-main/m1-ui/common/c1-components/TableHeaderItem/TableHeaderItem';
 import style from './PackTable.module.scss'
-import {SkeletonTableRow} from 's2-features/f3-packsList/SkeletonTableRow';
+import {SkeletonTableRow} from 's2-features/f3-packs/PacksTable/SkeletonTableRow';
 import dayjs from 'dayjs';
+import {PATH} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
 
 
 type TablePropsType = {
@@ -52,41 +53,46 @@ export const PackTable = ({packs}: TablePropsType) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {!isFirstLoading && packs.map(pack => (
-                        <TableRow
-                            key={pack._id}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                        >
-                            <TableCell align="left" sx={{overflowWrap: 'anywhere'}}>
-                                <Link to={`/pack/${pack._id}`}>
-                                    {pack.name}
-                                </Link>
-                            </TableCell>
-                            <TableCell align="center">{pack.cardsCount}</TableCell>
-                            <TableCell align="center">{dayjs(pack.updated).format(`DD.MM.YYYY`)}</TableCell>
-                            <TableCell align="center">{pack.user_name}</TableCell>
-                            <TableCell align="left">
-																<span style={{display: 'flex', gap: '8px'}}>
-																		{pack.cardsCount > 0 &&
-                                                                            <img src={studyImg} alt="study"
-                                                                                 style={{cursor: 'pointer'}}/>}
-                                                                    {userID === pack.user_id &&
-                                                                        <>
-                                                                            <img src={editImg} alt="edit"
-                                                                                 style={{cursor: 'pointer'}}
-                                                                                 onClick={() => updatePackHandle(pack._id)}
-                                                                            />
-                                                                            <img src={deleteImg} alt="delete"
-                                                                                 style={{cursor: 'pointer'}}
-                                                                                 onClick={() => deletePackHandle(pack._id)}/>
-                                                                        </>
-                                                                    }
-																</span>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                    {isFirstLoading &&
-                        <SkeletonTableRow elementsPerPage={elementsPerPage}/>
+                    {
+                        !isFirstLoading && packs.map(pack => (
+                            <TableRow
+                                key={pack._id}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+
+                                <TableCell align="left" sx={{overflowWrap: 'anywhere'}}>
+                                    <Link to={PATH.PACK + pack._id}>
+                                        {pack.name}
+                                    </Link>
+                                </TableCell>
+                                <TableCell align="center">{pack.cardsCount}</TableCell>
+                                <TableCell align="center">{dayjs(pack.updated).format(`DD.MM.YYYY`)}</TableCell>
+                                <TableCell align="center">{pack.user_name}</TableCell>
+                                <TableCell align="left">
+                                <span style={{display: 'flex', gap: '8px'}}>
+                                    {
+                                        pack.cardsCount > 0 &&
+                                        <img src={studyImg} alt="study"
+                                             style={{cursor: 'pointer'}}/>
+                                    }
+                                    {
+                                        userID === pack.user_id &&
+                                        <>
+                                            <img src={editImg} alt="edit"
+                                                 style={{cursor: 'pointer'}}
+                                                 onClick={() => updatePackHandle(pack._id)}
+                                            />
+                                            <img src={deleteImg} alt="delete"
+                                                 style={{cursor: 'pointer'}}
+                                                 onClick={() => deletePackHandle(pack._id)}/>
+                                        </>
+                                    }
+                                </span>
+                                </TableCell>
+                            </TableRow>
+                        ))
+                    }
+                    {
+                        isFirstLoading && <SkeletonTableRow elementsPerPage={elementsPerPage}/>
                     }
                 </TableBody>
             </Table>

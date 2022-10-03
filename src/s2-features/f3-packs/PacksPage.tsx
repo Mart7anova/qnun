@@ -7,9 +7,9 @@ import {
     setCurrentPage, setIsMyPacksFilter
 } from 's1-main/m2-bll/reducers/packs-reducer';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
-import {PackTable} from 's2-features/f3-packsList/PackTable';
+import {PackTable} from 's2-features/f3-packs/PacksTable/PackTable';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
-import {PackFiltration} from 's2-features/f3-packsList/PackFiltration/PackFiltration';
+import {PackFiltration} from 's2-features/f3-packs/PackFiltration/PackFiltration';
 import {
     getCurrentMaxCount,
     getCurrentMinCount,
