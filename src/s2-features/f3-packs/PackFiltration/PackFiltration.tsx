@@ -4,6 +4,8 @@ import {SearchInput} from 's1-main/m1-ui/common/c1-components/SearchInput/Search
 import {useAppDispatch} from 's1-main/m2-bll/store';
 import {clearFilters, setSearchByPacksNameFilter} from 's1-main/m2-bll/reducers/packs-reducer';
 import {FilterByMyCards} from './FilterByMyCards/FilterByMyCards';
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import {IconButton, Tooltip} from '@mui/material';
 
 
 export const PackFiltration = () => {
@@ -28,8 +30,11 @@ export const PackFiltration = () => {
                 <DoubleRangeFilter/>
             </div>
             <div>
-                <button onClick={clearFiltersHandle}>clear filters</button>
+                <Tooltip title='clean filter'>
+                    <IconButton><FilterAltOffIcon onClick={clearFiltersHandle}/></IconButton>
+                </Tooltip>
             </div>
         </div>
     )
 }
+//clear filters

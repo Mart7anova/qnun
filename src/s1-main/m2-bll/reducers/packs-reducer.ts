@@ -32,8 +32,10 @@ export const packsReducer = (state: PacksReducerType = initialState, action: Act
         case 'PACKS/SET-SORT-PACKS':
         case 'PACKS/SET-CURRENT-PAGE':
         case 'PACKS/SET-PACKS-PER-PAGE':
-        case'PACKS/CLEAR-FILTERS':
             return {...state, searchParams: {...state.searchParams, ...action.payload}}
+
+        case'PACKS/CLEAR-FILTERS':
+            return {...state, searchParams: {...initialState.searchParams, max: state.packs.maxCardsCount, min:state.packs.minCardsCount}}
 
         default:
             return state
@@ -62,10 +64,7 @@ export const setSortPacks = (sortPacks: string) => ({
     type: 'PACKS/SET-SORT-PACKS',
     payload: {sortPacks}
 } as const)
-export const clearFilters = () => ({
-    type: 'PACKS/CLEAR-FILTERS',
-    payload: {packName: '', user_id: '', min: 0, max: 100}
-} as const)
+export const clearFilters = () => ({type: 'PACKS/CLEAR-FILTERS'} as const)
 export const setCurrentPage = (page: number) => ({
     type: 'PACKS/SET-CURRENT-PAGE',
     payload: {page}
