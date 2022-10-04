@@ -49,7 +49,6 @@ export const CardsPage = () => {
     const cardQuestionSearch = useAppSelector(getCardQuestion)
     const sortCards = useAppSelector(getSortCards)
 
-    const packNameChanged = packName && packName.length > 0
     const isOwner = packOwnerUserId === userId
 
     const addNewCardHandle = () => {
@@ -72,7 +71,7 @@ export const CardsPage = () => {
 
     useEffect(() => {
         dispatch(fetchCards(packId))
-    }, [currentPage, cardQuestionSearch, sortCards, packId, elementsPerPage, packNameChanged])
+    }, [currentPage, cardQuestionSearch, sortCards, packId, elementsPerPage])
 
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
     if (!packName && !packOwnerUserId) return null
