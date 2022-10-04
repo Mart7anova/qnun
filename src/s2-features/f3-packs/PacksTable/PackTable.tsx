@@ -18,6 +18,8 @@ import style from './PackTable.module.scss'
 import {SkeletonTableRow} from 's2-features/f3-packs/PacksTable/SkeletonTableRow';
 import dayjs from 'dayjs';
 import {PATH} from '../../../s1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {getProfileId} from '../../../s1-main/m2-bll/selectors/profile-selectors';
+import {getIsFirstLoading, getPageCount} from '../../../s1-main/m2-bll/selectors/packs-selectors';
 
 
 type TablePropsType = {
@@ -25,17 +27,21 @@ type TablePropsType = {
 }
 
 export const PackTable = ({packs}: TablePropsType) => {
-    const userID = useAppSelector(state => state.profile.profile._id)
-    const isFirstLoading = useAppSelector(state => state.packs.isFirstLoading)
-    const elementsPerPage = useAppSelector(state => state.packs.searchParams.pageCount)
     const dispatch = useAppDispatch()
+
+    const userID = useAppSelector(getProfileId)
+    const isFirstLoading = useAppSelector(getIsFirstLoading)
+    const elementsPerPage = useAppSelector(getPageCount)
+
 
     const deletePackHandle = (id: string) => {
         dispatch(deletePack(id))
     }
+
     const updatePackHandle = (id: string) => {
         dispatch(updatePack(id))
     }
+
     return (
         <TableContainer sx={{marginTop: '25px'}} component={Paper}>
             <Table className={style.table}>

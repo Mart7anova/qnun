@@ -13,11 +13,12 @@ import {PackTable} from 's2-features/f3-packs/PacksTable/PackTable';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {PackFiltration} from 's2-features/f3-packs/PackFiltration/PackFiltration';
 import {
+    getCardPacksTotalCount,
     getCurrentMaxCount,
     getCurrentMinCount,
     getPackName,
     getPacks,
-    getPacksForUserId,
+    getPacksForUserId, getPage, getPageCount,
     getSortPacks
 } from 's1-main/m2-bll/selectors/packs-selectors';
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
@@ -41,9 +42,9 @@ export const PacksPage = () => {
     const currentMinCount = useAppSelector(getCurrentMinCount)
     const currentMaxCount = useAppSelector(getCurrentMaxCount)
     const sortPacks = useAppSelector(getSortPacks)
-    const page = useAppSelector(state => state.packs.searchParams.page)
-    const packsTotalCount = useAppSelector(state => state.packs.packs.cardPacksTotalCount)
-    const elementsPerPage = useAppSelector(state => state.packs.searchParams.pageCount)
+    const page = useAppSelector(getPage)
+    const packsTotalCount = useAppSelector(getCardPacksTotalCount)
+    const elementsPerPage = useAppSelector(getPageCount)
 
     useEffect(() => {
         dispatch(changeStatusFirstLoading(true))

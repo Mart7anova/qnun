@@ -12,6 +12,7 @@ import {useFormik} from 'formik';
 import {setIsRequestSuccess, updatePassword} from 's1-main/m2-bll/reducers/auth-reducer';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {getAppStatus} from '../../../s1-main/m2-bll/selectors/app-selectors';
+import {getIsRequestSuccess} from '../../../s1-main/m2-bll/selectors/auth-selectors';
 
 type FormikErrorType = {
     password?: string
@@ -19,7 +20,7 @@ type FormikErrorType = {
 }
 
 export const NewPassword = () => {
-    const isRequestSuccess = useAppSelector(state => state.auth.isRequestSuccess)
+    const isRequestSuccess = useAppSelector(getIsRequestSuccess)
     const appStatus = useAppSelector(getAppStatus)
     const dispatch = useAppDispatch()
     const {token} = useParams()

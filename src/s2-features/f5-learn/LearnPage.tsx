@@ -13,6 +13,7 @@ import styleBlock from '../../s1-main/m1-ui/common/c2-styles/Block.module.css';
 import {FormControlLabel, Radio, RadioGroup} from '@mui/material';
 import {getIsLoggedIn} from '../../s1-main/m2-bll/selectors/auth-selectors';
 import {getAppStatus} from '../../s1-main/m2-bll/selectors/app-selectors';
+import {getCards, getPackName} from '../../s1-main/m2-bll/selectors/cards-selectors';
 
 const grades = ['Did not know', 'Forgot', 'A lot of thought', 'Confused', 'Knew the answer'];
 
@@ -21,8 +22,8 @@ export const LearnPage = () => {
 
     const dispatch = useAppDispatch()
 
-    const cards = useAppSelector(state => state.cards.cardsState.cards)
-    const packName = useAppSelector(state => state.cards.cardsState.packName)
+    const cards = useAppSelector(getCards)
+    const packName = useAppSelector(getPackName)
     const isLoggedIn = useAppSelector(getIsLoggedIn)
     const appStatus = useAppSelector(getAppStatus)
 

@@ -10,6 +10,7 @@ type EmptyPackPropsType = {
 
 export const EmptyPack = ({isOwner, addNewCardHandle}: EmptyPackPropsType) => {
     const appStatus = useAppSelector(getAppStatus)
+
     return (
         <div style={{textAlign: 'center', marginTop: '80px'}}>
             {isOwner

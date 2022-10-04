@@ -6,9 +6,10 @@ import {AppRootStateType, useAppDispatch} from '../m2-bll/store';
 import {AppRoute} from './u1-Route/appRoute';
 import {Spinner} from 'assets/Spinner';
 import {initializeApp} from 's1-main/m2-bll/reducers/app-reducer';
+import {getIsInitialized} from '../m2-bll/selectors/app-selectors';
 
 export const App = () => {
-    const appInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
+    const appInitialized = useSelector<AppRootStateType, boolean>(getIsInitialized)
 
     const dispatch = useAppDispatch()
 

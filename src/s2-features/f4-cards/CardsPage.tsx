@@ -20,6 +20,14 @@ import {PaginationWithSelect} from '../../s1-main/m1-ui/common/c1-components/Pag
 import packMenuIcon from 'assets/pack-menu-icon.svg'
 import {PackMenu} from '../../s1-main/m1-ui/common/c1-components/MiniMenu/PackMenu';
 import {getAppStatus} from '../../s1-main/m2-bll/selectors/app-selectors';
+import {
+    getCardQuestion,
+    getCards,
+    getCardsTotalCount,
+    getPackName,
+    getPackUserId, getPage,
+    getPageCount, getSortCards
+} from '../../s1-main/m2-bll/selectors/cards-selectors';
 
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
@@ -28,16 +36,18 @@ export const CardsPage = () => {
     const [isOpenPackMenu, setIsOpenPackMenu] = useState(false)
 
     const appStatus = useAppSelector(getAppStatus)
-    const cards = useAppSelector(state => state.cards.cardsState.cards)
-    const packOwnerUserId = useAppSelector(state => state.cards.cardsState.packUserId)
     const isLoggedIn = useAppSelector(getIsLoggedIn)
     const userId = useAppSelector(getAuthUserId)
-    const packName = useAppSelector(state => state.cards.cardsState.packName)
-    const cardsTotalCount = useAppSelector(state => state.cards.cardsState.cardsTotalCount)
-    const elementsPerPage = useAppSelector(state => state.cards.searchParams.pageCount)
-    const currentPage = useAppSelector(state => state.cards.searchParams.page)
-    const cardQuestionSearch = useAppSelector(state => state.cards.searchParams.cardQuestion)
-    const sortCards = useAppSelector(state => state.cards.searchParams.sortCards)
+
+    const cards = useAppSelector(getCards)
+    const packOwnerUserId = useAppSelector(getPackUserId)
+    const packName = useAppSelector(getPackName)
+    const cardsTotalCount = useAppSelector(getCardsTotalCount)
+
+    const elementsPerPage = useAppSelector(getPageCount)
+    const currentPage = useAppSelector(getPage)
+    const cardQuestionSearch = useAppSelector(getCardQuestion)
+    const sortCards = useAppSelector(getSortCards)
 
     const packNameChanged = packName && packName.length > 0
     const isOwner = packOwnerUserId === userId

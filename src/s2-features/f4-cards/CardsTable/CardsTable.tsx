@@ -24,12 +24,15 @@ type CardsTablePropsType = {
 
 export const CardsTable = ({isOwner, cards}: CardsTablePropsType) => {
     const dispatch = useAppDispatch()
+
     const updateCardHandle = (packId: string, cardId: string) => {
         dispatch(updateCard(packId, cardId))
     }
+
     const deleteCardHandle = (packId: string, cardId: string) => {
         dispatch(deleteCard(packId, cardId))
     }
+
     return (
         <TableContainer sx={{marginTop: '25px'}} component={Paper}>
             <Table sx={{minWidth: 650}}>

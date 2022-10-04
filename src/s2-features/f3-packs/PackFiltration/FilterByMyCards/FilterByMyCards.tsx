@@ -7,10 +7,11 @@ import {setIsMyPacksFilter} from '../../../../s1-main/m2-bll/reducers/packs-redu
 import {getAppStatus} from '../../../../s1-main/m2-bll/selectors/app-selectors';
 
 export const FilterByMyCards = () => {
+    const dispatch = useAppDispatch()
+
     const profileId = useAppSelector(getProfileId)
     const packsForUserId = useAppSelector(getPacksForUserId)
     const appStatus = useAppSelector(getAppStatus)
-    const dispatch = useAppDispatch()
 
     const onIsMyPacksFilterChange = (profileId: string) => {
         dispatch(setIsMyPacksFilter(profileId))

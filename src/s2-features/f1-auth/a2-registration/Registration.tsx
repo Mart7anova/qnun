@@ -31,7 +31,7 @@ export const Registration = () => {
             confirmPassword: '',
         },
         validate: (values) => {
-            const errors: FormikErrorType = {};
+            const errors: FormikErrorType = {}
 
             if (!values.email) {
                 errors.email = 'Required'
