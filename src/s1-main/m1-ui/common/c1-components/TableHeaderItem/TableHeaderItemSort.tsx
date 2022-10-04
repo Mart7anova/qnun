@@ -11,10 +11,10 @@ type PropsType = {
     align: 'left' | 'right' | 'center'
     sortName: string
     setSort: (sortValue: string) => AnyAction
-    className: string
+    className?: string
 }
 
-export const TableHeaderItem = ({name, align, sortName, className, setSort}: PropsType) => {
+export const TableHeaderItemSort = ({name, align, sortName, className, setSort}: PropsType) => {
     const [isSortHeader, setIsSortHeader] = useState(true)
     const dispatch = useAppDispatch()
 

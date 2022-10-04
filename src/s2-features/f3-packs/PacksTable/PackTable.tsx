@@ -13,7 +13,7 @@ import deleteImg from 'assets/delete.svg';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {deletePack, setSortPacks, updatePack} from 's1-main/m2-bll/reducers/packs-reducer';
 import {Link} from 'react-router-dom';
-import {TableHeaderItem} from '../../../s1-main/m1-ui/common/c1-components/TableHeaderItem/TableHeaderItem';
+import {TableHeaderItemSort} from '../../../s1-main/m1-ui/common/c1-components/TableHeaderItem/TableHeaderItemSort';
 import style from './PackTable.module.scss'
 import {SkeletonTableRow} from 's2-features/f3-packs/PacksTable/SkeletonTableRow';
 import dayjs from 'dayjs';
@@ -41,14 +41,14 @@ export const PackTable = ({packs}: TablePropsType) => {
             <Table className={style.table}>
                 <TableHead className={style.tableHead}>
                     <TableRow>
-                        <TableHeaderItem name={'Name'} align={'left'} sortName={'name'} setSort={setSortPacks}
-                                         className={style.name}/>
-                        <TableHeaderItem name={'Cards'} align={'right'} sortName={'cardsCount'}
-                                         setSort={setSortPacks} className={style.cards}/>
-                        <TableHeaderItem name={'Last Updated'} align={'center'} sortName={'updated'}
-                                         setSort={setSortPacks} className={style.lastUpdated}/>
-                        <TableHeaderItem name={'Created by'} align={'center'} sortName={'user_name'}
-                                         setSort={setSortPacks} className={style.createdBy}/>
+                        <TableHeaderItemSort name={'Name'} align={'left'} sortName={'name'} setSort={setSortPacks}
+                                             className={style.name}/>
+                        <TableHeaderItemSort name={'Cards'} align={'right'} sortName={'cardsCount'}
+                                             setSort={setSortPacks} className={style.cards}/>
+                        <TableHeaderItemSort name={'Last Updated'} align={'center'} sortName={'updated'}
+                                             setSort={setSortPacks} className={style.lastUpdated}/>
+                        <TableHeaderItemSort name={'Created by'} align={'center'} sortName={'user_name'}
+                                             setSort={setSortPacks} className={style.createdBy}/>
                         <TableCell align="left" className={style.actions}>Actions</TableCell>
                     </TableRow>
                 </TableHead>

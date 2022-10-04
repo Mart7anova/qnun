@@ -13,6 +13,7 @@ interface IProps {
 
 export const PackMenu = ({closeMenu, packId}: IProps) => {
     const menuRef = useRef<HTMLDivElement>(null)
+
     const onClickOutsideMenu = (e: any) => {
         if (menuRef.current && !menuRef.current.contains(e.target)) {
             closeMenu()

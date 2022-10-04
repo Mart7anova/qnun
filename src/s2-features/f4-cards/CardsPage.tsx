@@ -7,7 +7,7 @@ import {
     setCardsPerPage,
     setCurrentPage
 } from 's1-main/m2-bll/reducers/cards-reducer';
-import {Link, Navigate, useParams} from 'react-router-dom';
+import {Navigate, useParams} from 'react-router-dom';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {getAuthUserId, getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
@@ -15,10 +15,10 @@ import {EmptyPack} from 's2-features/f4-cards/EmptyPack';
 import {Search} from 's2-features/f4-cards/Search';
 import {CardsTable} from 's2-features/f4-cards/CardsTable/CardsTable';
 import {LinkBackTo} from 's1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
-import {SelectChangeEvent} from "@mui/material";
+import {SelectChangeEvent} from '@mui/material';
 import {PaginationWithSelect} from '../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect';
 import packMenuIcon from 'assets/pack-menu-icon.svg'
-import {PackMenu} from "../../s1-main/m1-ui/common/c1-components/MiniMenu/PackMenu";
+import {PackMenu} from '../../s1-main/m1-ui/common/c1-components/MiniMenu/PackMenu';
 
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
@@ -82,7 +82,6 @@ export const CardsPage = () => {
                 </div>
                 {cards.length > 0 && isOwner && <Button onClick={addNewCardHandle}>Add new card</Button>}
 
-                {cards.length > 0 && <Link to={PATH.PACK + packId + PATH.LEARN}><Button>Learn to pack</Button></Link>}
             </div>
 
             {
