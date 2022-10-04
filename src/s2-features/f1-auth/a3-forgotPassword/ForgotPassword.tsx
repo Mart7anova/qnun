@@ -9,8 +9,7 @@ import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useFormik} from 'formik';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {forgotPassword, setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth-reducer';
-import {appStatus} from "../../../s1-main/m2-bll/selectors/app-selectors";
-import {LinearProgress} from "@mui/material";
+import {getAppStatus} from '../../../s1-main/m2-bll/selectors/app-selectors';
 
 type FormikErrorType = {
     email?: string
@@ -18,7 +17,7 @@ type FormikErrorType = {
 
 export const ForgotPassword = () => {
     const isRequestSuccess = useAppSelector(state => state.auth.isRequestSuccess)
-    const status = useAppSelector(appStatus)
+    const appStatus = useAppSelector(getAppStatus)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -69,7 +68,7 @@ export const ForgotPassword = () => {
                     Enter your email address and we will send you further instruction
                 </span>
 
-                        <Button type={'submit'} className={style.button}>Send Instruction</Button>
+                        <Button type={'submit'} className={style.button} disabled={appStatus==='loading'}>Send Instruction</Button>
 
                         <span className={style.informationText}>
                     <b>Did you remember your password?</b>

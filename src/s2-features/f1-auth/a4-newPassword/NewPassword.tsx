@@ -11,6 +11,7 @@ import {Navigate, useParams} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {setIsRequestSuccess, updatePassword} from 's1-main/m2-bll/reducers/auth-reducer';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
+import {getAppStatus} from '../../../s1-main/m2-bll/selectors/app-selectors';
 
 type FormikErrorType = {
     password?: string
@@ -19,6 +20,7 @@ type FormikErrorType = {
 
 export const NewPassword = () => {
     const isRequestSuccess = useAppSelector(state => state.auth.isRequestSuccess)
+    const appStatus = useAppSelector(getAppStatus)
     const dispatch = useAppDispatch()
     const {token} = useParams()
 
@@ -87,7 +89,7 @@ export const NewPassword = () => {
                         <span className={style.informationText}>
                         Create new password and we will send you further instructions to email
                     </span>
-                        <Button type={'submit'} className={style.button}>Create new password</Button>
+                        <Button type={'submit'} className={style.button} disabled={appStatus==='loading'}>Create new password</Button>
                     </div>
                 </form>
             </div>

@@ -10,9 +10,8 @@ import {Input} from 's1-main/m1-ui/common/c1-components/Input/Input';
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import styleContainer from 's1-main/m1-ui/common/c2-styles/Container.module.css';
 import styleBlock from 's1-main/m1-ui/common/c2-styles/Block.module.css';
-import {isLoggedIn} from "../../../s1-main/m2-bll/selectors/auth-selectors";
-import {appStatus} from "../../../s1-main/m2-bll/selectors/app-selectors";
-import {LinearProgress} from "@mui/material";
+import {isLoggedIn} from '../../../s1-main/m2-bll/selectors/auth-selectors';
+import {getAppStatus} from '../../../s1-main/m2-bll/selectors/app-selectors';
 
 type FormikErrorType = {
     email?: string
@@ -22,7 +21,7 @@ type FormikErrorType = {
 
 export const Registration = () => {
     const loggedIn = useAppSelector(isLoggedIn)
-    const status = useAppSelector(appStatus)
+    const appStatus = useAppSelector(getAppStatus)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -94,7 +93,7 @@ export const Registration = () => {
                         <PasswordView className={style.input}
                                       error={errorConfirmPassword} {...formik.getFieldProps('confirmPassword')}/>
 
-                        <Button className={style.btn}>Sign Up</Button>
+                        <Button className={style.btn} disabled={appStatus==='loading'}>Sign Up</Button>
                     </form>
 
                     <div className={style.infoBlock}>Already have account?</div>

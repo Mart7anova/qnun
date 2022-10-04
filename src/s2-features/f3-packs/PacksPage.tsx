@@ -23,14 +23,17 @@ import {
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {SelectChangeEvent} from "@mui/material";
-import {PaginationWithSelect} from "../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect";
+import {SelectChangeEvent} from '@mui/material';
+import {PaginationWithSelect} from '../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect';
+import {getAppStatus} from '../../s1-main/m2-bll/selectors/app-selectors';
 
 export const PacksPage = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const isSearch = useRef(false)
     const isMounted = useRef(false)
+
+    const appStatus = useAppSelector(getAppStatus)
     const packs = useAppSelector(getPacks)
     const isLoggedIn = useAppSelector(getIsLoggedIn)
     const packName = useAppSelector(getPackName)
@@ -89,7 +92,7 @@ export const PacksPage = () => {
         <div style={{maxWidth: '1008px', margin: '0 auto'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '40px', marginBottom: '40px'}}>
                 <h1 style={{fontWeight: '600', fontSize: '22px'}}>PacksList</h1>
-                <Button onClick={addNewPackHandler}>Add new pack</Button>
+                <Button onClick={addNewPackHandler} disabled={appStatus==='loading'}>Add new pack</Button>
             </div>
             <PackFiltration/>
             <PackTable packs={packs}/>

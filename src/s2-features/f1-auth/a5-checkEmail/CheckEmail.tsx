@@ -9,12 +9,14 @@ import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 
 import {Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
-import {useAppDispatch} from 's1-main/m2-bll/store';
+import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {setIsRequestSuccess} from 's1-main/m2-bll/reducers/auth-reducer';
+import {getAppStatus} from '../../../s1-main/m2-bll/selectors/app-selectors';
 
 export const CheckEmail = () => {
     const [linkToLogin, setLinkToLogin] = useState(false)
     const dispatch = useAppDispatch()
+    const appStatus = useAppSelector(getAppStatus)
 
     const onBackToLoginClick = () => {
         setLinkToLogin(true)
@@ -38,7 +40,7 @@ export const CheckEmail = () => {
                 <span className={style.informationText}>
                     We've sent an Email with instruction to {'props.email'}
                 </span>
-                <Button onClick={onBackToLoginClick} className={style.button}>Back to login</Button>
+                <Button onClick={onBackToLoginClick} className={style.button} disabled={appStatus==='loading'}>Back to login</Button>
             </div>
         </div>
     );

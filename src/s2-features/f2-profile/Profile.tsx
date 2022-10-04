@@ -1,13 +1,9 @@
 import React from 'react';
-
 import style from './Profile.module.scss'
 import styleContainer from '../../s1-main/m1-ui/common/c2-styles/Container.module.css'
 import styleBlock from '../../s1-main/m1-ui/common/c2-styles/Block.module.css'
-
 import userPhoto from '../../s1-main/m1-ui/common/c3-image/photo/catPhoto.png'
-
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
-
 import {Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
@@ -17,11 +13,13 @@ import {updateUser} from 's1-main/m2-bll/reducers/profile-reducer';
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {getProfileInfo} from 's1-main/m2-bll/selectors/profile-selectors';
 import {LinkBackTo} from '../../s1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
+import {getAppStatus} from '../../s1-main/m2-bll/selectors/app-selectors';
 
 
 export const Profile = () => {
     const profile = useAppSelector(getProfileInfo)
     const isLoggedIn = useAppSelector(getIsLoggedIn)
+    const appStatus = useAppSelector(getAppStatus)
     const dispatch = useAppDispatch()
 
     const onChangeUserName = (name: string) => {
@@ -57,7 +55,7 @@ export const Profile = () => {
                 <h3 className={style.email}>
                     {profile.email}
                 </h3>
-                <Button className={style.btnLogout} onClick={onLogoutClick}>
+                <Button className={style.btnLogout} onClick={onLogoutClick} disabled={appStatus==='loading'}>
                     Log out
                 </Button>
             </div>

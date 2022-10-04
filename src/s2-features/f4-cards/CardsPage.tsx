@@ -19,6 +19,7 @@ import {SelectChangeEvent} from '@mui/material';
 import {PaginationWithSelect} from '../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect';
 import packMenuIcon from 'assets/pack-menu-icon.svg'
 import {PackMenu} from '../../s1-main/m1-ui/common/c1-components/MiniMenu/PackMenu';
+import {getAppStatus} from '../../s1-main/m2-bll/selectors/app-selectors';
 
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
@@ -26,6 +27,7 @@ export const CardsPage = () => {
     const [isSearching, setIsSearching] = useState(false)
     const [isOpenPackMenu, setIsOpenPackMenu] = useState(false)
 
+    const appStatus = useAppSelector(getAppStatus)
     const cards = useAppSelector(state => state.cards.cardsState.cards)
     const packOwnerUserId = useAppSelector(state => state.cards.cardsState.packUserId)
     const isLoggedIn = useAppSelector(getIsLoggedIn)
@@ -80,7 +82,7 @@ export const CardsPage = () => {
                     }
                     {isOpenPackMenu && <PackMenu packId={packId} closeMenu={() => setIsOpenPackMenu(false)}/>}
                 </div>
-                {cards.length > 0 && isOwner && <Button onClick={addNewCardHandle}>Add new card</Button>}
+                {cards.length > 0 && isOwner && <Button onClick={addNewCardHandle} disabled={appStatus==='loading'}>Add new card</Button>}
 
             </div>
 

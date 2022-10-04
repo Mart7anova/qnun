@@ -12,6 +12,7 @@ import styleContainer from '../../s1-main/m1-ui/common/c2-styles/Container.modul
 import styleBlock from '../../s1-main/m1-ui/common/c2-styles/Block.module.css';
 import {FormControlLabel, Radio, RadioGroup} from '@mui/material';
 import {getIsLoggedIn} from '../../s1-main/m2-bll/selectors/auth-selectors';
+import {getAppStatus} from '../../s1-main/m2-bll/selectors/app-selectors';
 
 const grades = ['Did not know', 'Forgot', 'A lot of thought', 'Confused', 'Knew the answer'];
 
@@ -23,6 +24,7 @@ export const LearnPage = () => {
     const cards = useAppSelector(state => state.cards.cardsState.cards)
     const packName = useAppSelector(state => state.cards.cardsState.packName)
     const isLoggedIn = useAppSelector(getIsLoggedIn)
+    const appStatus = useAppSelector(getAppStatus)
 
     const [card, setCard] = useState<CardType>(getRandomCard(cards))
     const [isChecked, setIsChecked] = useState(false)
@@ -67,7 +69,7 @@ export const LearnPage = () => {
                         className={style.infoNumber}>{card.shots}</span>
                     </span>
                     {
-                        !isChecked && <Button onClick={onShowAnswerClick} className={style.button}>Show answer</Button>
+                        !isChecked && <Button onClick={onShowAnswerClick} className={style.button} disabled={appStatus==='loading'}>Show answer</Button>
                     }
                     {
                         isChecked && (

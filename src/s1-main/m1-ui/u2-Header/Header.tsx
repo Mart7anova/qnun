@@ -8,14 +8,14 @@ import {useAppSelector} from 's1-main/m2-bll/store';
 import noAvatar from '../../../assets/no-avatar.png'
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {getProfileInfo} from 's1-main/m2-bll/selectors/profile-selectors';
-import {appStatus} from '../../m2-bll/selectors/app-selectors';
+import {getAppStatus} from '../../m2-bll/selectors/app-selectors';
 import {LinearProgress} from '@mui/material';
 
 export const Header = () => {
     const {pathname} = useLocation()
     const isLoggedIn = useAppSelector(getIsLoggedIn)
     const profile = useAppSelector(getProfileInfo)
-    const status = useAppSelector(appStatus)
+    const appStatus = useAppSelector(getAppStatus)
 
     return (
         <header className={s.header}>
@@ -39,12 +39,12 @@ export const Header = () => {
                     : (
                         pathname !== PATH.LOGIN &&
                         <Link to={PATH.LOGIN}>
-                            <Button style={{width: '115px'}}>Sign in</Button>
+                            <Button style={{width: '115px'}} disabled={appStatus==='loading'}>Sign in</Button>
                         </Link>
                     )
                 }
             </div>
-            {status === 'loading' &&
+            {appStatus === 'loading' &&
                 <LinearProgress className={s.linearProgress} color="primary"/>}
         </header>
     );
