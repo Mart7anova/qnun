@@ -9,31 +9,31 @@ import {IconButton, Tooltip} from '@mui/material';
 
 
 export const PackFiltration = () => {
-    const dispatch = useAppDispatch()
+		const dispatch = useAppDispatch()
 
-    const clearFiltersHandle = () => {
-        dispatch(clearFilters())
-    }
+		const clearFiltersHandle = () => {
+				dispatch(clearFilters())
+		}
 
-    return (
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-            <div>
-                <div>search</div>
-                <SearchInput setSearch={setSearchByPacksNameFilter}/>
-            </div>
-            <div>
-                <div>Show pack cards</div>
-                <FilterByMyCards/>
-            </div>
-            <div>
-                <div>number of cards</div>
-                <DoubleRangeFilter/>
-            </div>
-            <div>
-                <Tooltip title='clean filter'>
-                    <IconButton><FilterAltOffIcon onClick={clearFiltersHandle}/></IconButton>
-                </Tooltip>
-            </div>
-        </div>
-    )
+		return (
+				<div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
+						<div>
+								<div>search</div>
+								<SearchInput setSearch={setSearchByPacksNameFilter}/>
+						</div>
+						<div>
+								<div>Show pack cards</div>
+								<FilterByMyCards/>
+						</div>
+						<div>
+								<div>number of cards</div>
+								<DoubleRangeFilter/>
+						</div>
+						<div>
+								<Tooltip title="clean filter">
+										<IconButton onClick={clearFiltersHandle}><FilterAltOffIcon/></IconButton>
+								</Tooltip>
+						</div>
+				</div>
+		)
 }
