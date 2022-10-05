@@ -37,4 +37,3 @@ export const PackFiltration = () => {
         </div>
     )
 }
-//clear filters

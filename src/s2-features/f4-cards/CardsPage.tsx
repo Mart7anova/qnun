@@ -17,7 +17,7 @@ import {CardsTable} from 's2-features/f4-cards/CardsTable/CardsTable';
 import {LinkBackTo} from 's1-main/m1-ui/common/c1-components/LinkBackTo/LinkBackTo';
 import {SelectChangeEvent} from '@mui/material';
 import {PaginationWithSelect} from '../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect';
-import packMenuIcon from 'assets/pack-menu-icon.svg'
+import packMenuIcon from 's1-main/m1-ui/common/c3-image/pack-menu-icon.svg'
 import {PackMenu} from '../../s1-main/m1-ui/common/c1-components/MiniMenu/PackMenu';
 import {getAppStatus} from '../../s1-main/m2-bll/selectors/app-selectors';
 import {

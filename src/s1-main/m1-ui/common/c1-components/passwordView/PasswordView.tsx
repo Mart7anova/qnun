@@ -4,8 +4,8 @@ import {Input} from '../Input/Input';
 
 import style from './PasswordView.module.scss'
 
-import open from '../../c3-image/photo/open.png'
-import close from '../../c3-image/photo/close.png'
+import open from '../../c3-image/open.png'
+import close from '../../c3-image/close.png'
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 

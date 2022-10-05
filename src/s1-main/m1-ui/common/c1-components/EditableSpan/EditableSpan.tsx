@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Input} from '../Input/Input';
-import pen from '../../c3-image/photo/pen.png';
+import pen from '../../c3-image/pen.png';
 import style from './EditableSpan.module.scss'
 
 type PropsType = {

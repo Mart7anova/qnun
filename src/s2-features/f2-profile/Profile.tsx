@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Profile.module.scss'
 import styleContainer from '../../s1-main/m1-ui/common/c2-styles/Container.module.css'
 import styleBlock from '../../s1-main/m1-ui/common/c2-styles/Block.module.css'
-import userPhoto from '../../s1-main/m1-ui/common/c3-image/photo/catPhoto.png'
+import userPhoto from '../../s1-main/m1-ui/common/c3-image/catPhoto.png'
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 import {Navigate} from 'react-router-dom';
 import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';

@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './Header.module.scss'
-import logo from '../../../assets/it-inc-logo.svg'
+import logo from '../common/c3-image/it-inc-logo.svg'
 import {Link, useLocation} from 'react-router-dom'
 import {PATH} from '../u1-Route/Variables/routeVariables';
 import {Button} from '../common/c1-components/Button/Button';
 import {useAppSelector} from 's1-main/m2-bll/store';
-import noAvatar from '../../../assets/no-avatar.png'
+import noAvatar from '../common/c3-image/no-avatar.png'
 import {getIsLoggedIn} from 's1-main/m2-bll/selectors/auth-selectors';
 import {getProfileInfo} from 's1-main/m2-bll/selectors/profile-selectors';
 import {getAppStatus} from '../../m2-bll/selectors/app-selectors';

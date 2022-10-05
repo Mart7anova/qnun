@@ -4,7 +4,7 @@ import styleContainer from '../../../s1-main/m1-ui/common/c2-styles/Container.mo
 import style from './CheckEmail.module.scss';
 import styleBlock from '../../../s1-main/m1-ui/common/c2-styles/Block.module.css';
 
-import emailImg from '../../../s1-main/m1-ui/common/c3-image/photo/email.png'
+import emailImg from '../../../s1-main/m1-ui/common/c3-image/email.png'
 import {Button} from 's1-main/m1-ui/common/c1-components/Button/Button';
 
 import {Navigate} from 'react-router-dom';

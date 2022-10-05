@@ -1,8 +1,8 @@
 import React, {useEffect, useRef} from 'react'
 import s from './PackMenu.module.scss'
-import editImg from 'assets/edit.svg'
-import learnImg from 'assets/study.svg'
-import deleteImg from 'assets/delete.svg'
+import editImg from 's1-main/m1-ui/common/c3-image/edit.svg'
+import learnImg from 's1-main/m1-ui/common/c3-image/study.svg'
+import deleteImg from 's1-main/m1-ui/common/c3-image/delete.svg'
 import {Link} from "react-router-dom";
 import {PATH} from "../../../u1-Route/Variables/routeVariables";
 

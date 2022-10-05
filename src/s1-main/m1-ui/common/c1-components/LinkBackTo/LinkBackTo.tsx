@@ -1,7 +1,7 @@
 import React from 'react';
 import {PATH} from '../../../u1-Route/Variables/routeVariables';
 import style from './LinkBackTo.module.scss'
-import arrow from '../../c3-image/photo/arrow.png';
+import arrow from '../../c3-image/arrow.png';
 import {Link} from 'react-router-dom';
 
 type PropsType={
