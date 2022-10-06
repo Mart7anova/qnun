@@ -18,11 +18,14 @@
 }
 
 .red{
-  //border: 2px solid $errorColor;
-  //background-color: $errorColor;
+  background-color: $errorColor;
+  box-shadow: 0 4px 18px rgba(255, 54, 54, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 
-  &:active:not([disabled]){
-    //background-color: transparent;
-    //color: $errorColor;
-  }
+}
+
+.white{
+  background-color: rgba(207, 207, 207, 0.1);
+  color: black;
+  border: 1px solid #CFCFCF;
+  box-shadow: 0 2px 11px rgb(180, 180, 180), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }

@@ -13,3 +13,8 @@
   cursor: pointer;
   transition: background-color 0.4s;
 }
+
+@mixin H1(){
+  font-size: 28px;
+  font-weight: 800;
+}

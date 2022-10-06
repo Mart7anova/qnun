@@ -18,7 +18,7 @@ export const PackFiltration = () => {
 		return (
 				<div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>
 						<div>
-								<div>search</div>
+								<div>Search</div>
 								<SearchInput setSearch={setSearchByPacksNameFilter}/>
 						</div>
 						<div>

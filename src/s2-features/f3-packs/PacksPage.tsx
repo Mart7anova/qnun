@@ -27,6 +27,9 @@ import {PATH} from 's1-main/m1-ui/u1-Route/Variables/routeVariables';
 import {SelectChangeEvent} from '@mui/material';
 import {PaginationWithSelect} from '../../s1-main/m1-ui/common/c1-components/Pagination/PaginationWithSelect';
 import {getAppStatus} from '../../s1-main/m2-bll/selectors/app-selectors';
+import style from './PacksPage.module.scss'
+import {useModal} from '../../s1-main/m2-bll/hooks/useModal';
+import {PackModal} from '../f6-modal/PackModal/PackModal';
 
 export const PacksPage = () => {
     const navigate = useNavigate()
@@ -45,6 +48,8 @@ export const PacksPage = () => {
     const page = useAppSelector(getPage)
     const packsTotalCount = useAppSelector(getCardPacksTotalCount)
     const elementsPerPage = useAppSelector(getPageCount)
+
+    const {open, openModal, closeModal} = useModal();
 
     useEffect(() => {
         dispatch(changeStatusFirstLoading(true))
@@ -77,8 +82,9 @@ export const PacksPage = () => {
         isMounted.current = true
     }, [packsForUserId])
 
-    const addNewPackHandler = () => {
-        dispatch(createNewPack())
+    const addNewPackHandler = async (name: string, isPrivate: boolean) => {
+        await dispatch(createNewPack(name, isPrivate))
+        closeModal()
     }
     const onChangePacksPerPage = (event: SelectChangeEvent<number>) => {
         dispatch(setPacksPerPage(event.target.value as number))
@@ -90,19 +96,23 @@ export const PacksPage = () => {
 
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
     return (
-        <div style={{maxWidth: '1008px', margin: '0 auto'}}>
-            <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '40px', marginBottom: '40px'}}>
-                <h1 style={{fontWeight: '600', fontSize: '22px'}}>PacksList</h1>
-                <Button onClick={addNewPackHandler} disabled={appStatus==='loading'}>Add new pack</Button>
+        <div className={style.packContainer}>
+            <div className={style.headerContainer}>
+                <h1 className={style.header}>PacksList</h1>
+                <Button onClick={openModal} disabled={appStatus === 'loading'}>Add new pack</Button>
+                <PackModal title={'Add new pack'} open={open} closeModal={closeModal} sentChanges={addNewPackHandler}/>
             </div>
+
             <PackFiltration/>
+
             <PackTable packs={packs}/>
-            {packsTotalCount > elementsPerPage &&
-                <PaginationWithSelect elementsPerPage={elementsPerPage} page={page}
-                                      onChangeItemsPerPage={onChangePacksPerPage}
-                                      onPageChange={onPageChange}
-                                      label='Packs'
-                                      totalItemsCount={packsTotalCount}/>
+            {
+                packsTotalCount > elementsPerPage && <PaginationWithSelect elementsPerPage={elementsPerPage}
+                                                                           page={page}
+                                                                           onChangeItemsPerPage={onChangePacksPerPage}
+                                                                           onPageChange={onPageChange}
+                                                                           label="Packs"
+                                                                           totalItemsCount={packsTotalCount}/>
             }
         </div>
     );

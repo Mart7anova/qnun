@@ -5,15 +5,16 @@ type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonE
 
 type PropsType = DefaultButtonPropsType & {
     red?: boolean
+    white?:boolean
 }
 
 export const Button: FC<PropsType> = (props) => {
     const {
-        red, className,
+        red, white, className,
         ...restProps
     } =props
 
-    const finalClassName = `${red && style.red} ${className? `${style.default} ${className}` : style.default}`
+    const finalClassName = `${red && style.red} ${white && style.white} ${className? `${style.default} ${className}` : style.default}`
 
     return (
         <button

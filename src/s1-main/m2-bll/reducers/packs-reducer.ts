@@ -91,10 +91,10 @@ export const fetchPacks = (): AppThunk => async (dispatch, getState) => {
         dispatch(setAppStatus('idle'))
     }
 }
-export const createNewPack = (): AppThunk => async (dispatch) => {
+export const createNewPack = (name: string, isPrivate: boolean): AppThunk => async (dispatch) => {
     dispatch(setAppStatus('loading'))
     try {
-        await packApi.createPack('new pack')
+        await packApi.createPack(name, isPrivate)
         dispatch(fetchPacks())
     } catch (e) {
         errorUtils(e, dispatch)
@@ -113,10 +113,10 @@ export const deletePack = (id: string): AppThunk => async (dispatch) => {
         dispatch(setAppStatus('idle'))
     }
 }
-export const updatePack = (id: string): AppThunk => async (dispatch) => {
+export const updatePack = (id: string, name: string, isPrivate: boolean): AppThunk => async (dispatch) => {
     dispatch(setAppStatus('loading'))
     try {
-        await packApi.updatePack(id, 'hardcoded updated name')
+        await packApi.updatePack(id, name, isPrivate)
         dispatch(fetchPacks())
     } catch (e) {
         errorUtils(e, dispatch)

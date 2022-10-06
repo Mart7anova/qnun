@@ -1,0 +1,27 @@
+@import '../../s1-main/m1-ui/common/c2-styles/sass/mixins';
+
+.icon {
+  cursor: pointer;
+}
+
+.headerContainer {
+  border-bottom: 1px solid #CFCFCF;
+  display: flex;
+  justify-content: space-between;
+
+  .header {
+    @include H1();
+    margin: 0 0 20px 30px;
+  }
+
+  .iconClose {
+    margin-right: 30px;
+    font-size: 35px;
+    cursor: pointer;
+  }
+}
+
+.childrenContainer {
+  margin: 30px;
+
+}

@@ -1,0 +1,17 @@
+.infoText{
+  color: #bbbaba;
+  font-weight: 400;
+  font-size: 18px;
+
+  .errorText{
+    color: #bd2c2c;
+  }
+}
+.formSelect{
+  margin: 10px 0 20px 0;
+}
+
+.btnGroup{
+  display: flex;
+  justify-content: space-between;
+}

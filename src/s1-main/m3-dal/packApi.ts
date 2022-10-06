@@ -6,7 +6,7 @@ export const packApi = {
     getPacks(params: RequestPackSearchParamsType) {
         return instance.get<RequestPackSearchParamsType, AxiosResponse<ResponseCardPacksType>>(`/cards/pack`, {params})
     },
-    createPack(name: string, isPrivate = false) {
+    createPack(name: string, isPrivate: boolean) {
         return instance.post(`cards/pack`, {
             cardsPack: {
                 name,
@@ -17,11 +17,12 @@ export const packApi = {
     deletePack(packId: string) {
         return instance.delete(`/cards/pack/?id=${packId}`)
     },
-    updatePack(_id: string, newName: string) {
+    updatePack(_id: string, name: string, isPrivate: boolean) {
         return instance.put(`/cards/pack`, {
             cardsPack: {
                 _id,
-                name: newName,
+                name,
+                private: isPrivate
             }
         })
     },

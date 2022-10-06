@@ -6,9 +6,8 @@
   .childrenBlock {
 
     .title{
-      font-size: 26px;
+      @include H1();
       margin-bottom: 37px;
-      font-weight: 600;
     }
     .nameDirection {
       font-size: 13px;

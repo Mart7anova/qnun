@@ -1,10 +1,11 @@
+@import '../../s1-main/m1-ui/common/c2-styles/sass/mixins';
+
 .learnContainer {
   margin-top: 50px;
   width: 430px;
 
   .packName {
-    font-size: 26px;
-    font-weight: 600;
+    @include H1();
 
     display: flex;
     justify-content: center;

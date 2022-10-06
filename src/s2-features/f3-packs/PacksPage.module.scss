@@ -1,0 +1,16 @@
+@import '../../s1-main/m1-ui/common/c2-styles/sass/mixins';
+
+.packContainer{
+    max-width: 1008px;
+    margin: 0 auto;
+
+    .headerContainer{
+        display: flex;
+        justify-content: space-between;
+        margin: 50px 0;
+
+        .header{
+            @include H1();
+        }
+    }
+}

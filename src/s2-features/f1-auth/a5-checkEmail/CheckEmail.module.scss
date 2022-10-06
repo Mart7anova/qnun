@@ -1,11 +1,11 @@
 @import './src/s1-main/m1-ui/common/c2-styles/sass/variables';
+@import './src/s1-main/m1-ui/common/c2-styles/sass/mixins';
 
 .checkEmailContainer {
   .checkEmailPassBlock {
     .header {
-      font-size: 26px;
+      @include H1();
       margin-bottom: 30px;
-      font-weight: 600;
     }
 
     .informationText {

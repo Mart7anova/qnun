@@ -1,0 +1,29 @@
+@import '../../s1-main/m1-ui/common/c2-styles/sass/mixins';
+
+.cardsContainer {
+  max-width: 1008px;
+  margin: 0 auto;
+
+  .headerContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+
+    .header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      & h1 {
+        @include H1();
+      }
+
+      .imgHeader {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,3 +1,5 @@
+@import '../../../s1-main/m1-ui/common/c2-styles/sass/mixins';
+
 .loginPage {
 
 	.formWrapper {
@@ -14,9 +16,8 @@
 
 			.title {
 				text-align: center;
-				font-size: 26px;
 				margin-bottom: 37px;
-				font-weight: 600;
+				@include H1();
 			}
 
 			.label {

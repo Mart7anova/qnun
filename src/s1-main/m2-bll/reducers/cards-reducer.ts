@@ -70,10 +70,10 @@ export const fetchCards = (packId: string): AppThunk => async (dispatch, getStat
         dispatch(setAppStatus('idle'))
     }
 }
-export const createCard = (packId: string): AppThunk => async (dispatch) => {
+export const createCard = (packId: string, question: string, answer: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatus('loading'))
     try {
-        await cardsApi.createCard(packId, 'hardcoded question', 'hardcoded answer')
+        await cardsApi.createCard(packId, question, answer)
         dispatch(fetchCards(packId))
     } catch (e) {
         errorUtils(e, dispatch)
@@ -92,10 +92,10 @@ export const deleteCard = (packId: string, cardId: string): AppThunk => async (d
         dispatch(setAppStatus('idle'))
     }
 }
-export const updateCard = (packId: string, cardId: string): AppThunk => async (dispatch) => {
+export const updateCard = (packId: string, cardId: string, question: string, answer: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatus('loading'))
     try {
-        await cardsApi.updateCard(cardId, 'updated question', 'updated answer')
+        await cardsApi.updateCard(cardId, question, answer)
         dispatch(fetchCards(packId))
     } catch (e) {
         errorUtils(e, dispatch)
