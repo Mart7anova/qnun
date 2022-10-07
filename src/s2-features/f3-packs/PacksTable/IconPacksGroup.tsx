@@ -14,10 +14,10 @@ type PropsType = {
 }
 
 export const IconPacksGroup = ({packId, packName}: PropsType) => {
+    const dispatch = useAppDispatch()
 
     const {open, openModal, closeModal} = useModal();
     const {openEdit, openEditModal, closeEditModal} = useModal();
-    const dispatch = useAppDispatch()
 
     const updatePackHandle = async (packName: string, isPrivate: boolean) => {
         await dispatch(updatePack(packId, packName, isPrivate))
@@ -30,7 +30,7 @@ export const IconPacksGroup = ({packId, packName}: PropsType) => {
     }
 
     return (
-        <span style={{display: 'flex', gap: '8px'}}>
+        <>
             <Icon img={editImg} alt={'edit'} onClick={openModal}/>
             <PackModal title={'Edit pack'}
                        open={open}
@@ -46,6 +46,6 @@ export const IconPacksGroup = ({packId, packName}: PropsType) => {
                          open={openEdit}
                          closeModal={closeEditModal}
             />
-        </span>
+        </>
     );
 };

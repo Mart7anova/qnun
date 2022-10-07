@@ -39,6 +39,7 @@ import {useModal} from '../../s1-main/m2-bll/hooks/useModal';
 export const CardsPage = () => {
     const dispatch = useAppDispatch()
     const {packId} = useParams() as { packId: string }
+
     const [isSearching, setIsSearching] = useState(false)
     const [isOpenPackMenu, setIsOpenPackMenu] = useState(false)
     const { open, openModal, closeModal } = useModal();

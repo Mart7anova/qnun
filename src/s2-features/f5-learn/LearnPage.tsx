@@ -52,6 +52,7 @@ export const LearnPage = () => {
         setGrade(-1)
     }
 
+    console.log(cards)
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
 
     return (

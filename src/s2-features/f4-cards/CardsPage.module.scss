@@ -17,6 +17,7 @@
 
       & h1 {
         @include H1();
+        max-width: 800px;
       }
 
       .imgHeader {

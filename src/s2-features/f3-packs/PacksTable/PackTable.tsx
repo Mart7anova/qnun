@@ -8,9 +8,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {PackType} from 's1-main/m3-dal/packApi';
 import studyImg from 's1-main/m1-ui/common/c3-image/study.svg';
-import {useAppSelector} from 's1-main/m2-bll/store';
+import {useAppDispatch, useAppSelector} from 's1-main/m2-bll/store';
 import {setSortPacks} from 's1-main/m2-bll/reducers/packs-reducer';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {TableHeaderItemSort} from '../../../s1-main/m1-ui/common/c1-components/TableHeaderItem/TableHeaderItemSort';
 import style from './PackTable.module.scss'
 import {SkeletonTableRow} from 's2-features/f3-packs/PacksTable/SkeletonTableRow';
@@ -20,6 +20,7 @@ import {getProfileId} from '../../../s1-main/m2-bll/selectors/profile-selectors'
 import {getIsFirstLoading, getPageCount} from '../../../s1-main/m2-bll/selectors/packs-selectors';
 import {Icon} from '../../../s1-main/m1-ui/common/c1-components/Icon/Icon';
 import {IconPacksGroup} from './IconPacksGroup';
+import {fetchCards} from '../../../s1-main/m2-bll/reducers/cards-reducer';
 
 
 type TablePropsType = {
@@ -27,10 +28,17 @@ type TablePropsType = {
 }
 
 export const PackTable = ({packs}: TablePropsType) => {
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     const userID = useAppSelector(getProfileId)
     const isFirstLoading = useAppSelector(getIsFirstLoading)
     const elementsPerPage = useAppSelector(getPageCount)
+
+    const onStudyClick = async (packId: string) => {
+        await dispatch(fetchCards(packId))
+        navigate(PATH.PACK + packId + PATH.LEARN)
+    }
 
 
     return (
@@ -68,7 +76,7 @@ export const PackTable = ({packs}: TablePropsType) => {
                                 <span style={{display: 'flex', gap: '8px'}}>
                                     {
                                         pack.cardsCount > 0 &&
-                                        <Icon img={studyImg} alt={'study'}/>
+                                        <Icon img={studyImg} alt={'study'} onClick={() => onStudyClick(pack._id)}/>
                                     }
                                     {
                                         userID === pack.user_id &&
