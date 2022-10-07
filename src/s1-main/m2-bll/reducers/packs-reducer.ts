@@ -106,7 +106,6 @@ export const deletePack = (id: string): AppThunk => async (dispatch) => {
     dispatch(setAppStatus('loading'))
     try {
         await packApi.deletePack(id)
-        dispatch(fetchPacks())
     } catch (e) {
         errorUtils(e, dispatch)
     } finally {
