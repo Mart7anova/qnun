@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/qnun/static/css/main.54d19515.css",
-    "main.js": "/qnun/static/js/main.92eb429b.js",
-    "static/js/787.19b5cadc.chunk.js": "/qnun/static/js/787.19b5cadc.chunk.js",
-    "static/media/catPhoto.png": "/qnun/static/media/catPhoto.aefbd5142c8adc0599c3.png",
-    "static/media/open.png": "/qnun/static/media/open.658383685858f123194b.png",
-    "static/media/it-inc-logo.svg": "/qnun/static/media/it-inc-logo.3c09153556dc0fef65c4fc532ee16562.svg",
-    "static/media/delete.svg": "/qnun/static/media/delete.5074d598f7a8970a63dfa17b33aebe95.svg",
-    "static/media/edit.svg": "/qnun/static/media/edit.22b87cfecc031e713e076cd779cde7e3.svg",
-    "static/media/study.svg": "/qnun/static/media/study.61316ef9f9bb14acdf57faf399645aeb.svg",
-    "index.html": "/qnun/index.html",
-    "static/media/pack-menu-icon.svg": "/qnun/static/media/pack-menu-icon.3cfeb2e74bee0959a4a6753e9f851386.svg",
-    "main.54d19515.css.map": "/qnun/static/css/main.54d19515.css.map",
-    "main.92eb429b.js.map": "/qnun/static/js/main.92eb429b.js.map",
-    "787.19b5cadc.chunk.js.map": "/qnun/static/js/787.19b5cadc.chunk.js.map"
+    "main.css": "/learning-by-cards/static/css/main.54d19515.css",
+    "main.js": "/learning-by-cards/static/js/main.cd9eb398.js",
+    "static/js/787.19b5cadc.chunk.js": "/learning-by-cards/static/js/787.19b5cadc.chunk.js",
+    "static/media/catPhoto.png": "/learning-by-cards/static/media/catPhoto.aefbd5142c8adc0599c3.png",
+    "static/media/open.png": "/learning-by-cards/static/media/open.658383685858f123194b.png",
+    "static/media/it-inc-logo.svg": "/learning-by-cards/static/media/it-inc-logo.3c09153556dc0fef65c4fc532ee16562.svg",
+    "static/media/delete.svg": "/learning-by-cards/static/media/delete.5074d598f7a8970a63dfa17b33aebe95.svg",
+    "static/media/edit.svg": "/learning-by-cards/static/media/edit.22b87cfecc031e713e076cd779cde7e3.svg",
+    "index.html": "/learning-by-cards/index.html",
+    "static/media/study.svg": "/learning-by-cards/static/media/study.61316ef9f9bb14acdf57faf399645aeb.svg",
+    "static/media/pack-menu-icon.svg": "/learning-by-cards/static/media/pack-menu-icon.3cfeb2e74bee0959a4a6753e9f851386.svg",
+    "main.54d19515.css.map": "/learning-by-cards/static/css/main.54d19515.css.map",
+    "main.cd9eb398.js.map": "/learning-by-cards/static/js/main.cd9eb398.js.map",
+    "787.19b5cadc.chunk.js.map": "/learning-by-cards/static/js/787.19b5cadc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.54d19515.css",
-    "static/js/main.92eb429b.js"
+    "static/js/main.cd9eb398.js"
   ]
 }
