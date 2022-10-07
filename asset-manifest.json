@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/learning-by-cards/static/css/main.54d19515.css",
+    "main.css": "/learning-by-cards/static/css/main.775bfbbc.css",
     "main.js": "/learning-by-cards/static/js/main.cd9eb398.js",
     "static/js/787.19b5cadc.chunk.js": "/learning-by-cards/static/js/787.19b5cadc.chunk.js",
     "static/media/catPhoto.png": "/learning-by-cards/static/media/catPhoto.aefbd5142c8adc0599c3.png",
@@ -11,12 +11,12 @@
     "index.html": "/learning-by-cards/index.html",
     "static/media/study.svg": "/learning-by-cards/static/media/study.61316ef9f9bb14acdf57faf399645aeb.svg",
     "static/media/pack-menu-icon.svg": "/learning-by-cards/static/media/pack-menu-icon.3cfeb2e74bee0959a4a6753e9f851386.svg",
-    "main.54d19515.css.map": "/learning-by-cards/static/css/main.54d19515.css.map",
+    "main.775bfbbc.css.map": "/learning-by-cards/static/css/main.775bfbbc.css.map",
     "main.cd9eb398.js.map": "/learning-by-cards/static/js/main.cd9eb398.js.map",
     "787.19b5cadc.chunk.js.map": "/learning-by-cards/static/js/787.19b5cadc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.54d19515.css",
+    "static/css/main.775bfbbc.css",
     "static/js/main.cd9eb398.js"
   ]
 }
