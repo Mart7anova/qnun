@@ -57,7 +57,7 @@ export const PackMenu = ({closeMenu, packId}: IProps) => {
             <DeleteModal title={'Delete pack'} isPack deleteItem={onDeleteClick} itemName={packName} open={openEdit}
                          closeModal={closeEditModal}/>
 
-            <Link to={PATH.PACK + packId + PATH.LEARN}>
+            <Link to={PATH.LEARN + packId}>
                 <div className={s.menuItem}>
                     <Icon img={learnImg} alt={'learn'}/>
                     Learn

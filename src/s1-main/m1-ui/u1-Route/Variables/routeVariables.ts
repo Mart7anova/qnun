@@ -12,7 +12,8 @@ export enum PATH {
     PACKS_LIST = '/',
     PACK = '/pack/',
     CARD = '/pack/:packId',
-    LEARN_CARD = '/pack/:packId/learn',
-    LEARN = '/learn'
+    LEARN = '/learn/',
+    LEARN_CARD = '/learn/:packId/',
+
 }
 

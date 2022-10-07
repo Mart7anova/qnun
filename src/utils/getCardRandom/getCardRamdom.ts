@@ -1,4 +1,4 @@
-import {CardType} from '../../../s1-main/m3-dal/cardsApi';
+import {CardType} from '../../s1-main/m3-dal/cardsApi';
 
 export const getRandomCard = (cards: CardType[]) => {
     const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0);

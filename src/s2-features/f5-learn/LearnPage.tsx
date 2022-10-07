@@ -5,7 +5,7 @@ import {Navigate, useParams} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../s1-main/m2-bll/store';
 import {CardType} from '../../s1-main/m3-dal/cardsApi';
 import {updateCardGrade} from '../../s1-main/m2-bll/reducers/cards-reducer';
-import {getRandomCard} from './getCardRandom/getCardRamdom';
+import {getRandomCard} from '../../utils/getCardRandom/getCardRamdom';
 import {Button} from '../../s1-main/m1-ui/common/c1-components/Button/Button';
 import style from './LearnPage.module.scss'
 import styleContainer from '../../s1-main/m1-ui/common/c2-styles/Container.module.css';
@@ -52,7 +52,6 @@ export const LearnPage = () => {
         setGrade(-1)
     }
 
-    console.log(cards)
     if (!isLoggedIn) return <Navigate to={PATH.LOGIN}/>
 
     return (

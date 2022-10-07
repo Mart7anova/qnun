@@ -37,7 +37,7 @@ export const PackTable = ({packs}: TablePropsType) => {
 
     const onStudyClick = async (packId: string) => {
         await dispatch(fetchCards(packId))
-        navigate(PATH.PACK + packId + PATH.LEARN)
+        navigate(PATH.LEARN + packId)
     }
 
 
